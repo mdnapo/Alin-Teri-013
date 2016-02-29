@@ -12,8 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('pages.home');
 });
+
+// Login...
+Route::get('login', 'LoginController@run');
+Route::post('login', 'LoginController@Login');
 
 /*
 |--------------------------------------------------------------------------
@@ -27,5 +31,5 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+
 });
