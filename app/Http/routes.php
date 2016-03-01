@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/donaties', function () {
+	$number = 10;
+	return view('donaties', compact('number'));
+});
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
