@@ -11,7 +11,8 @@
 				$("#leftarrow").fadeTo(0, 0);
 				$("#rightarrow").fadeTo(0, 0);
 				$("#closesign").fadeTo(0, 0);
-								
+				$currentImgId = 0;
+				
 				$("#annuleren").click(function(){
 					$(".uploadoverlay").fadeOut('fast');
 				});
@@ -22,6 +23,7 @@
 				
 				$(".donatie").click(function(){
 					$("#zoomimage").attr("src", $(this).attr("src"));
+					$currentImgId = $(this).attr('id');
 					$(".imageoverlay").fadeIn('fast');
 				});
 				
@@ -38,19 +40,37 @@
 				});
 				
 				$(".imageoverlaycontent").mouseenter(function(){
-					$("#leftarrow").fadeTo('fast', 0.8);
-					$("#rightarrow").fadeTo('fast', 0.8);
-					$("#closesign").fadeTo('fast', 0.8);
+					$(".donatieui").fadeTo('fast', 0.8);
 				});
 				
 				$(".imageoverlaycontent").mouseleave(function(e){
-					$("#leftarrow").fadeTo('fast', 0);
-					$("#rightarrow").fadeTo('fast', 0);
-					$("#closesign").fadeTo('fast', 0);
+					$(".donatieui").fadeTo('fast', 0);
 				});
 				
 				$("#closesign").click(function(){
-					$(".uploadoverlay").fadeOut('fast');
+					$(".imageoverlay").fadeOut('fast');
+				});
+				
+				$("#leftarrow").click(function(){
+					if($currentImgId-1 >= 0){
+						$currentImgId--;
+						$("#zoomimage").attr("src", $('#' + $currentImgId).attr("src"));
+					}
+				});
+				
+				$("#rightarrow").click(function(){
+					if($currentImgId+1 < $('.donaties').children().length){
+						$currentImgId++;
+						$("#zoomimage").attr("src", $('#' + $currentImgId).attr("src"));
+					}
+				});
+				
+				$(".donatieui").mouseenter(function(){
+					$(this).fadeTo('fast', 1);
+				});
+				
+				$(".donatieui").mouseleave(function(){
+					$(this).fadeTo('fast', 0.8);
 				});
 			});
 			
@@ -167,7 +187,7 @@
 				bottom: 0;
 				right: 0;
 				margin: 25px 25px auto auto;
-				height: 40px;
+				height: 30px;
 			}
         </style>
     </head>
@@ -191,9 +211,9 @@
 		<div class="imageoverlay">
 			<div class="imageoverlaycontent">
 				<img id="zoomimage" src=""/>
-				<img id="leftarrow" src="img\images\arrowleft.png"/>
-				<img id="rightarrow" src="img\images\arrowright.png"/>
-				<img id="closesign" src="img\images\closesign.png"/>
+				<img class="donatieui" id="leftarrow" src="img\images\arrowleft.png"/>
+				<img class="donatieui" id="rightarrow" src="img\images\arrowright.png"/>
+				<img class="donatieui" id="closesign" src="img\images\closesign.png"/>
 			</div>
 		</div>
 		
@@ -203,9 +223,11 @@
 				<div class="text">
 				Wij van Alin Teri zien graag wie ons steunen. Daarom hebben wij een eigen actie: laat je steun zien met een foto! Hieronder kun je zien wie ons steunen. Wil jij ook je steun laten zien? Stuur ons jou foto in!
 				</div>
-				@foreach(File::files('img\donaties') as $file)
-					<img class='donatie' src='{{{$file}}}'/>
-				@endforeach
+				<div class="donaties">
+				@for($i = 0; $i < count(File::files('img\donaties')); $i++)
+					<img class='donatie' id="{{$i}}" src='{{File::files('img\donaties')[$i]}}'/>
+				@endfor
+				</div>
 				<br/>
 				<button id="doneren" type="button">Bijdrage tonen</button>
 			</div>
