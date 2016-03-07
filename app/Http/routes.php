@@ -17,7 +17,10 @@ Route::get('/', function () {
 
 // Login...
 Route::get('login', 'LoginController@run');
-Route::post('login', 'LoginController@Login');
+
+Route::post('login', array('before' => 'cfrs', function(){
+    Route::post('login', 'LoginController@Login');
+}));
 
 /*
 |--------------------------------------------------------------------------

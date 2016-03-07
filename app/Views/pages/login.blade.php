@@ -1,7 +1,8 @@
 @extends('layouts.master')
 @section('content')
-    <br />
+    <br />0
     <form method="POST" action="./login" novalidate>
+        <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
         <div class="form-group">
             <label >Gebruikersnaam</label>
             <input type="text" id="username" class="form-control" name="username" placeholder="Gebruikersnaam" >
