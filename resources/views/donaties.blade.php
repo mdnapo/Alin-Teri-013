@@ -40,11 +40,11 @@
 				});
 				
 				$(".imageoverlaycontent").mouseenter(function(){
-					$(".donatieui").fadeTo('fast', 0.8);
+					$(".donatieui").fadeTo(100, 0.8);
 				});
 				
 				$(".imageoverlaycontent").mouseleave(function(e){
-					$(".donatieui").fadeTo('fast', 0);
+					$(".donatieui").fadeTo(100, 0);
 				});
 				
 				$("#closesign").click(function(){
@@ -52,25 +52,29 @@
 				});
 				
 				$("#leftarrow").click(function(){
-					if($currentImgId-1 >= 0){
+					if(parseInt($currentImgId)-1 >= 0){
 						$currentImgId--;
-						$("#zoomimage").attr("src", $('#' + $currentImgId).attr("src"));
+						$("#zoomimage").fadeOut(100, function(){
+							$("#zoomimage").attr("src", $('#' + $currentImgId).attr("src"));
+						}).fadeIn(100);
 					}
 				});
 				
 				$("#rightarrow").click(function(){
-					if($currentImgId+1 < $('.donaties').children().length){
+					if(parseInt($currentImgId)+1 < $('.donaties').children().length){
 						$currentImgId++;
-						$("#zoomimage").attr("src", $('#' + $currentImgId).attr("src"));
+						$("#zoomimage").fadeOut(100, function(){
+							$("#zoomimage").attr("src", $('#' + $currentImgId).attr("src"));
+						}).fadeIn(100);
 					}
 				});
 				
 				$(".donatieui").mouseenter(function(){
-					$(this).fadeTo('fast', 1);
+					$(this).fadeTo(100, 1);
 				});
 				
 				$(".donatieui").mouseleave(function(){
-					$(this).fadeTo('fast', 0.8);
+					$(this).fadeTo(100, 0.8);
 				});
 			});
 			
@@ -121,14 +125,10 @@
 			
 			.uploadoverlaycontent {
 				position: absolute;
-				margin: auto;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
 				padding: 10px;
-				width: 500px;
-				height: 520px;
 				background-color: white;
 				border-radius: 3px;
 			}
@@ -142,14 +142,10 @@
 			
 			.imageoverlaycontent {
 				position: absolute;
-				margin: auto;
-				top: 0;
-				right: 0;
-				bottom: 0;
-				left: 0;
+				left: 50%;
+				top: 50%;
+				transform: translate(-50%, -50%);
 				padding: 10px;
-				width: 500px;
-				height: 500px;
 				background-color: white;
 				border-radius: 3px;
 			}
@@ -192,18 +188,43 @@
         </style>
     </head>
     <body>
+		<?php
+		function cropImage($imagePath, $startX, $startY, $width, $height, $id) {
+			$file_parts = pathinfo($imagePath);
+			$img;
+			switch($file_parts['extension'])
+			{
+				case "png": $img = imagecreatefrompng($imagePath);
+				break;
+			}
+			try{
+				$croppedImg = imagecrop($img, array('x' => $startX, 'y' => $startY, 'width' => $width, 'height' => $height));
+				imagepng($croppedImg, $id . '.png', 9);
+			} catch(Exception $e){
+			
+			}
+		}
+		?>
 		<div class="uploadoverlay">
 			<div class="uploadoverlaycontent">
 				<table>
-					<td>
-						Upload hier je foto:<br/>
-						<input id="annuleren" type="submit" value="Annuleren"/>
-					</td>
-					<td>
-						<form>
-							<input type="submit" value="Kies je foto"/>
-						</form>
-					</td>
+						<tr>
+							<td><b>Foto*:</b></td>
+							<td><input type="file" name="image" value="Kies je foto" required/></td>
+						</tr>
+						<tr>
+							<td><b>E-mailadres (optioneel):</b></td>
+							<td><input type="email" name="email"></td>
+						</tr>
+						<tr>
+							<td><b>Bericht (optioneel):</b></td>
+							<td><textarea name="opmerking"></textarea></td>
+						<tr>
+						<tr>
+							<td>*verplicht veld</td>
+							<td><button type="submit">Versturen</button></td>
+						</tr>
+					</form>
 				</table>
 			</div>
 		</div>
@@ -224,8 +245,8 @@
 				Wij van Alin Teri zien graag wie ons steunen. Daarom hebben wij een eigen actie: laat je steun zien met een foto! Hieronder kun je zien wie ons steunen. Wil jij ook je steun laten zien? Stuur ons jou foto in!
 				</div>
 				<div class="donaties">
-				@for($i = 0; $i < count(File::files('img\donaties')); $i++)
-					<img class='donatie' id="{{$i}}" src='{{File::files('img\donaties')[$i]}}'/>
+				@for($i = 0; $i < count($donations); $i++)
+					<img class='donatie' id="{{$i}}" src='{{$donations[$i]}}'/>
 				@endfor
 				</div>
 				<br/>
