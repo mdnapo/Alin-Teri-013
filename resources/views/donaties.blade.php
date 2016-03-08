@@ -208,6 +208,7 @@
 		<div class="uploadoverlay">
 			<div class="uploadoverlaycontent">
 				<table>
+					<form method="POST" enctype="multipart/form-data">
 						<tr>
 							<td><b>Foto*:</b></td>
 							<td><input type="file" name="image" value="Kies je foto" required/></td>
