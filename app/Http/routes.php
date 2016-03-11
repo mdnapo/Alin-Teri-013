@@ -11,16 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.home');
-});
 
-// Login...
-Route::get('login', 'LoginController@run');
-
-Route::post('login', array('before' => 'cfrs', function(){
-    Route::post('login', 'LoginController@Login');
-}));
 
 /*
 |--------------------------------------------------------------------------
@@ -34,5 +25,9 @@ Route::post('login', array('before' => 'cfrs', function(){
 */
 
 Route::group(['middleware' => ['web']], function () {
+    Route::auth();
 
+    Route::get('/', function () {
+        return view('pages.home');
+    });
 });
