@@ -4,6 +4,18 @@
         <title>Donaties</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 		<script>
+			function readURL(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+
+					reader.onload = function (e) {
+						$('#uploadpreview').attr('src', e.target.result);
+					}
+
+					reader.readAsDataURL(input.files[0]);
+				}
+			}
+			
 			
 			$(document).ready(function(){
 				$(".uploadoverlay").hide();
@@ -75,6 +87,10 @@
 				
 				$(".donatieui").mouseleave(function(){
 					$(this).fadeTo(100, 0.8);
+				});
+				
+				$("#fileSelect").change(function(){
+					readURL(this);
 				});
 			});
 			
@@ -185,6 +201,10 @@
 				margin: 25px 25px auto auto;
 				height: 30px;
 			}
+			#uploadpreview{
+				max-width: 300px;
+				max-height: 300px;
+			}
         </style>
     </head>
     <body>
@@ -207,11 +227,12 @@
 		?>
 		<div class="uploadoverlay">
 			<div class="uploadoverlaycontent">
+				<img id="uploadpreview" src="">
 				<table>
 					<form method="POST" enctype="multipart/form-data">
 						<tr>
 							<td><b>Foto*:</b></td>
-							<td><input type="file" name="image" value="Kies je foto" required/></td>
+							<td><input type="file" id="fileSelect" name="image" value="Kies je foto" accept="image/*" required/></td>
 						</tr>
 						<tr>
 							<td><b>E-mailadres (optioneel):</b></td>
@@ -225,8 +246,10 @@
 							<td>*verplicht veld</td>
 							<td><button type="submit">Versturen</button></td>
 						</tr>
+						
 					</form>
 				</table>
+				<p>Uw e-mailadres wordt niet openbaar gemaakt. Deze is alleen zodat wij eventueel met u in contact kunnen komen.</p>
 			</div>
 		</div>
 		
