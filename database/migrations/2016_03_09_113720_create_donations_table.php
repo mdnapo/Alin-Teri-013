@@ -14,6 +14,10 @@ class CreateDonationsTable extends Migration
     {
         Schema::create('donations', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('pic_loc');
+            $table->string('email');
+            $table->longText('message')->nullable();
+            $table->boolean('approved')->default(0);
             $table->timestamps();
         });
     }

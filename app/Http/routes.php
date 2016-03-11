@@ -30,4 +30,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
         return view('pages.home');
     });
+
+    Route::group(['middleware' => ['auth']], function(){
+
+    });
 });
