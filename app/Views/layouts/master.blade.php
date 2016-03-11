@@ -8,9 +8,6 @@
         <div id="header">
             @include('includes.header')
         </div>
-        <div id="menu">
-            @include('includes.menu')
-        </div>
         <div id="content">
             @yield('content')
         </div>
