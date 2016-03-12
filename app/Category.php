@@ -31,7 +31,6 @@ class Category extends Model
     }
 
     /**
-     * 
      * @param $cat_name
      * @return void
      */

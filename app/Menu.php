@@ -94,4 +94,13 @@ class Menu extends Model
     public function setLink($link){
         $this->link = $link;
     }
+
+    /**
+     * Get all menu items.
+     * @return array
+     */
+    public function getAllMenuItems(){
+        $menuItems = Menu::all();
+        return $menuItems;
+    }
 }
