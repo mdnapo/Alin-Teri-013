@@ -21,6 +21,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/') }}">Home</a></li>
+                <li><a href="{{ url('/donaties') }}">Steun ons</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

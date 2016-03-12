@@ -18,29 +18,8 @@ use Illuminate\Contracts\Validation\ValidatesRequests;
 |
 */
 
-
-
-Route::get('donaties', function () {
-	$donations = File::files('img\donaties');
-	return view('donaties', compact('donations'));
-});
-
-Route::post('donaties', function(){
-	if(Input::file('image')->isValid()){
-		$rules = array(
-			'image' => 'required|image',
-			'email' => 'email',
-			'opmerking' => 'string'
-		);
-		$validator = Validator::make(Input::all(),$rules);
-		if($validator->fails()){
-			
-		} else{
-			Input::file('image')->move('img\donaties', count(File::files('img\donaties')) . '.png');
-		}
-	}
-	return back();
-});
+Route::get('donaties', 'DonationController@index');
+Route::post('donaties', 'DonationController@upload');
 
 /*
 |--------------------------------------------------------------------------
