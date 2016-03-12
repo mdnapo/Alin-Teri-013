@@ -25,7 +25,8 @@
 
         <!--The modal for uploading a new image-->
         <div id="upload_modal" class="modal fade" role="dialog">
-            <form  method="POST" enctype="multipart/form-data" action="{{ action('DonationController@upload') }}">
+            <!---->
+            <form  method="POST" enctype="multipart/form-data" action="/donaties">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
@@ -41,7 +42,7 @@
                                 </div>
                                 <div class="controls">
                                     <label>Emailadres(optioneel):</label>
-                                    <input type="email" class="form-control" name="enail">
+                                    <input type="email" class="form-control" name="email">
                                 </div>
                                 <div class="controls">
                                     <label>Bericht(optioneel):</label>
