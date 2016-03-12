@@ -25,7 +25,7 @@
 
         <!--The modal for uploading a new image-->
         <div id="upload_modal" class="modal fade" role="dialog">
-            <form  method="POST" enctype="multipart/form-data" action="{{ action('DonationController@upload') }}">
+            <form  method="POST" enctype="multipart/form-data" action="./donaties">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">
@@ -40,17 +40,17 @@
                                     <input type="file" name="image" accept="image/*" required>
                                 </div>
                                 <div class="controls">
-                                    <label>Emailadres(optioneel):</label>
+                                    <label>E-Mail Adres (optioneel):</label>
                                     <input type="email" class="form-control" name="enail">
                                 </div>
                                 <div class="controls">
-                                    <label>Bericht(optioneel):</label>
+                                    <label>Bericht (optioneel):</label>
                                     <textarea class="form-control" name="opmerking"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
-                            <button type="submit" class="btn btn-default" data-dismiss="modal">Uploaden</button>
+                            <input type="submit" class="btn btn-default" value="Uploaden" />
                             <button class="btn btn-default" data-dismiss="modal">Annuleren</button>
                         </div>
                     </div>
@@ -59,6 +59,6 @@
         </div>
     </div>
 </div>
-<link  href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
+<link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
 
 @stop

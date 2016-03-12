@@ -19,9 +19,7 @@
 				  'opmerking' => 'string'
 			  );
 			  $validator = Validator::make(Input::all(), $rules);
-			  if($validator->fails()){
-
-			  } else{
+			  if(!$validator->fails()){
 				  Input::file('image')->move('img\donaties', count(\File::files('img\donaties'))+1 . '.png');
 			  }
 		  }
