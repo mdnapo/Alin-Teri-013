@@ -13,10 +13,40 @@
             <hr>
         </div>
         <div class="col-xs-12">
-            <div class="fotorama" data-nav="thumbs" data-width="100%" data-ratio="2/1">
-                @for($i = 0; $i < count($donations); $i++)
-                    <img id="{{$i}}" src='{{$donations[$i]}}'/>
-                @endfor
+            <div class="col-xs-8 col-xs-offset-2">
+                <!--The thumbnail carousel-->
+                <div id="thumb_carousel" class="carousel slide" data-interval="false">
+                    <div class="carousel-inner">
+                        @for($i = 0; $i < ceil(count($donations)/4); $i++)
+                            <div class="item @if($i == 0){{ 'active' }}@endif">
+                                @for($j = ($i*4); $j < ($i*4) + 4 && $j < count($donations); $j++)
+                                    <div data-target="#main_carousel" data-slide-to="{{$j}}" class="thumb">
+                                        <img src="{{ $donations[$j] }}">
+                                    </div>
+                                @endfor
+                            </div>
+                        @endfor
+                    </div><!-- /carousel-inner -->
+                    <a class="left carousel-control" href="#thumb_carousel" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a class="right carousel-control" href="#thumb_carousel" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div><!-- /thumbcarousel -->
+            </div>
+
+            <!--The main carousel-->
+            <div class="col-xs-8 col-xs-offset-2">
+                <div id="main_carousel" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+                        @for($i = 0; $i < count($donations); $i++)
+                            <div class="item @if($i == 0){{ 'active' }}@endif">
+                                <img src="{{$donations[$i]}}">
+                            </div>
+                        @endfor
+                    </div>
+                </div><!-- /thumbcarousel -->
             </div>
         </div>
         <div class="col-xs-8 col-xs-offset-2" id="doneer_nu">
@@ -59,6 +89,5 @@
         </div>
     </div>
 </div>
-<link href="http://cdnjs.cloudflare.com/ajax/libs/fotorama/4.6.4/fotorama.css" rel="stylesheet">
 
 @stop

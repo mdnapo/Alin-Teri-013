@@ -2,3 +2,20 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
+
+.carousel {
+    margin-top: 10px;
+}
+.item .thumb {
+    width: 25%;
+    height: 20%;
+    cursor: pointer;
+    float: left;
+}
+.item .thumb img {
+    width: 100%;
+    margin: 2px;
+}
+.item img {
+    width: 100%;
+}
