@@ -3,19 +3,21 @@
     <head>
         <title>Donaties</title>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<link href="dist/cropper.css" rel="stylesheet">
+		<script src="dist/cropper.js"></script>
 		<script>
 			function readURL(input) {
 				if (input.files && input.files[0]) {
 					var reader = new FileReader();
 
 					reader.onload = function (e) {
-						$('#uploadpreview').attr('src', e.target.result);
+						var $image = $("#uploadpreview");
+						$image.cropper('replace', e.target.result);
 					}
 
 					reader.readAsDataURL(input.files[0]);
 				}
 			}
-			
 			
 			$(document).ready(function(){
 				$(".uploadoverlay").hide();
@@ -23,7 +25,26 @@
 				$("#leftarrow").fadeTo(0, 0);
 				$("#rightarrow").fadeTo(0, 0);
 				$("#closesign").fadeTo(0, 0);
-				$currentImgId = 0;
+				$currentImgId = 0;  
+				
+				var $image = $("#uploadpreview");
+				originalData = {};
+				
+				$image.cropper({
+					viewMode: 1,
+					aspectRatio: 300/300,
+					resizable: true,
+					responsive: false,
+					autoCropArea: 1,
+					zoomable: false,
+					rotatable: false,
+					crop: function(data) {      
+						$("#croppedWidth").val(parseInt(data.width));
+						$("#croppedHeight").val(parseInt(data.height)); 
+						$("#croppedX").val(parseInt(data.x));
+						$("#croppedY").val(parseInt(data.y));
+					}
+				});
 				
 				$("#annuleren").click(function(){
 					$(".uploadoverlay").fadeOut('fast');
@@ -96,7 +117,6 @@
 			
 		</script>
 		<style>
-			
             html, body {
 				widht: 100%;
 				height: 100%;
@@ -208,23 +228,6 @@
         </style>
     </head>
     <body>
-		<?php
-		function cropImage($imagePath, $startX, $startY, $width, $height, $id) {
-			$file_parts = pathinfo($imagePath);
-			$img;
-			switch($file_parts['extension'])
-			{
-				case "png": $img = imagecreatefrompng($imagePath);
-				break;
-			}
-			try{
-				$croppedImg = imagecrop($img, array('x' => $startX, 'y' => $startY, 'width' => $width, 'height' => $height));
-				imagepng($croppedImg, $id . '.png', 9);
-			} catch(Exception $e){
-			
-			}
-		}
-		?>
 		<div class="uploadoverlay">
 			<div class="uploadoverlaycontent">
 				<img id="uploadpreview" src="">
@@ -232,7 +235,13 @@
 					<form method="POST" enctype="multipart/form-data">
 						<tr>
 							<td><b>Foto*:</b></td>
-							<td><input type="file" id="fileSelect" name="image" value="Kies je foto" accept="image/*" required/></td>
+							<td>
+								<input type="file" id="fileSelect" name="image" value="Kies je foto" accept="image/*" required/>
+								<input type="hidden" id="croppedWidth" name="width" value=""/>
+								<input type="hidden" id="croppedHeight" name="height" value=""/>
+								<input type="hidden" id="croppedX" name="x" value=""/>
+								<input type="hidden" id="croppedY" name="y" value=""/>
+							</td>
 						</tr>
 						<tr>
 							<td><b>E-mailadres (optioneel):</b></td>
@@ -277,6 +286,5 @@
 				<button id="doneren" type="button">Bijdrage tonen</button>
 			</div>
         </div>
-		
     </body>
 </html>

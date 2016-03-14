@@ -73,7 +73,7 @@ trait InteractsWithPages
 
         $this->currentUri = $this->app->make('request')->fullUrl();
 
-        $this->crawler = new Crawler($this->response->getContent(), $uri);
+        $this->crawler = new Crawler($this->response->getContent(), $this->currentUri);
 
         $this->subCrawlers = [];
 
@@ -208,41 +208,221 @@ trait InteractsWithPages
     }
 
     /**
-     * Assert that a given string is seen on the page.
+     * Get the HTML from the current context or the full response.
+     *
+     * @return string
+     */
+    protected function html()
+    {
+        return $this->crawler()
+            ? $this->crawler()->html()
+            : $this->response->getContent();
+    }
+
+    /**
+     * Get the plain text from the current context or the full response.
+     *
+     * @return string
+     */
+    protected function text()
+    {
+        return $this->crawler()
+            ? $this->crawler()->text()
+            : strip_tags($this->response->getContent());
+    }
+
+    /**
+     * Get the escaped text pattern.
+     *
+     * @param  string  $text
+     * @return string
+     */
+    protected function getEscapedPattern($text)
+    {
+        $rawPattern = preg_quote($text, '/');
+
+        $escapedPattern = preg_quote(e($text), '/');
+
+        return $rawPattern == $escapedPattern
+            ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
+    }
+
+    /**
+     * Assert that a given string is seen on the current HTML.
      *
      * @param  string  $text
      * @param  bool  $negate
      * @return $this
      */
-    protected function see($text, $negate = false)
+    public function see($text, $negate = false)
     {
-        $method = $negate ? 'assertNotRegExp' : 'assertRegExp';
+        if ($negate) {
+            return $this->dontSee($text);
+        }
 
-        $rawPattern = preg_quote($text, '/');
-
-        $escapedPattern = preg_quote(e($text), '/');
-
-        $pattern = $rawPattern == $escapedPattern
-                ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
-
-        $html = $this->crawler()
-                    ? $this->crawler()->html()
-                    : $this->response->getContent();
-
-        $this->$method("/$pattern/i", $html);
+        if (! $this->hasSource($text)) {
+            $this->failPageInspection("Couldn't find [$text] on the page");
+        }
 
         return $this;
     }
 
     /**
-     * Assert that a given string is not seen on the page.
+     * Assert that a given string is not seen on the current HTML.
      *
      * @param  string  $text
      * @return $this
      */
-    protected function dontSee($text)
+    public function dontSee($text)
     {
-        return $this->see($text, true);
+        if ($this->hasSource($text)) {
+            $this->failPageInspection("The page should not contain [$text]");
+        }
+
+        return $this;
+    }
+
+    /**
+     * Check if the page contains the given text as part of the source.
+     *
+     * @param  string  $text
+     * @return int|bool
+     */
+    protected function hasSource($text)
+    {
+        $pattern = $this->getEscapedPattern($text);
+
+        return preg_match("/$pattern/i", $this->html());
+    }
+
+    /**
+     * Assert that an element is present on the page.
+     *
+     * @param  string  $selector
+     * @param  array  $attributes
+     * @return void
+     */
+    public function seeElement($selector, array $attributes = [])
+    {
+        if (! $this->hasElement($selector, $attributes)) {
+            $element = "[$selector]".(empty($attributes) ? '' : ' with attributes '.json_encode($attributes));
+
+            $this->failPageInspection("Couldn't find $element on the page");
+        }
+    }
+
+    /**
+     * Assert that an element is not present on the page.
+     *
+     * @param  string  $selector
+     * @param  array  $attributes
+     * @return void
+     */
+    public function dontSeeElement($selector, array $attributes = [])
+    {
+        if ($this->hasElement($selector, $attributes)) {
+            $element = "[$selector]".(empty($attributes) ? '' : ' with attributes '.json_encode($attributes));
+
+            $this->failPageInspection("$element was found on the page");
+        }
+    }
+
+    /**
+     * Determine if the given selector is present on the page.
+     *
+     * @param  string  $selector
+     * @param  array  $attributes
+     * @return bool
+     */
+    protected function hasElement($selector, array $attributes = [])
+    {
+        $elements = $this->crawler()->filter($selector);
+
+        if ($elements->count() == 0) {
+            return false;
+        }
+
+        if (empty($attributes)) {
+            return true;
+        }
+
+        $elements = $elements->reduce(function ($element) use ($attributes) {
+            return $this->hasAttributes($element, $attributes);
+        });
+
+        return $elements->count() > 0;
+    }
+
+    /**
+     * Determines if the given element has the given attributes.
+     *
+     * @param  Crawler  $element
+     * @param  array  $attributes
+     * @return bool
+     */
+    protected function hasAttributes(Crawler $element, array $attributes = [])
+    {
+        foreach ($attributes as $name => $value) {
+            if (is_numeric($name)) {
+                if ($element->attr($value) === null) {
+                    return false;
+                }
+            } else {
+                if ($element->attr($name) != $value) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+
+    /**
+     * Assert that a given string is seen on the current text.
+     *
+     * @param  string  $text
+     * @param  bool  $negate
+     * @return $this
+     */
+    public function seeText($text, $negate = false)
+    {
+        if ($negate) {
+            return $this->dontSeeText($text);
+        }
+
+        if (! $this->hasText($text)) {
+            $this->failPageInspection("Couldn't find the text [$text] on the page");
+        }
+
+        return $this;
+    }
+
+    /**
+     * Assert that a given string is not seen on the current text.
+     *
+     * @param  string  $text
+     * @return $this
+     */
+    public function dontSeeText($text)
+    {
+        if ($this->hasText($text)) {
+            $this->failPageInspection("The page should not contain the text [$text]");
+        }
+
+        return $this;
+    }
+
+    /**
+     * Check if the page contains the given plain text.
+     *
+     * @param  string  $text
+     * @return int|bool
+     */
+    protected function hasText($text)
+    {
+        $pattern = $this->getEscapedPattern($text);
+
+        return preg_match("/$pattern/i", $this->text());
     }
 
     /**
@@ -295,12 +475,7 @@ trait InteractsWithPages
     {
         $elements = $this->crawler()->filter($element);
 
-        $rawPattern = preg_quote($text, '/');
-
-        $escapedPattern = preg_quote(e($text), '/');
-
-        $pattern = $rawPattern == $escapedPattern
-            ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
+        $pattern = $this->getEscapedPattern($text);
 
         foreach ($elements as $element) {
             $element = new Crawler($element);
@@ -478,7 +653,7 @@ trait InteractsWithPages
      */
     public function seeIsSelected($selector, $expected)
     {
-        $this->assertEquals(
+        $this->assertContains(
             $expected, $this->getSelectedValue($selector),
             "The field [{$selector}] does not contain the selected value [{$expected}]."
         );
@@ -495,7 +670,7 @@ trait InteractsWithPages
      */
     public function dontSeeIsSelected($selector, $value)
     {
-        $this->assertNotEquals(
+        $this->assertNotContains(
             $value, $this->getSelectedValue($selector),
             "The field [{$selector}] contains the selected value [{$value}]."
         );
@@ -555,7 +730,9 @@ trait InteractsWithPages
         }
 
         if ($element == 'input') {
-            return $this->getCheckedValueFromRadioGroup($field);
+            $value = $this->getCheckedValueFromRadioGroup($field);
+
+            return $value ? [$value] : [];
         }
 
         throw new Exception("Given selector [$selector] is not a select or radio group.");
@@ -565,7 +742,7 @@ trait InteractsWithPages
      * Get the selected value from a select field.
      *
      * @param  \Symfony\Component\DomCrawler\Crawler  $field
-     * @return string|null
+     * @return array
      *
      * @throws \Exception
      */
@@ -575,13 +752,21 @@ trait InteractsWithPages
             throw new Exception('Given element is not a select element.');
         }
 
+        $selected = [];
+
         foreach ($field->children() as $option) {
-            if ($option->hasAttribute('selected')) {
-                return $option->getAttribute('value');
+            if ($option->nodeName === 'optgroup') {
+                foreach ($option->childNodes as $child) {
+                    if ($child->hasAttribute('selected')) {
+                        $selected[] = $child->getAttribute('value');
+                    }
+                }
+            } elseif ($option->hasAttribute('selected')) {
+                $selected[] = $option->getAttribute('value');
             }
         }
 
-        return;
+        return $selected;
     }
 
     /**
@@ -603,8 +788,6 @@ trait InteractsWithPages
                 return $radio->getAttribute('value');
             }
         }
-
-        return;
     }
 
     /**
@@ -874,5 +1057,16 @@ trait InteractsWithPages
         return new UploadedFile(
             $file['tmp_name'], basename($uploads[$name]), $file['type'], $file['size'], $file['error'], true
         );
+    }
+
+    /**
+     * Fail the test with the given error message.
+     *
+     * @param  string  $message
+     * @return void
+     */
+    protected function failPageInspection($message)
+    {
+        $this->fail($this->html().str_repeat("\n", 4).$message.'. Check content above.');
     }
 }

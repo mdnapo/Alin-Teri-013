@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\ValidatesRequests;
+use Intervention\Image\ImageManager;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -35,10 +36,10 @@ Route::post('donaties', function(){
 			'opmerking' => 'string'
 		);
 		$validator = Validator::make(Input::all(),$rules);
-		if($validator->fails()){
-			
-		} else{
-			Input::file('image')->move('img\donaties', count(File::files('img\donaties')) . '.png');
+		if(!$validator->fails()){
+			$img = Image::Make(Input::file('image'));
+			$img->crop(Input::get('width'), Input::get('height'), Input::get('x'), Input::get('y'))->save('img/donaties/' . count(File::files('img\donaties')) . '.png');
+			//Input::file('image')->move('img\donaties', count(File::files('img\donaties')) . '.png');
 		}
 	}
 	return back();
