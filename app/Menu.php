@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Menu extends Model
 {
+    protected $table = 'menu';
     /**
      * Mass assignable for Eloquent
      * @var array
@@ -16,7 +17,7 @@ class Menu extends Model
      * Get all menu items.
      * @return array
      */
-    public function getAllMenuItems(){
+    public static function getAllMenuItems(){
         $menuItems = Menu::all();
         return $menuItems;
     }

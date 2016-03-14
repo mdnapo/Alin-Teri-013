@@ -29,10 +29,10 @@ class User extends Authenticatable
      * @param $userId
      * @return boolean
      */
-    public function isAdmin($userId){
-        $user = User::find($userId);
-        $role = Role::where('name', '=', 'admin');
-        if($user->role == $role->id){
+    public static function isAdmin($userId){
+        $user = User::find($userId)->role;
+        $role = Role::where('name', 'admin')->first()->id;
+        if($role == $user){
             return true;
         }
         return false;

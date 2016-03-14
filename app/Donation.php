@@ -12,8 +12,8 @@ class Donation extends Model
      * Returns non-checked photo's.
      * @return array
      */
-    public function didNotCheckYet(){
-        $donation = \Donation::where('approved', '=', 0);
+    public static function didNotCheckYet(){
+        $donation = \Donation::where('approved', 0);
         return $donation;
     }
 
@@ -22,8 +22,8 @@ class Donation extends Model
      * @param $id
      * @param $approved
      */
-    public function setApproved($id, $approved){
-        $picture = \Donation::where('id', '=', $id);
+    public static function setApproved($id, $approved){
+        $picture = \Donation::where('id', $id)->first();
         if(is_numeric($approved) && ($approved == 0 || $approved == 1)){
             $picture->approved = $approved;
             $picture->save();

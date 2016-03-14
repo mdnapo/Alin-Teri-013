@@ -16,7 +16,7 @@ class Faq extends Model
      * Get the complete faq.
      * @return array
      */
-    public function getCompleteFaq(){
+    public static function getCompleteFaq(){
         $completeFaq = \Faq::all();
         return $completeFaq;
     }
@@ -26,7 +26,7 @@ class Faq extends Model
      * @param $category
      * @return array
      */
-    public function getFaqByCategory($category){
+    public static function getFaqByCategory($category){
         $available = [];
         $faqs = \Faq::where('cat_name', '=', $category);
         while($faq = count($faqs)){

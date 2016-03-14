@@ -1,5 +1,4 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -11,19 +10,6 @@
 |
 */
 
-
-
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
-
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
 
@@ -31,9 +17,13 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.home');
     });
 
+    Route::get('/page/{slug}', [
+        'uses' => 'PageController@getPage'
+    ])->where('slug', '([A-Za-z0-9\-\/]+)');
+
     Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
         Route::get('dashboard', 'AdminController@dashboard');
-        Route::get('pages', 'AdminController@pages');
+        Route::get('page', 'AdminController@pages');
         // Route::get();
     });
 });
