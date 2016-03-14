@@ -6,80 +6,33 @@ use Illuminate\Database\Eloquent\Model;
 
 class Faq extends Model
 {
-    //
-    protected $fillable = ['category', 'question', 'answer'];
-    // ID
-    private $id;
-    // Category
-    private $category;
-    // Question
-    private $question;
-    // Answer
-    private $answer;
+    /**
+     * Guarded
+     * @var array
+     */
+    protected $guarded = ['id'];
 
     /**
-     * Gets QA ID
-     * @return int
+     * Get the complete faq.
+     * @return array
      */
-    public function getId()
-    {
-        return $this->id;
+    public function getCompleteFaq(){
+        $completeFaq = \Faq::all();
+        return $completeFaq;
     }
 
     /**
-     * Gets QA category
-     * @return int
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
-     * Sets category
+     * Get all questions by category.
      * @param $category
-     * @return void
+     * @return array
      */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-    }
-
-    /**
-     * Returns question.
-     * @return string
-     */
-    public function getQuestion()
-    {
-        return $this->question;
-    }
-
-    /**
-     * Sets question.
-     * @param $question
-     * @return void
-     */
-    public function setQuestion($question)
-    {
-        $this->question = $question;
-    }
-
-    /**
-     * Gets answer
-     * @return string
-     */
-    public function getAnswer()
-    {
-        return $this->answer;
-    }
-
-    /**
-     * Sets answer
-     * @param $answer
-     * @return void
-     */
-    public function setAnswer($answer)
-    {
-        $this->answer = $answer;
+    public function getFaqByCategory($category){
+        $available = [];
+        $faqs = \Faq::where('cat_name', '=', $category);
+        while($faq = count($faqs)){
+            array_push($available, $faqs[$faq]);
+            $faq++;
+        }
+        return $available;
     }
 }

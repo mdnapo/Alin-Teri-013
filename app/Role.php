@@ -7,32 +7,34 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     // Enabling MASS Assignable for Eloquent.
-    protected $fillable = ['name'];
-    // Role ID.
-    private $id;
-    // Name of a role
-    private $name;
+    protected $guarded = ['id'];
+
     /**
-     * Get id of current Role
-     * @return int current id.
+     * Get user role.
+     * @return string
      */
-    public function getId(){
-        return $this->id;
+    public function getRole($roleId){
+        $roles = \Role::find($roleId);
+        $roles->name;
+        return $roles;
     }
+
     /**
-     * Get Name of current Role
-     * @return String current name.
+     * Set a new role
+     * @param $role
+     * @return void
      */
-    public function getName(){
-        return $this->name;
+    public function setRole($role){
+        $role = \Role::where('name', '=', $role);
+        if($role < 1){
+            $newRole = new Role;
+            $newRole->name = $role;
+            $newRole->save();
+        }else{
+            return "this role already exists.";
+        }
     }
-    /**
-     * Set name of current Role
-     * @return Void
-     */
-    public function setName($name){
-        $this->name = $name;
-    }
+
     /**
      * Get all current Roles
      * @return Array

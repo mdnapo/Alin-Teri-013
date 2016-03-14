@@ -31,7 +31,9 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.home');
     });
 
-    Route::group(['middleware' => ['auth']], function(){
-
+    Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
+        Route::get('dashboard', 'AdminController@dashboard');
+        Route::get('pages', 'AdminController@pages');
+        // Route::get();
     });
 });

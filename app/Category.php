@@ -7,35 +7,22 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     //
-    protected $fillable = ['cat_name'];
-
-    private $id;
-    private $cat_name;
+    protected $guarded = ['id'];
 
     /**
-     * Get ID
-     * @return int
+     * Get the category
+     * @param $id
      */
-    public function getId()
-    {
-        return $this->id;
+    public function getCategory($id){
+        $cat = \Category::find($id);
+        return $cat;
     }
 
-    /**
-     * Returns category name.
-     * @return string
-     */
-    public function getCatName()
-    {
-        return $this->cat_name;
-    }
-
-    /**
-     * @param $cat_name
-     * @return void
-     */
-    public function setCatName($cat_name)
-    {
-        $this->cat_name = $cat_name;
+    public function setCategory($id, $categoryName){
+        if(!empty($id)&&!empty($categoryName)){
+            $cat = \Category::find($id);
+            $cat->name = $categoryName;
+            $cat->save();
+        }
     }
 }

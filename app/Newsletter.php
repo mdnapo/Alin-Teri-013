@@ -7,30 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class Newsletter extends Model
 {
     //
-    protected $fillable = ['email'];
-    //
-    private $id;
-    //
-    private $email;
+    protected $guarded = ['id'];
+
     /**
-     * Return Newsletter ID
-     * @return int
+     * Get all users that want an E-Mail
+     *
      */
-    public function getId(){
-        return $this->id;
-    }
-    /**
-     * Get E-Mail address
-     * @return string
-     */
-    public function getEmail(){
-        return $this->email;
-    }
-    /**
-     * Set e-mail address
-     * @return void
-     */
-    public function setEmail($email){
-        $this->email = $email;
+    public function wantNewsletter(){
+        $newsletter = \Newsletter::all();
+        return $newsletter;
     }
 }
