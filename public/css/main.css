@@ -1,3 +1,7 @@
+/********************************/
+/*** Styling for the carousel ***/
+/********************************/
+
 #doneer_nu{
     margin-top: 10px;
     margin-bottom: 10px;
@@ -8,7 +12,6 @@
 }
 .item .thumb {
     width: 25%;
-    height: 20%;
     cursor: pointer;
     float: left;
 }
@@ -18,4 +21,39 @@
 }
 .item img {
     width: 100%;
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+    .item .thumb img {
+        height: 120px;
+    }
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .item .thumb img {
+        height: 110px;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+    .item .thumb img {
+        height: 90px;
+    }
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    .item .thumb img {
+        height: 70px;
+    }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .item .thumb img {
+        height: 50px;
+    }
 }

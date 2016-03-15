@@ -13,7 +13,7 @@
             <hr>
         </div>
         <div class="col-xs-12">
-            <div class="col-xs-8 col-xs-offset-2">
+            <div class="col-md-8 col-md-offset-2">
                 <!--The thumbnail carousel-->
                 <div id="thumb_carousel" class="carousel slide" data-interval="false">
                     <div class="carousel-inner">
@@ -27,26 +27,40 @@
                             </div>
                         @endfor
                     </div><!-- /carousel-inner -->
-                    <a class="left carousel-control" href="#thumb_carousel" role="button" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </a>
-                    <a class="right carousel-control" href="#thumb_carousel" role="button" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </a>
+                    {{--If there are more then 4 pictures show add carousel controls--}}
+                    @if(ceil(count($donations)/4) > 1)
+                        <a class="left carousel-control" href="#thumb_carousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#thumb_carousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    @endif
                 </div><!-- /thumbcarousel -->
             </div>
 
             <!--The main carousel-->
-            <div class="col-xs-8 col-xs-offset-2">
+            <div class="col-md-8 col-md-offset-2">
                 <div id="main_carousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         @for($i = 0; $i < count($donations); $i++)
                             <div class="item @if($i == 0){{ 'active' }}@endif">
-                                <img src="{{$donations[$i]}}">
+                                <a data-toggle="lightbox" href="{{$donations[$i]}}" data-gallery="donations_gallery">
+                                    <img src="{{$donations[$i]}}">
+                                </a>
                             </div>
                         @endfor
                     </div>
-                </div><!-- /thumbcarousel -->
+                    {{--If there is more than 1 picture add carousel controls--}}
+                    @if(count($donations) > 1)
+                        <a class="left carousel-control" href="#main_carousel" role="button" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </a>
+                        <a class="right carousel-control" href="#main_carousel" role="button" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </a>
+                    @endif
+                </div><!-- /main carousel -->
             </div>
         </div>
         <div class="col-xs-8 col-xs-offset-2" id="doneer_nu">
@@ -89,5 +103,5 @@
         </div>
     </div>
 </div>
-
+<link rel="stylesheet" href="{{asset('css/ekko-lightbox.min.css')}}"/>
 @stop
