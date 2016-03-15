@@ -27,7 +27,7 @@
                             <a href="#"></a>
                         </li>
                     @else
-                        <li><a href="{{ url('/page/'+$items->link) }}">{{ $items->label }}</a></li>
+                        <li><a href="{{ url('/pagina/'+$items->link) }}">{{ $items->label }}</a></li>
                     @endif
                 @endforeach
             </ul>

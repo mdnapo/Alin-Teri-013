@@ -13,7 +13,7 @@ class Role extends Model
      * @return string
      */
     public static function getRole($roleId){
-        $roles = \Role::find($roleId);
+        $roles = Role::find($roleId);
         $roles->name;
         return $roles;
     }
@@ -24,7 +24,7 @@ class Role extends Model
      * @return void
      */
     public static function setRole($role){
-        $role = \Role::where('name', $role)->first();
+        $role = Role::where('name', $role)->first();
         if($role < 1){
             $newRole = new Role;
             $newRole->name = $role;

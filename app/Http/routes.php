@@ -17,7 +17,7 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.home');
     });
 
-    Route::get('/page/{slug}', [
+    Route::get('/{slug}', [
         'uses' => 'PageController@getPage'
     ])->where('slug', '([A-Za-z0-9\-\/]+)');
 

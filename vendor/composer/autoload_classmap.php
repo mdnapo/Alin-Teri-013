@@ -11,6 +11,7 @@ return array(
     'CreateFaqTable' => $baseDir . '/database/migrations/2016_03_09_113529_create_faq_table.php',
     'CreateMenuTable' => $baseDir . '/database/migrations/2016_03_09_113803_create_menu_table.php',
     'CreateNewsletterTable' => $baseDir . '/database/migrations/2016_03_09_113850_create_newsletter_table.php',
+    'CreatePagesTable' => $baseDir . '/database/migrations/2016_03_15_190838_create_pages_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateRoleTable' => $baseDir . '/database/migrations/2013_03_09_113450_create_role_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
@@ -482,6 +483,7 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'PagesTableSeeder' => $baseDir . '/database/seeds/PagesTableSeeder.php',
     'RolesTableSeeder' => $baseDir . '/database/seeds/RolesTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
@@ -521,4 +523,5 @@ return array(
     'SebastianBergmann\\Version' => $vendorDir . '/sebastian/version/src/Version.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
+    'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
 );

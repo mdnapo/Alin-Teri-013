@@ -24,6 +24,8 @@ class AdminController extends Controller
     }
 
     public function pages(){
-
+        /**
+         * Paging Dashboard.
+         */
     }
 }

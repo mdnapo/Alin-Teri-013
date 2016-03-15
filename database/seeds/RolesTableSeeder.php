@@ -17,6 +17,5 @@ class RolesTableSeeder extends Seeder
         App\Role::create([
             'name' => 'user'
         ]);
-        $this->command->info('Admin and user roles are seeded.');
     }
 }
