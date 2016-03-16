@@ -21,14 +21,6 @@ use Intervention\Image\ImageManager;
 
 Route::get('donaties', 'DonationController@index');
 Route::post('donaties', 'DonationController@upload');
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('donaties', function () {
-	$donations = File::files('img\donaties');
-	return view('donaties', compact('donations'));
-});
 
 /*
 |--------------------------------------------------------------------------

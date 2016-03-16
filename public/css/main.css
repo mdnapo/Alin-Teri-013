@@ -7,11 +7,19 @@
     margin-bottom: 10px;
 }
 
+#preview_container{
+    width: 100%;
+}
+
+#upload_preview{
+    max-width: 100%;
+}
+
 .carousel {
     margin-top: 10px;
 }
 .item .thumb {
-    width: 25%;
+    width: 20%;
     cursor: pointer;
     float: left;
 }
@@ -19,8 +27,14 @@
     width: 100%;
     margin: 2px;
 }
+
 .item img {
-    width: 100%;
+    max-height: 450px;
+}
+
+#main_carousel .carousel-control.left, #main_carousel .carousel-control.right {
+    background-image: none;
+    color: black;
 }
 
 /* Large desktops and laptops */

@@ -20,7 +20,10 @@
 			  );
 			  $validator = Validator::make(Input::all(), $rules);
 			  if(!$validator->fails()){
-				  Input::file('image')->move('img\donaties', count(\File::files('img\donaties'))+1 . '.png');
+				  $img = \Image::Make(Input::file('image'));
+				  $img->crop(Input::get('width'), Input::get('height'), Input::get('x'), Input::get('y'));
+				  $img->resize(600,600);
+				  $img->save('img/donaties/' . (count(\File::files('img\donaties'))+1) . '.png');
 			  }
 		  }
 		return back();

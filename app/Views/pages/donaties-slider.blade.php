@@ -17,18 +17,18 @@
                 <!--The thumbnail carousel-->
                 <div id="thumb_carousel" class="carousel slide" data-interval="false">
                     <div class="carousel-inner">
-                        @for($i = 0; $i < ceil(count($donations)/4); $i++)
+                        @for($i = 0; $i < ceil(count($donations)/5); $i++)
                             <div class="item @if($i == 0){{ 'active' }}@endif">
-                                @for($j = ($i*4); $j < ($i*4) + 4 && $j < count($donations); $j++)
+                                @for($j = ($i*5); $j < ($i*5) + 5 && $j < count($donations); $j++)
                                     <div data-target="#main_carousel" data-slide-to="{{$j}}" class="thumb">
-                                        <img src="{{ $donations[$j] }}">
+                                        <img class="img-responsive" src="{{ $donations[$j] }}">
                                     </div>
                                 @endfor
                             </div>
                         @endfor
                     </div><!-- /carousel-inner -->
-                    {{--If there are more then 4 pictures show add carousel controls--}}
-                    @if(ceil(count($donations)/4) > 1)
+                    {{--If there are more then 5 pictures show add carousel controls--}}
+                    @if(ceil(count($donations)/5) > 1)
                         <a class="left carousel-control" href="#thumb_carousel" role="button" data-slide="prev">
                             <span class="glyphicon glyphicon-chevron-left"></span>
                         </a>
@@ -46,7 +46,7 @@
                         @for($i = 0; $i < count($donations); $i++)
                             <div class="item @if($i == 0){{ 'active' }}@endif">
                                 <a data-toggle="lightbox" href="{{$donations[$i]}}" data-gallery="donations_gallery">
-                                    <img src="{{$donations[$i]}}">
+                                    <img class="center-block img-responsive" src="{{$donations[$i]}}">
                                 </a>
                             </div>
                         @endfor
@@ -80,8 +80,15 @@
 
                         <div class="modal-body">
                             <div class="control-group form-group">
+                                <div class="preview_container" style="margin-bottom: 10px;">
+                                    <img class="center-block" id="upload_preview" src="">
+                                </div>
                                 <div class="controls">
-                                    <input type="file" name="image" accept="image/*" required>
+                                    <input id="file_select" type="file" name="image" accept="image/*" required>
+                                    <input type="hidden" id="cropped_width" name="width" value=""/>
+                                    <input type="hidden" id="cropped_height" name="height" value=""/>
+                                    <input type="hidden" id="cropped_x" name="x" value=""/>
+                                    <input type="hidden" id="cropped_y" name="y" value=""/>
                                 </div>
                                 <div class="controls">
                                     <label>E-Mail Adres (optioneel):</label>
@@ -103,5 +110,50 @@
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="{{asset('css/ekko-lightbox.min.css')}}"/>
+<link rel="stylesheet" href="css/ekko-lightbox.min.css"/>
+<link href="css/cropper.min.css" rel="stylesheet">
+<script src="js/ekko-lightbox.min.js"></script>
+<script src="js/cropper.min.js"></script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                var $image = $("#upload_preview");
+                $image.cropper('replace', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(document).ready(function(){
+        $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+            event.preventDefault();
+            $(this).ekkoLightbox();
+        });
+
+        $("#file_select").change(function(){
+            readURL(this);
+        });
+
+        var $image = $("#upload_preview");
+        $image.cropper({
+            viewMode: 1,
+            aspectRatio: 1/1,
+            resizable: true,
+            responsive: true,
+            autoCropArea: 1,
+            zoomable: false,
+            rotatable: false,
+            crop: function(data) {
+                $("#cropped_width").val(parseInt(data.width));
+                $("#cropped_height").val(parseInt(data.height));
+                $("#cropped_x").val(parseInt(data.x));
+                $("#cropped_y").val(parseInt(data.y));
+            }
+        });
+    });
+</script>
 @stop
