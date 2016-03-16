@@ -8,4 +8,6 @@ class Page extends Model
 {
     //
     protected $table = 'pages';
+
+    protected $guarded = [];
 }

@@ -11,13 +11,13 @@ use App;
 
 class PageController extends Controller
 {
-    private $template = 'layouts.master';
+    private $template = 'pages.page';
 
     public function getPage($slug = null){
-        $page = App\Page::where('route', $slug)->where('active', 1);
-        if(empty($page->first())){
+        $page = App\Page::where('route', $slug)->where('active', 1)->firstOrFail();
+        if(empty($page->html)){
             abort(404);
         }
-        return view($this->template)->with('content', $page->first());
+        return \View::make($this->template, array('content' => $page->html));
     }
 }
