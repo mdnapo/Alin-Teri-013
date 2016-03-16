@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Validation\ValidatesRequests;
+use Intervention\Image\ImageManager;
 /*
 |--------------------------------------------------------------------------
 | Routes File
@@ -20,6 +21,14 @@ use Illuminate\Contracts\Validation\ValidatesRequests;
 
 Route::get('donaties', 'DonationController@index');
 Route::post('donaties', 'DonationController@upload');
+Route::get('/', function () {
+    return view('welcome');
+});
+
+Route::get('donaties', function () {
+	$donations = File::files('img\donaties');
+	return view('donaties', compact('donations'));
+});
 
 /*
 |--------------------------------------------------------------------------
