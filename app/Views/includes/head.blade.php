@@ -6,7 +6,6 @@
 
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
 <!-- Material Design fonts -->
 <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
@@ -17,6 +16,9 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/bootstrap-material-design.css">
 <link rel="stylesheet" type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/ripples.min.css">
+
+<!-- Custom css -->
+<link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
 <!-- Scripts NIET VERWIJDEREN!!! -->
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
