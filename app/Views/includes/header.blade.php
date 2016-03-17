@@ -21,15 +21,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 <li><a href="{{ url('/') }}">Home</a></li>
-                @foreach(App\Menu::getAllMenuItems() as $items)
-                    @if(!empty($items->parent_menu_id))
-                        <li class="dropdown">
-                            <a href="#"></a>
-                        </li>
-                    @else
-                        <li><a href="{{ url('/pagina/'+$items->link) }}">{{ $items->label }}</a></li>
-                    @endif
-                @endforeach
+
             </ul>
 
             <!-- Right Side Of Navbar -->

@@ -9,7 +9,6 @@ return array(
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_03_09_103658_create_categories_table.php',
     'CreateDonationsTable' => $baseDir . '/database/migrations/2016_03_09_113720_create_donations_table.php',
     'CreateFaqTable' => $baseDir . '/database/migrations/2016_03_09_113529_create_faq_table.php',
-    'CreateMenuTable' => $baseDir . '/database/migrations/2016_03_09_113803_create_menu_table.php',
     'CreateNewsletterTable' => $baseDir . '/database/migrations/2016_03_09_113850_create_newsletter_table.php',
     'CreatePagesTable' => $baseDir . '/database/migrations/2016_03_15_190838_create_pages_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
