@@ -7,6 +7,80 @@
     padding-right: 10px;
 }
 
-.container-fluid #content #adm-pnl-right{
+.container-fluid #content #adm-pnl-right {
     width: 100%;
+}
+
+/********************************/
+/*** Styling for the carousel ***/
+/********************************/
+
+#doneer_nu{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#preview_container{
+    width: 100%;
+}
+
+#upload_preview{
+    max-width: 100%;
+}
+
+.carousel {
+    margin-top: 10px;
+}
+.item .thumb {
+    width: 20%;
+    cursor: pointer;
+    float: left;
+}
+.item .thumb img {
+    width: 100%;
+    margin: 2px;
+}
+
+.item img {
+    max-height: 450px;
+}
+
+#main_carousel .carousel-control.left, #main_carousel .carousel-control.right {
+    background-image: none;
+    color: black;
+}
+
+/* Large desktops and laptops */
+@media (min-width: 1200px) {
+    .item .thumb img {
+        height: 120px;
+    }
+}
+
+/* Landscape tablets and medium desktops */
+@media (min-width: 992px) and (max-width: 1199px) {
+    .item .thumb img {
+        height: 110px;
+    }
+}
+
+/* Portrait tablets and small desktops */
+@media (min-width: 768px) and (max-width: 991px) {
+    .item .thumb img {
+        height: 90px;
+    }
+}
+
+/* Landscape phones and portrait tablets */
+@media (max-width: 767px) {
+    .item .thumb img {
+        height: 70px;
+    }
+}
+
+/* Portrait phones and smaller */
+@media (max-width: 480px) {
+    .item .thumb img {
+        height: 50px;
+    }
 }
