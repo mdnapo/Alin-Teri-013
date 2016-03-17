@@ -20,12 +20,13 @@ class AdminController extends Controller
         /**
          * User/Admin Dashboard.
          */
-
+        return View('pages.adm.dashboard');
     }
 
     public function pages(){
         /**
          * Paging Dashboard.
          */
+        return View('pages.adm.pages');
     }
 }

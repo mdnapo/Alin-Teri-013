@@ -23,7 +23,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
         Route::get('dashboard', 'AdminController@dashboard');
-        Route::get('page', 'AdminController@pages');
-        // Route::get();
+        Route::get('pages', 'AdminController@pages');
+        Route::get('pages/edit/{id}', ['uses' => 'AdminController@editPage'])->where('id', '([0-9])');
     });
 });

@@ -4,7 +4,7 @@
     @include('includes.head')
 </head>
 <body>
-    <div class="container">
+    <div class="container-fluid">
         <div id="header">
             @include('includes.header')
         </div>

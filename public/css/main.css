@@ -1,0 +1,12 @@
+.container-fluid #content #adm-pnl-left{
+    list-style-image: none;
+}
+
+.container-fluid #content #adm-pnl-left ul li a{
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.container-fluid #content #adm-pnl-right{
+    width: 100%;
+}

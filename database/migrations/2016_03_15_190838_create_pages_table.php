@@ -18,6 +18,7 @@ class CreatePagesTable extends Migration
             $table->string('route');
             $table->longText('html');
             $table->boolean('active')->default(1);
+            $table->boolean('protected')->default(0);
             $table->timestamps();
         });
     }
