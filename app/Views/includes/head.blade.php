@@ -4,7 +4,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 
-<!-- bootstrap -->
+<!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 <link rel="stylesheet" href="{{ asset('css/main.css') }}">
 
@@ -18,10 +18,8 @@
 <link rel="stylesheet" type="text/css"
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/ripples.min.css">
 
-<style>
-    body {
-        padding-top: 70px;
-    }
-</style>
+<!-- Scripts NIET VERWIJDEREN!!! -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
 <title>Alin Teri</title>
