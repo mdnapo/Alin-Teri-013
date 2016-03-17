@@ -30,6 +30,7 @@
                         <li><a href="{{ url('/pagina/'+$items->link) }}">{{ $items->label }}</a></li>
                     @endif
                 @endforeach
+                <li><a href="{{ url('/donaties') }}">Steun ons</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->
