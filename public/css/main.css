@@ -1,3 +1,7 @@
+body {
+    padding-top: 60px;
+}
+
 .container-fluid #content #adm-pnl-left{
     list-style-image: none;
 }
@@ -15,7 +19,7 @@
 /*** Styling for the carousel ***/
 /********************************/
 
-#doneer_nu{
+#doneer_knop{
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -26,6 +30,14 @@
 
 #upload_preview{
     max-width: 100%;
+}
+
+#upload_button{
+    cursor: pointer !important;
+}
+
+#donations_lead_text{
+    padding: 10px;
 }
 
 .carousel {

@@ -2,15 +2,17 @@
 @section('content')
 
 <div class="container">
-    <h3>Onze donateurs!</h3>
     <div class="row">
-        <div class="col-xs-12">
+        <div class="col-xs-10 col-xs-offset-1">
+            <h2><strong>Steun ons!</strong></h2>
+        </div>
+        <div class="col-xs-10 col-xs-offset-1">
             <p>
-                Wij van Alin Teri zien graag wie ons steunen. Daarom hebben wij een eigen actie: laat je steun zien met een foto! Hieronder kun je zien wie ons steunen. Wil jij ook je steun laten zien? Stuur ons jou foto in!
+                <strong>AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze doelen is het krijgen van 5000 profielfoto’s als steunbetuiging. Onze vrijwilligers en ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!</strong>
             </p>
         </div>
-        <div class="col-xs-12">
-            <hr>
+        <div class="col-xs-8 col-xs-offset-2">
+            <strong><em>Onze ambassadeurs, bondgenoten en vrijwilligers</em></strong>
         </div>
         <div class="col-xs-12">
             <div class="col-md-8 col-md-offset-2">
@@ -21,7 +23,7 @@
                             <div class="item @if($i == 0){{ 'active' }}@endif">
                                 @for($j = ($i*5); $j < ($i*5) + 5 && $j < count($donations); $j++)
                                     <div data-target="#main_carousel" data-slide-to="{{$j}}" class="thumb">
-                                        <img class="img-responsive" src="{{ $donations[$j] }}">
+                                        <img class="img-responsive" src="{{ $donations[$j]->pic_loc }}">
                                     </div>
                                 @endfor
                             </div>
@@ -45,8 +47,8 @@
                     <div class="carousel-inner">
                         @for($i = 0; $i < count($donations); $i++)
                             <div class="item @if($i == 0){{ 'active' }}@endif">
-                                <a data-toggle="lightbox" href="{{$donations[$i]}}" data-gallery="donations_gallery">
-                                    <img class="center-block img-responsive" src="{{$donations[$i]}}">
+                                <a data-toggle="lightbox" href="{{ $donations[$i]->pic_loc }}" data-gallery="donations_gallery">
+                                    <img class="center-block img-responsive" src="{{ $donations[$i]->pic_loc }}">
                                 </a>
                             </div>
                         @endfor
@@ -63,8 +65,8 @@
                 </div><!-- /main carousel -->
             </div>
         </div>
-        <div class="col-xs-8 col-xs-offset-2" id="doneer_nu">
-            <button class="btn btn-info btn-block" id="doneer_knop" data-toggle="modal" data-target="#upload_modal">Doneer nu jouw foto!</button>
+        <div class="col-xs-10 col-xs-offset-1" id="doneer_nu">
+            <button class="btn btn-primary btn-block" id="doneer_knop" data-toggle="modal" data-target="#upload_modal">Steun ons!</button>
         </div>
 
         <!--The modal for uploading a new image-->
@@ -80,23 +82,28 @@
 
                         <div class="modal-body">
                             <div class="control-group form-group">
-                                <div class="preview_container" style="margin-bottom: 10px;">
+                                <div class="preview_container">
                                     <img class="center-block" id="upload_preview" src="">
                                 </div>
-                                <div class="controls">
+                                <div class="form-group">
                                     <input id="file_select" type="file" name="image" accept="image/*" required>
+                                    <button class="btn btn-block btn btn-primary">Kies een afbeelding.</button>
                                     <input type="hidden" id="cropped_width" name="width" value=""/>
                                     <input type="hidden" id="cropped_height" name="height" value=""/>
                                     <input type="hidden" id="cropped_x" name="x" value=""/>
                                     <input type="hidden" id="cropped_y" name="y" value=""/>
                                 </div>
-                                <div class="controls">
-                                    <label>E-Mail Adres (optioneel):</label>
-                                    <input type="email" class="form-control" name="enail">
+                                <div class="form-group">
+                                    <label class="col-xs-12 control-label">E-Mail Address (optioneel):</label>
+                                    <div class="col-xs-12">
+                                        <input type="email" class="form-control" name="email">
+                                    </div>
                                 </div>
-                                <div class="controls">
-                                    <label>Bericht (optioneel):</label>
-                                    <textarea class="form-control" name="opmerking"></textarea>
+                                <div class="form-group">
+                                    <label class="col-xs-12 control-label">Bericht (optioneel):</label>
+                                    <div class="col-xs-12">
+                                        <textarea class="form-control" name="opmerking"></textarea>
+                                    </div>
                                 </div>
                             </div>
                         </div>
