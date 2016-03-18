@@ -1,3 +1,6 @@
+<?php
+$items = App\Page::where('active', 1)->get();
+?>
 <nav class="navbar navbar-default navbar-fixed-top shadow-z-1">
     <div class="container-fluid">
         <div class="navbar-header">
@@ -15,12 +18,17 @@
             </a>
         </div>
 
-    <div class="navbar-collapse collapse navbar-responsive-collapse" id="app-navbar-collapse">
-        <!-- Left Side Of Navbar -->
-        <ul class="nav navbar-nav">
-            <li class="link"><a href="{{ url('/') }}">Home</a></li>
-            <li class="link"><a href="{{ url('/donaties') }}">Steun ons</a></li>
-        </ul>
+        <div class="navbar-collapse collapse navbar-responsive-collapse" id="app-navbar-collapse">
+            <!-- Left Side Of Navbar -->
+            <ul class="nav navbar-nav">
+                <li class="link"><a href="{{ url('/') }}">Home</a></li>
+                <li class="link"><a href="{{ url('/donaties') }}">Donaties</a></li>
+                @foreach($items as $item)
+                    <li class="link">
+                        <a href="{{ url('/p/'.$item->route) }}">{{ $item->name }}</a>
+                    </li>
+                @endforeach
+            </ul>
 
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">

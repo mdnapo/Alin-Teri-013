@@ -11,20 +11,6 @@ use Intervention\Image\ImageManager;
 
 /*
 |--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
-Route::get('donaties', 'DonationController@index');
-Route::post('donaties', 'DonationController@upload');
-
-/*
-|--------------------------------------------------------------------------
 | Application Routes
 |--------------------------------------------------------------------------
 |
@@ -41,6 +27,9 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.home');
     });
 
+    Route::get('donaties', 'DonationController@index');
+    Route::post('donaties', 'DonationController@upload');
+
     Route::get('/p/{slug}', [
         'uses' => 'PageController@getPage'
     ])->where('slug', '([A-Za-z0-9\-\/]+)');
@@ -48,6 +37,13 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
         Route::get('dashboard', 'AdminController@dashboard');
         Route::get('pages', 'AdminController@pages');
-        Route::get('pages/edit/{id}', ['uses' => 'AdminController@editPage'])->where('id', '([0-9])');
+        Route::group(['prefix' => 'pages'], function(){
+            Route::get('create', 'AdminController@makePage');
+            Route::post('create', 'AdminController@createPage');
+            Route::get('edit/{id}', ['uses' => 'AdminController@editPage'])->where('id', '([0-9])');
+            Route::post('edit/{id}', ['uses' => 'AdminController@savePage'])->where('id', '([0-9])');
+            Route::get('delete/{id}', ['uses' => 'AdminController@deletePage'])->where('id', '([0-9])');
+            Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9])')->where('visibility', '([0-1])');
+        });
     });
 });

@@ -14,7 +14,7 @@ class Newsletter extends Model
      *
      */
     public static function wantNewsletter(){
-        $newsletter = \Newsletter::all();
+        $newsletter = Newsletter::all();
         return $newsletter;
     }
 }

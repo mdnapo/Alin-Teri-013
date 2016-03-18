@@ -13,7 +13,7 @@ class Donation extends Model
      * @return array
      */
     public static function didNotCheckYet(){
-        $donation = \Donation::where('approved', 0);
+        $donation = Donation::where('approved', 0);
         return $donation;
     }
 
@@ -23,7 +23,7 @@ class Donation extends Model
      * @param $approved
      */
     public static function setApproved($id, $approved){
-        $picture = \Donation::where('id', $id)->first();
+        $picture = Donation::where('id', $id)->first();
         if(is_numeric($approved) && ($approved == 0 || $approved == 1)){
             $picture->approved = $approved;
             $picture->save();
