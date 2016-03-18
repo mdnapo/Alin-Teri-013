@@ -117,7 +117,8 @@ class AdminController extends Controller
             $page->save();
             return redirect('/admin/pages');
         }
-
     }
 
+
+    
 }
