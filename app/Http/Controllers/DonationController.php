@@ -23,6 +23,7 @@
 			  $validator = Validator::make(Input::all(), $rules);
 			  if(!$validator->fails()){
 				  $img = \Image::Make(Input::file('image'));
+				  $img->rotate(Input::get('rotation'));
 				  $img->crop(Input::get('width'), Input::get('height'), Input::get('x'), Input::get('y'));
 				  $img->save('img/donaties/' . (count(\File::files('img\donaties'))+1) . '.png');
 				  $donation = new Donation;

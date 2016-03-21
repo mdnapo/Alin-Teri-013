@@ -96,6 +96,8 @@
                                     <input type="hidden" id="cropped_height" name="height" value=""/>
                                     <input type="hidden" id="cropped_x" name="x" value=""/>
                                     <input type="hidden" id="cropped_y" name="y" value=""/>
+									<input type="hidden" id="cropped_rotation" name="rotation" value="0"/>
+									<input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
                                 </div>
                                 <div class="form-group">
                                     <label class="col-xs-12 control-label">E-Mail Address (optioneel):</label>
@@ -151,12 +153,12 @@
 
 		$("#rotate_left").click(function(){
 			var $image = $("#upload_preview");
-			$image.cropper('rotate', -90);
+			$image.cropper('rotate', 90);
 		});
 		
 		$("#rotate_right").click(function(){
 			var $image = $("#upload_preview");
-			$image.cropper('rotate', 90);
+			$image.cropper('rotate', -90);
 		});
 		
         $("#file_select").change(function(){
@@ -177,6 +179,7 @@
                 $("#cropped_height").val(parseInt(data.height));
                 $("#cropped_x").val(parseInt(data.x));
                 $("#cropped_y").val(parseInt(data.y));
+				$("#cropped_rotation").val(parseInt(data.rotate*-1));
             }
         });
     });
