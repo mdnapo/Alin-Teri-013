@@ -84,6 +84,10 @@
                             <div class="control-group form-group">
                                 <div class="preview_container">
                                     <img class="center-block" id="upload_preview" src="">
+									<div class="row">
+										<div class="col-xs-6"><button type="button" class="btn btn-primary btn-block" id="rotate_left">Links draaien</button></div>
+										<div class="col-xs-6"><button type="button" class="btn btn-primary btn-block" id="rotate_right">Rechts draaien</button></div>
+									</div>
                                 </div>
                                 <div class="form-group">
                                     <input id="file_select" type="file" name="image" accept="image/*" required>
@@ -129,6 +133,8 @@
             reader.onload = function (e) {
                 var $image = $("#upload_preview");
                 $image.cropper('replace', e.target.result);
+				$("#rotate_left").show();
+				$("#rotate_right").show();
             }
 
             reader.readAsDataURL(input.files[0]);
@@ -136,11 +142,23 @@
     }
 
     $(document).ready(function(){
+		$("#rotate_left").hide();
+		$("#rotate_right").hide();
         $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
             event.preventDefault();
             $(this).ekkoLightbox();
         });
 
+		$("#rotate_left").click(function(){
+			var $image = $("#upload_preview");
+			$image.cropper('rotate', -90);
+		});
+		
+		$("#rotate_right").click(function(){
+			var $image = $("#upload_preview");
+			$image.cropper('rotate', 90);
+		});
+		
         $("#file_select").change(function(){
             readURL(this);
         });
