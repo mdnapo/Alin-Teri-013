@@ -37,6 +37,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
         Route::get('dashboard', 'AdminController@dashboard');
         Route::get('pages', 'AdminController@pages');
+        Route::get('donations', 'AdminController@donations');
         Route::group(['prefix' => 'pages'], function(){
             Route::get('create', 'AdminController@makePage');
             Route::post('create', 'AdminController@createPage');
@@ -44,6 +45,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('edit/{id}', ['uses' => 'AdminController@savePage'])->where('id', '([0-9])');
             Route::get('delete/{id}', ['uses' => 'AdminController@deletePage'])->where('id', '([0-9])');
             Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9])')->where('visibility', '([0-1])');
+        });
+        Route::group(['prefix' => 'donations'], function(){
+            Route::post('accept/{id}', ['uses' => 'AdminController@acceptDonation'])->where('id', '([0-9])');
+            Route::post('delete/{id}', ['uses' => 'AdminController@deleteDonation'])->where('id', '([0-9])');
         });
     });
 });

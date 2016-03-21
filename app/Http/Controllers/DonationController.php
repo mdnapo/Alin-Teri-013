@@ -3,13 +3,12 @@
 
 	use App\Http\Controllers\Controller;
 	use App\Donation;
-	use DB;
 	use Illuminate\Support\Facades\Input;
 	use Illuminate\Support\Facades\Validator;
 
 	class DonationController extends Controller {
 	  public function index() {
-		$donations = DB::table('donations')->where('approved', 1)->get();
+		$donations = Donation::approvedDonations();
 		return view('pages.donaties-slider', ['donations' => $donations]);
 	  }
 
