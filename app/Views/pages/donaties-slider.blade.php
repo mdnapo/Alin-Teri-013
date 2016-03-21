@@ -171,7 +171,7 @@
             responsive: true,
             autoCropArea: 1,
             zoomable: false,
-            rotatable: false,
+            rotatable: true,
             crop: function(data) {
                 $("#cropped_width").val(parseInt(data.width));
                 $("#cropped_height").val(parseInt(data.height));
