@@ -42,7 +42,9 @@ use Illuminate\Support\Facades\Validator;
 				  $donation->save();
 
 				  if (isset($_POST['mailinglistcb'])){
-					  optin();
+					  $mailinglist = new Mailinglist();
+					  $mailinglist->email = Input::get('email');
+					  $mailinglist->save();
 				  }
 			  }
 		  }
