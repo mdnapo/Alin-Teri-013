@@ -23,6 +23,7 @@ $items = App\Page::where('active', 1)->get();
             <ul class="nav navbar-nav">
                 <li class="link"><a href="{{ url('/') }}">Home</a></li>
                 <li class="link"><a href="{{ url('/donaties') }}">Donaties</a></li>
+                <li class="link"><a href="{{ url('/contact') }}">Contact</a></li>
                 @foreach($items as $item)
                     <li class="link">
                         <a href="{{ url('/p/'.$item->route) }}">{{ $item->name }}</a>

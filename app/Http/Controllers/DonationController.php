@@ -3,9 +3,11 @@
 
 	use App\Http\Controllers\Controller;
 	use App\Donation;
+	use App\Mailinglist;
 	use DB;
 	use Illuminate\Support\Facades\Input;
-	use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 	class DonationController extends Controller {
 	  public function index() {
@@ -13,7 +15,14 @@
 		return view('pages.donaties-slider', ['donations' => $donations]);
 	  }
 
-	  public function upload(){
+		public function optin(){
+			$mailinglist = new Mailinglist();
+			$mailinglist->email = Input::get('email');
+			$mailinglist->save();
+			return back();
+		}
+
+	  	public function upload(){
 		  if(Input::file('image')->isValid()){
 			  $rules = array(
 				  'image' => 'required|image',
@@ -31,6 +40,10 @@
 				  $donation->email = Input::get('email');
 				  $donation->message = Input::get('opmerking');
 				  $donation->save();
+
+				  if (isset($_POST['mailinglistcb'])){
+					  optin();
+				  }
 			  }
 		  }
 		return back();
