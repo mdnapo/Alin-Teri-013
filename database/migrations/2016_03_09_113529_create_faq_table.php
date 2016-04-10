@@ -14,12 +14,12 @@ class CreateFaqTable extends Migration
     {
         Schema::create('faq', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('category')->unsigned();
+            $table->integer('category_id')->unsigned();
             $table->string('question');
             $table->string('answer');
             $table->timestamps();
 
-            $table->foreign('category')->references('id')->on('categories');
+            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

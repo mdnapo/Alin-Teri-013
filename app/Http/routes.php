@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('donaties', 'DonationController@index');
     Route::post('donaties', 'DonationController@upload');
 
-    Route::get('faq', 'FAQController@index');
+    Route::get('faq', 'FaqController@index');
 
     Route::get('/p/{slug}', [
         'uses' => 'PageController@getPage'
