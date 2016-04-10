@@ -49,7 +49,9 @@ Route::group(['middleware' => ['web']], function () {
         });
         Route::get('faq', 'AdminController@faqs');
         Route::group(['prefix' => 'faq'], function() {
-            Route::get()
+            Route::get('/{id}', ['uses' => 'AdminController@faq'])->where('id', '[0-9]');
+            Route::post('/{id}', ['uses' => 'AdminController@faqSave'])->where('id', '[0-9]');
+            Route::delete('/{id}', ['uses' => 'AdminController@faqDestroy'])->where('id', '[0-9]');
         });
     });
 });
