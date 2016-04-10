@@ -1,5 +1,5 @@
 <?php
-$items = App\Page::where('active', 1)->get();
+$items = App\Page::where('active', 1)->where('route', '!=', '')->get();
 ?>
 <nav class="navbar navbar-default navbar-fixed-top shadow-z-1">
     <div class="container-fluid">

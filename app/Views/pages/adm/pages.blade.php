@@ -23,14 +23,18 @@ $items = App\Page::all();
                     <a href="{{ url('/admin/pages/edit/'.$item->id) }}" class="glyphicon glyphicon-pencil"></a>
                 </td>
                 <td>
-                    @if($item->active == 1)
-                        <a href="{{ url('/admin/pages/visibility/'.$item->id.'/0') }}" class="glyphicon glyphicon-eye-close"></a>
-                    @else
-                        <a href="{{ url('/admin/pages/visibility/'.$item->id.'/1') }}" class="glyphicon glyphicon-eye-open"></a>
+                    @if($item->route != "")
+                        @if($item->active == 1)
+                            <a href="{{ url('/admin/pages/visibility/'.$item->id.'/0') }}" class="glyphicon glyphicon-eye-close"></a>
+                        @else
+                            <a href="{{ url('/admin/pages/visibility/'.$item->id.'/1') }}" class="glyphicon glyphicon-eye-open"></a>
+                        @endif
                     @endif
                 </td>
                 <td>
-                    <a href="{{ url('/admin/pages/delete/'.$item->id) }}" class="glyphicon glyphicon-remove"></a>
+                    @if($item->route != "")
+                        <a href="{{ url('/admin/pages/delete/'.$item->id) }}" class="glyphicon glyphicon-remove"></a>
+                    @endif
                 </td>
             </tr>
         @endforeach
