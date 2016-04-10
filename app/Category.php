@@ -11,12 +11,4 @@ class Category extends Model
     public function faqs() {
         return $this->hasMany('App\Faq');
     }
-
-    public static function setCategory($id, $categoryName){
-        if(!empty($id)&&!empty($categoryName)){
-            $cat = \Category::find($id);
-            $cat->name = $categoryName;
-            $cat->save();
-        }
-    }
 }

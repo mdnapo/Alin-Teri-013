@@ -47,5 +47,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('delete/{id}', ['uses' => 'AdminController@deletePage'])->where('id', '([0-9])');
             Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9])')->where('visibility', '([0-1])');
         });
+        Route::get('faq', 'AdminController@faqs');
+        Route::group(['prefix' => 'faq'], function() {
+            Route::get()
+        });
     });
 });
