@@ -65,6 +65,10 @@
     color: black;
 }
 
+.img-thumbnail{
+    margin-bottom: 5px;
+}
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
     .item .thumb img {
