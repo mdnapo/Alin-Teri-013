@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Validator;
 		  if(Input::file('image')->isValid()){
 			  $rules = array(
 				  'image' => 'required|image',
-				  'email' => 'email',
+				  'email' => 'required|email',
 				  'opmerking' => 'string'
 			  );
 			  $validator = Validator::make(Input::all(), $rules);

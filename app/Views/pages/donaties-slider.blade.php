@@ -117,8 +117,8 @@
                                         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>"/>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-xs-12 control-label">E-Mail Address (optioneel):</label>
-                                        <input type="email" class="form-control" name="email">
+                                        <label class="col-xs-12 control-label">E-Mail Address:</label>
+                                        <input type="email" class="form-control" name="email" required>
                                         <span class="help-block">
                                             Het ingevoerde e-mailadres zal niet openbaar gedeeld worden met anderen.
                                         </span>
