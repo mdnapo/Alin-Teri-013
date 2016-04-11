@@ -3,8 +3,6 @@
     <form class="well well-lg form-horizontal" role="form" method="POST"
           action="{{ ($faq->question == 'Nieuwe vraag') ? url('/admin/faq/0'):url('/admin/faq/' . $faq->id) }}">
         {!! csrf_field() !!}
-        <input type="hidden" name="new"
-               value="{{ ($faq->name == 'Nieuwe vraag') ? 'true':'false' }}"></input>
 
         @if (count($errors) > 0)
             <div class="alert alert-danger">
@@ -19,9 +17,10 @@
         <div class="form-group">
             <label for="parent" class="col-md-4 control-label">Categorie</label>
             <div class="col-md-6">
-                <select id="cat" class="form-control" name="cat" value="{{ (old('cat') != null) ? old('cat'):$faq->cat_id }}">
+                <select id="cat" class="form-control" name="cat" value="">
                     @foreach($cats as $cat)
-                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                        <option selected="{{ ((old('cat') == $cat->id) || ((old('cat') == null) && ($faq->category_id == $cat->id))) ? "selected":"" }}"
+                                value="{{ $cat->id }}">{{ $cat->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -39,8 +38,9 @@
             <label class="col-md-4 control-label">Antwoord</label>
 
             <div class="col-md-6">
-                <input type="text" class="form-control" name="answer"
-                       value="{{ (old('answer') != null) ? old('answer'):$faq->answer }}">
+                <textarea class="form-control" rows="2" name="answer">
+                    {{ (old('answer') != null) ? old('answer'):$faq->answer }}
+                </textarea>
             </div>
         </div>
 
