@@ -15,7 +15,7 @@ class CategoriesTableSeeder extends Seeder {
         ]);
 
         App\Category::create([
-            'name' => 'Onderwerp',
+            'name' => 'Specifiek Onderwerp',
         ]);
 
     }
