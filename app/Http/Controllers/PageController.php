@@ -18,6 +18,6 @@ class PageController extends Controller
         if(empty($page->html)){
             abort(404);
         }
-        return \View::make($this->template, array('content' => $page->html));
+        return \View::make($this->template, array('content' => $page->html, 'id' => $page->id));
     }
 }
