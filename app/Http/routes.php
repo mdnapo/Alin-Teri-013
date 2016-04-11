@@ -53,5 +53,10 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/{id}', ['uses' => 'AdminController@faqSave'])->where('id', '[0-9]');
             Route::delete('/{id}', ['uses' => 'AdminController@faqDestroy'])->where('id', '[0-9]');
         });
+        Route::group(['prefix' => 'cat'], function() {
+            Route::get('/{id}', ['uses' => 'AdminController@cat'])->where('id', '[0-9]');
+            Route::post('/{id}', ['uses' => 'AdminController@catSave'])->where('id', '[0-9]');
+            Route::delete('/{id}', ['uses' => 'AdminController@catDestroy'])->where('id', '[0-9]');
+        });
     });
 });

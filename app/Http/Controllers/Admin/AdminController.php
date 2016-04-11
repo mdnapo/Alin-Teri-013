@@ -125,8 +125,8 @@ class AdminController extends Controller {
      * @return \Illuminate\Http\Request
      */
     public function faqs() {
-        $faqs = App\Faq::all();
-        return view('pages.adm.faq.faqs', ['faqs' => $faqs]);
+        $cats = App\Category::all();
+        return view('pages.adm.faq.faqs', ['cats' => $cats]);
     }
 
     /**
@@ -187,6 +187,61 @@ class AdminController extends Controller {
     public function faqDestroy($id = null) {
         $faq = App\Faq::findOrFail($id);
         $faq->delete();
+        return redirect('/admin/faq');
+    }
+
+    /**
+     * Shows an edit page for a single faq
+     *
+     * @param int $id
+     * @return \Illuminate\Http\Request
+     */
+    public function cat($id = null) {
+        if ($id == 0) {
+            $cat = new App\Category(['name' => 'Nieuwe categorie']);
+        } else {
+            $cat = App\Category::findOrFail($id);
+        }
+        return view('pages.adm.faq.cat', ['cat' => $cat]);
+    }
+
+    /**
+     * Updates or creates a given faq entry
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function catSave($id = null, Request $request) {
+        if ($id == 0) {
+            $cat = new App\Category();
+        } else {
+            $cat = App\Category::findOrFail($id);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'name' => 'required|String',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/admin/cat/' . $id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $cat->name = $request->name;
+            $cat->save();
+            return redirect('/admin/faq');
+        }
+    }
+
+    /**
+     * Deletes a category entry
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function catDestroy($id = null) {
+        $cat = App\Category::findOrFail($id);
+        $cat->delete();
         return redirect('/admin/faq');
     }
 
