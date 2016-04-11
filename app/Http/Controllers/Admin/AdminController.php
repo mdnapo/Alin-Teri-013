@@ -8,10 +8,13 @@
 
 namespace app\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use GuzzleHttp\Psr7\Request;
 use Illuminate\Routing\Controller;
 use App;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
@@ -37,6 +40,14 @@ class AdminController extends Controller
      */
     public function pages(){
         return View('pages.adm.pages');
+    }
+
+    /**
+     * Get Newsletter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function newsletter(){
+        return View('pages.adm.newsletter');
     }
 
     /**
@@ -119,6 +130,29 @@ class AdminController extends Controller
         }
     }
 
+    public function sendNewsletter(){
+        if(!empty(App\Mailinglist::all())){
+            if(Input::file('newsletter')->isValid()){
+                $rules = array(
+                    'newsletter' => 'required',
+                    'subject' => 'string|required'
+                );
+                $validator = Validator::make(Input::all(), $rules);
+                if(!$validator->fails()){
+                    Input::file('newsletter')->move("newsletter/", Input::file('newsletter')->getClientOriginalName());
+                    Mail::raw('', function ($message) {
+                        $message->subject(Input::get('subject'));
+                        $message->attach("newsletter/" . Input::file('newsletter')->getClientOriginalName());
+                        $message->from('testmail34125@gmail.com');
+                        foreach(App\Mailinglist::all() as $mail){
+                            $message->bcc($mail->email);
+                        }
+                    });
+                }
+            }
+        }
 
+        return back();
+    }
     
 }
