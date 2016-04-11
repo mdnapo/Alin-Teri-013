@@ -135,8 +135,13 @@ class AdminController extends Controller {
      * @return \Illuminate\Http\Request
      */
     public function faq($id = null) {
-        $faq = App\Faq::findOrFail($id);
-        return view('pages.adm.faq.faq', ['faq' => $faq]);
+        if ($id == 0) {
+            $faq = new App\Faq(['name' => 'Nieuwe Gebruiker']);
+        } else {
+            $faq = App\Faq::findOrFail($id);
+        }
+        $cats = App\Category::all();
+        return view('pages.adm.faq.faq', ['faq' => $faq, 'cats' => $cats]);
     }
 
     /**
@@ -155,7 +160,9 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function faqDestroy() {
+    public function faqDestroy($id = null) {
+        $faq = App\Faq::findOrFail($id);
+        $faq->delete();
         return redirect('/admin/faq');
     }
 
