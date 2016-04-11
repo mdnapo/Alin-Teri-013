@@ -6,7 +6,7 @@
         @foreach($pending_donations as $pending)
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="img-thumbnail">
-                    <a data-toggle="lightbox" href="{{ asset($pending->pic_loc) }}">
+                    <a data-toggle="lightbox" href="{{ asset($pending->pic_loc) }}" data-footer="{{ $pending->message }}">
                         <img src="{{ asset($pending->pic_loc) }}" class="img-responsive">
                     </a>
                     <div class="caption">
@@ -45,14 +45,14 @@
         @foreach($approved_donations as $approved)
             <div class="col-xs-12 col-sm-6 col-md-4">
                 <div class="img-thumbnail">
-                    <a data-toggle="lightbox" href="{{ asset($approved->pic_loc) }}" data-gallery="test">
+                    <a data-toggle="lightbox" href="{{ asset($approved->pic_loc) }}" data-gallery="gallery" data-title="{{ $approved->message }}">
                         <img src="{{ asset($approved->pic_loc) }}" class="img-responsive">
                     </a>
                     <div class="caption">
                         <div><strong>Email:</strong></div>
                         <div>{{ $approved->email != '' ? $approved->email : 'Leeg' }}</div>
                         <div><strong>Opmerking:</strong></div>
-                        <div>{{ $approved->message != '' ? $approved->message : 'Leeg' }}</div>
+                        <div>{!! $approved->message != '' ? $approved->message : 'Leeg' !!}</div>
                         <!--Additional wrapper to center the button group-->
                         <div class="text-center">
                             <div class="btn-group" role="group">

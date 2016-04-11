@@ -47,7 +47,7 @@
                     <div class="carousel-inner">
                         @for($i = 0; $i < count($donations); $i++)
                             <div class="item @if($i == 0){{ 'active' }}@endif">
-                                <a data-toggle="lightbox" href="{{ $donations[$i]->pic_loc }}" data-gallery="donations_gallery">
+                                <a data-toggle="lightbox" href="{{ $donations[$i]->pic_loc }}" data-gallery="donations_gallery" data-footer="{{ $donations[$i]->message }}">
                                     <img class="center-block img-responsive" src="{{ $donations[$i]->pic_loc }}">
                                 </a>
                             </div>

@@ -140,9 +140,9 @@ class AdminController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function deleteDonation($id){
-//        $donation = App\Donation::find($id);
-//        File::delete($donation->pic_loc);
-//        $donation->delete();
+        $donation = App\Donation::find($id);
+        File::delete($donation->pic_loc);
+        $donation->delete();
         return redirect('/admin/donations');
     }
 
@@ -152,7 +152,7 @@ class AdminController extends Controller
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
     public function acceptDonation($id){
-//        App\Donation::setApproved($id, 1);
+        App\Donation::setApproved($id, 1);
         return redirect('/admin/donations');
     }
 

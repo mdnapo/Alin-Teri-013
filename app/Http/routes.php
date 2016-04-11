@@ -47,8 +47,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9])')->where('visibility', '([0-1])');
         });
         Route::group(['prefix' => 'donations'], function(){
-            Route::post('accept/{id}', ['uses' => 'AdminController@acceptDonation'])->where('id', '([0-9])');
-            Route::post('delete/{id}', ['uses' => 'AdminController@deleteDonation'])->where('id', '([0-9])');
+            Route::post('accept/{id}', ['uses' => 'AdminController@acceptDonation'])->where('id', '([0-9]+)');
+            Route::post('delete/{id}', ['uses' => 'AdminController@deleteDonation'])->where('id', '([0-9]+)');
         });
     });
 });
