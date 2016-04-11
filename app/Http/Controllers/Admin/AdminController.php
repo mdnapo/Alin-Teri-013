@@ -9,9 +9,10 @@
 namespace app\Http\Controllers\Admin;
 
 use App;
-use GuzzleHttp\Psr7\Request;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller {
     /**
@@ -136,7 +137,7 @@ class AdminController extends Controller {
      */
     public function faq($id = null) {
         if ($id == 0) {
-            $faq = new App\Faq(['name' => 'Nieuwe Gebruiker']);
+            $faq = new App\Faq(['question' => 'Nieuwe vraag']);
         } else {
             $faq = App\Faq::findOrFail($id);
         }
@@ -150,7 +151,30 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function faqSave() {
+    public function faqSave($id = null, Request $request) {
+        if ($id == 0) {
+            $faq = new App\Faq();
+        } else {
+            $faq = App\Faq::findOrFail($id);
+        }
+
+        $validator = Validator::make($request->all(), [
+            'cat' => 'required|integer',
+            'question' => 'required|string',
+            'answer' => 'required|string',
+        ]);
+
+        if ($validator->fails()) {
+            return redirect('/admin/faq/' . $id)
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            $faq->question = $request->question;
+            $faq->answer = $request->answer;
+            $faq->category_id = $request->cat;
+            $faq->save();
+        }
+
         return redirect('/admin/faq');
     }
 

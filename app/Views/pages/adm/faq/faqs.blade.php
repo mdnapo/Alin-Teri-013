@@ -32,7 +32,7 @@
         </tbody>
     </table>
     <div class="btn btn-raised">
-        <a href="{{ url('/admin/faq/create') }}">Toevoegen</a>
+        <a href="{{ url('/admin/faq/0') }}">Toevoegen</a>
     </div>
 
 @endsection

@@ -39,7 +39,7 @@
             <label class="col-md-4 control-label">Antwoord</label>
 
             <div class="col-md-6">
-                <input type="email" class="form-control" name="answer"
+                <input type="text" class="form-control" name="answer"
                        value="{{ (old('answer') != null) ? old('answer'):$faq->answer }}">
             </div>
         </div>
