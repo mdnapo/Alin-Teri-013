@@ -24,6 +24,7 @@
             @endif
             <?php echo $text->html ?>
         </div>
+        </br>
         <div class="col-md-4">
             <div class="fb-page" data-href="https://www.facebook.com/alinteri013/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/alinteri013/"><a href="https://www.facebook.com/alinteri013/">Alin Teri</a></blockquote></div></div>
         </div>
