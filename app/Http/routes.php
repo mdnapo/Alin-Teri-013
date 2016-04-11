@@ -29,6 +29,10 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('donaties', 'DonationController@index');
     Route::post('donaties', 'DonationController@upload');
+    Route::post('newsletter/optin', 'DonationController@optin');
+
+    Route::get('contact', 'ContactController@index');
+    Route::post('contact', 'ContactController@insertIntoDb');
 
     Route::get('/p/{slug}', [
         'uses' => 'PageController@getPage'

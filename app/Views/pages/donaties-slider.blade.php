@@ -67,6 +67,7 @@
         </div>
         <div class="col-xs-10 col-xs-offset-1" id="doneer_nu">
             <button class="btn btn-primary btn-block" id="doneer_knop" data-toggle="modal" data-target="#upload_modal">Steun ons!</button>
+            <button class="btn btn-primary btn-block" id="optin_knop" data-toggle="modal" data-target="#optin_modal">Meld je aan voor de nieuwsbrief!</button>
         </div>
 
         <!--The modal for uploading a new image-->
@@ -103,6 +104,7 @@
                                     <label class="col-xs-12 control-label">E-Mail Address (optioneel):</label>
                                     <div class="col-xs-12">
                                         <input type="email" class="form-control" name="email">
+                                        <input type="checkbox" name="mailinglistcb" value="1" checked> Meld mij aan voor de nieuwsbrief<br>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -121,6 +123,37 @@
                 </div>
             </form>
         </div>
+
+        <!--The modal for registering for the newsletter-->
+        <div id="optin_modal" class="modal fade" role="dialog">
+            <form  method="POST" enctype="multipart/form-data" action="./newsletter/optin">
+                <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" >
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Vul uw email in</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="control-group form-group">
+                                <div class="form-group">
+                                    <label class="col-xs-12 control-label">E-Mail Address:</label>
+                                    <div class="col-xs-12">
+                                        <input type="email" class="form-control" name="email">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <input type="submit" class="btn btn-default" value="Aanmelden" />
+                            <button class="btn btn-default" data-dismiss="modal">Annuleren</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
     </div>
 </div>
 <link rel="stylesheet" href="css/ekko-lightbox.min.css"/>
