@@ -6,12 +6,12 @@
 	use App\Mailinglist;
 	use DB;
 	use Illuminate\Support\Facades\Input;
-	use Illuminate\Support\Facades\Mail;
-	use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Validator;
 
 	class DonationController extends Controller {
 	  public function index() {
-		$donations = Donation::approvedDonations();
+		$donations = DB::table('donations')->where('approved', 1)->get();
 		return view('pages.donaties-slider', ['donations' => $donations]);
 	  }
 

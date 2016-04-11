@@ -7,6 +7,7 @@
  */
 
 namespace app\Http\Controllers\Admin;
+
 use App;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -14,9 +15,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Contracts\Filesystem\Filesystem;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\View;
 
 class AdminController extends Controller {
     /**
@@ -279,39 +277,6 @@ class AdminController extends Controller {
         $cat = App\Category::findOrFail($id);
         $cat->delete();
         return redirect('/admin/faq');
-    }
-
-    /**
-     * Get donations admin page
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
-    public function donations(){
-        $pending_donations = App\Donation::pendingDonations();
-        $approved_donations = App\Donation::approvedDonations();
-        return View('pages.adm.donations', ['pending_donations' => $pending_donations,
-            'approved_donations' => $approved_donations]);
-    }
-
-    /**
-     * Delete donation
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function deleteDonation($id){
-        $donation = App\Donation::find($id);
-        File::delete($donation->pic_loc);
-        $donation->delete();
-        return redirect('/admin/donations');
-    }
-
-    /**
-     * Accept donation
-     * @param int $id
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
-     */
-    public function acceptDonation($id){
-        App\Donation::setApproved($id, 1);
-        return redirect('/admin/donations');
     }
 
 }
