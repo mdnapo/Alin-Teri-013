@@ -131,20 +131,24 @@ class AdminController extends Controller
     }
 
     public function sendNewsletter(){
-        if(Input::file('newsletter')->isValid()){
-            $rules = array(
-                'newsletter' => 'required',
-                'subject' => 'string|required'
-            );
-            $validator = Validator::make(Input::all(), $rules);
-            if(!$validator->fails()){
-                Input::file('newsletter')->move("newsletter/", Input::file('newsletter')->getClientOriginalName());
-                Mail::raw('', function ($message) {
-                    $message->subject(Input::get('subject'));
-                    $message->attach("newsletter/" . Input::file('newsletter')->getClientOriginalName());
-                    $message->from('testmail34125@gmail.com');
-                    //for loop with all the emails
-                });
+        if(!empty(App\Mailinglist::all())){
+            if(Input::file('newsletter')->isValid()){
+                $rules = array(
+                    'newsletter' => 'required',
+                    'subject' => 'string|required'
+                );
+                $validator = Validator::make(Input::all(), $rules);
+                if(!$validator->fails()){
+                    Input::file('newsletter')->move("newsletter/", Input::file('newsletter')->getClientOriginalName());
+                    Mail::raw('', function ($message) {
+                        $message->subject(Input::get('subject'));
+                        $message->attach("newsletter/" . Input::file('newsletter')->getClientOriginalName());
+                        $message->from('testmail34125@gmail.com');
+                        foreach(App\Mailinglist::all() as $mail){
+                            $message->bcc($mail->email);
+                        }
+                    });
+                }
             }
         }
 

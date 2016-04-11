@@ -1,3 +1,6 @@
+<?php
+    $mails = App\Mailinglist::all();
+?>
 @extends('layouts.admindashboard')
 @section('adminPanel')
     <form method="POST" enctype="multipart/form-data" action="{{ url('/admin/newsletter') }}">
@@ -16,6 +19,33 @@
             <div class="form-group">
                 <input type="submit" class="btn btn-block btn-primary" value="Versturen"/>
             </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <h4>E-mails waarnaar deze mail verstuurd wordt:</h4>
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                        @foreach($mails as $mail)
+                            <tr>
+                                <td>{{ $mail->email }}</td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+                <div class="col-lg-6">
+                    <h4>Eerder verstuurde bestanden:</h4>
+                    <table class="table table-striped table-hover">
+                        <tbody>
+                        @foreach(File::allFiles('newsletter') as $file)
+                            <tr>
+                                <td><a target="_blank" href="{{ asset('newsletter/' . $file->getFilename()) }}">{{ $file->getFilename() }}</a></td>
+                            </tr>
+                        @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
         </div>
     </form>
 @endsection
