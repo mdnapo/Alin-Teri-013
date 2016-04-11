@@ -1,5 +1,10 @@
 <?php
     $text = App\Page::where('name', 'Home')->first();
+    if($text == null){
+        $text = new App\Page();
+        $text->name = "Home";
+        $text->save();
+    }
 ?>
 
 @extends('layouts.master')
