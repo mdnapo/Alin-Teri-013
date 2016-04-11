@@ -72,7 +72,7 @@
 
         <!--The modal for uploading a new image-->
         <div id="upload_modal" class="modal fade" role="dialog">
-            <form  method="POST" enctype="multipart/form-data" action="./donaties">
+            <form  method="POST" enctype="multipart/form-data" action="./steun-ons">
                 <div class="modal-dialog">
                     <!-- Modal content-->
                     <div class="modal-content">

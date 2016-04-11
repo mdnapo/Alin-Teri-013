@@ -36,9 +36,10 @@ use Illuminate\Support\Facades\Validator;
 				  $img->crop(Input::get('width'), Input::get('height'), Input::get('x'), Input::get('y'));
 				  $img->save('img/donaties/' . (count(\File::files('img\donaties'))+1) . '.png');
 				  $donation = new Donation;
-				  $donation->pic_loc = 'img/donaties/' . count(\File::files('img\donaties')) . '.png';
 				  $donation->email = Input::get('email');
 				  $donation->message = Input::get('opmerking');
+				  $donation->save();
+				  $donation->pic_loc = 'img/donaties/' . $donation->id . '.png';
 				  $donation->save();
 
 				  if (isset($_POST['mailinglistcb'])){

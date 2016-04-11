@@ -27,8 +27,8 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.home');
     });
 
-    Route::get('donaties', 'DonationController@index');
-    Route::post('donaties', 'DonationController@upload');
+    Route::get('steun-ons', 'DonationController@index');
+    Route::post('steun-ons', 'DonationController@upload');
     Route::post('newsletter/optin', 'DonationController@optin');
 
     Route::get('contact', 'ContactController@index');
