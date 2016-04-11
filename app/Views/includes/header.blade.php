@@ -29,6 +29,7 @@ $items = App\Page::where('active', 1)->where('route', '!=', '')->get();
                         <a href="{{ url('/p/'.$item->route) }}">{{ $item->name }}</a>
                     </li>
                 @endforeach
+                <li class="link"><a href="{{ url('/faq') }}">FAQ</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

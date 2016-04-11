@@ -2,16 +2,15 @@
 
 use Illuminate\Database\Seeder;
 
-class PagesTableSeeder extends Seeder
-{
+class PagesTableSeeder extends Seeder {
     /**
      * Run the database seeds.
      *
      * @return void
      */
-    public function run()
-    {
+    public function run() {
         App\Page::create([
+            'name' => 'Over Ons',
             'route' => 'Over-Ons',
             'html' => 'Holy shit it works!<br />'
         ]);

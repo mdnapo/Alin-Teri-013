@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'CategoriesTableSeeder' => $baseDir . '/database/seeds/CategoriesTableSeeder.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_03_09_103658_create_categories_table.php',
     'CreateContactsTable' => $baseDir . '/database/migrations/2016_04_09_133356_create_contacts_table.php',
     'CreateDonationsTable' => $baseDir . '/database/migrations/2016_03_09_113720_create_donations_table.php',
@@ -17,6 +18,7 @@ return array(
     'CreateRoleTable' => $baseDir . '/database/migrations/2013_03_09_113450_create_role_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',
+    'FaqTableSeeder' => $baseDir . '/database/seeds/FaqTableSeeder.php',
     'File_Iterator' => $vendorDir . '/phpunit/php-file-iterator/src/Iterator.php',
     'File_Iterator_Facade' => $vendorDir . '/phpunit/php-file-iterator/src/Facade.php',
     'File_Iterator_Factory' => $vendorDir . '/phpunit/php-file-iterator/src/Factory.php',

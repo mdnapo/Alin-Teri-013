@@ -33,12 +33,12 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('contact', 'ContactController@index');
     Route::post('contact', 'ContactController@insertIntoDb');
+    
+    Route::get('faq', 'FaqController@index');
 
     Route::get('/p/{slug}', [
         'uses' => 'PageController@getPage'
     ])->where('slug', '([A-Za-z0-9\-\/]+)');
-
-    //Route::get('admin', 'login');
 
     Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
         Route::get('/', 'AdminController@dashboard');
@@ -51,6 +51,17 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('edit/{id}', ['uses' => 'AdminController@savePage'])->where('id', '([0-9])');
             Route::get('delete/{id}', ['uses' => 'AdminController@deletePage'])->where('id', '([0-9])');
             Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9])')->where('visibility', '([0-1])');
+        });
+        Route::group(['prefix' => 'faq'], function() {
+            Route::get('/', 'AdminController@faqs');
+            Route::get('/{id}', ['uses' => 'AdminController@faq'])->where('id', '[0-9]');
+            Route::post('/{id}', ['uses' => 'AdminController@faqSave'])->where('id', '[0-9]');
+            Route::delete('/{id}', ['uses' => 'AdminController@faqDestroy'])->where('id', '[0-9]');
+        });
+        Route::group(['prefix' => 'cat'], function() {
+            Route::get('/{id}', ['uses' => 'AdminController@cat'])->where('id', '[0-9]');
+            Route::post('/{id}', ['uses' => 'AdminController@catSave'])->where('id', '[0-9]');
+            Route::delete('/{id}', ['uses' => 'AdminController@catDestroy'])->where('id', '[0-9]');
         });
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');
