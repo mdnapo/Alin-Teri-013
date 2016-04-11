@@ -38,7 +38,10 @@ Route::group(['middleware' => ['web']], function () {
         'uses' => 'PageController@getPage'
     ])->where('slug', '([A-Za-z0-9\-\/]+)');
 
+    //Route::get('admin', 'login');
+
     Route::group(['middleware' => ['auth'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
+        Route::get('/', 'AdminController@dashboard');
         Route::get('dashboard', 'AdminController@dashboard');
         Route::get('pages', 'AdminController@pages');
         Route::group(['prefix' => 'pages'], function(){

@@ -34,10 +34,7 @@ $items = App\Page::where('active', 1)->where('route', '!=', '')->get();
             <!-- Right Side Of Navbar -->
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
-                @if (Auth::guest())
-                    <li class="link"><a href="{{ url('/login') }}">Login</a></li>
-                    <li class="link"><a href="{{ url('/register') }}">Register</a></li>
-                @else
+                @if (!Auth::guest())
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                             Welkom {{ Auth::user()->name }} <span class="caret"></span>
