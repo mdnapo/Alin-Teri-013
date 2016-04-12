@@ -26,7 +26,7 @@ class ContactController extends Controller
     public function insertIntoDb(){
         //Validate form
         $rules = array(
-            'email' => 'email',
+            'email' => 'email|required',
             'opmerking' => 'string|required'
         );
         $validator = Validator::make(Input::all(), $rules);
