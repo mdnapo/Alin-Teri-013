@@ -35,11 +35,12 @@
 				  $img->rotate(Input::get('rotation'));
 				  $img->crop(Input::get('width'), Input::get('height'), Input::get('x'), Input::get('y'));
 				  $img->resize(400,400);
-				  $img->save('img/donaties/' . (count(\File::files('img\donaties'))+1) . '.png');
 				  $donation = new Donation;
 				  $donation->email = Input::get('email');
 				  $donation->message = Input::get('opmerking');
-				  $donation->pic_loc = 'img/donaties/' . count(\File::files('img\donaties')) . '.png';
+				  $donation->save();
+				  $img->save('img/donaties/' . $donation->id . '.png');
+				  $donation->pic_loc = 'img/donaties/' . $donation->id . '.png';
 				  $donation->save();
 
 				  if (isset($_POST['mailinglistcb'])){
