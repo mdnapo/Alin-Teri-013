@@ -13,7 +13,17 @@ class Donation extends Model
      * @return array
      */
     public static function didNotCheckYet(){
-        $donation = Donation::where('approved', 0);
+        $donation = Donation::where('approved', 0)->get();
+        return $donation;
+    }
+
+
+    /**
+     * Returns checked photo's.
+     * @return array
+     */
+    public static function approvedDonations(){
+        $donation = Donation::where('approved', 1)->get();
         return $donation;
     }
 
