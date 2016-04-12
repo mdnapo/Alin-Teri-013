@@ -11,6 +11,14 @@
     width: 100%;
 }
 
+a.plain_link{
+    text-decoration: none;
+}
+
+a.plain_link:hover{
+    cursor: pointer;
+}
+
 /********************************/
 /*** Styling for the carousel ***/
 /********************************/
@@ -65,6 +73,9 @@
     color: black;
 }
 
+.img-thumbnail{
+    margin-bottom: 10px;
+}
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
     .item .thumb img {

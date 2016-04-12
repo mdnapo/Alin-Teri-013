@@ -11,6 +11,7 @@ namespace app\Http\Controllers\Admin;
 use App;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+use App\Contact;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
@@ -277,6 +278,85 @@ class AdminController extends Controller {
         $cat = App\Category::findOrFail($id);
         $cat->delete();
         return redirect('/admin/faq');
+    }
+
+    /**
+     * Get donations admin page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function donations(){
+        $pending_donations = App\Donation::didNotCheckYet();
+        $approved_donations = App\Donation::approvedDonations();
+        return View('pages.adm.donations', ['pending_donations' => $pending_donations,
+            'approved_donations' => $approved_donations]);
+    }
+
+    /**
+     * Delete donation
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function deleteDonation($id){
+        $donation = App\Donation::find($id);
+        \File::delete($donation->pic_loc);
+        $donation->delete();
+        return redirect('/admin/donations');
+    }
+
+    /**
+     * Accept donation
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function acceptDonation($id){
+        App\Donation::setApproved($id, 1);
+        return redirect('/admin/donations');
+    }
+
+    /**
+     * Redirects user to the Contact adminpanel.
+     */
+    public function contact(){
+        $items = Contact::all();
+        $contact_email = App\ContactEmail::find(1);
+        return view('pages.adm.contact', [ 'items' => $items, 'contact_email' => $contact_email ]);
+    }
+
+    /**
+     * Redirects user to a page displaying the contact info.
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function viewContact($id = null){
+        $contact = Contact::where('id', $id)->firstOrFail();
+        return view('pages.adm.viewContact', [ 'contact' => $contact ]);
+    }
+
+    /**
+     * Deletes a contact and redirects the user to Contact amdinpanel.
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function deleteContact($id = null){
+        $contact = Contact::where('id', $id)->firstOrFail();
+        $contact->delete();
+        return redirect('/admin/contact');
+    }
+
+    /**
+     * Sets the contact email adres in the database.
+     */
+    public function setContactEmail(){
+        $rules = array(
+            'email' => 'email|required'
+        );
+        $validator = Validator::make(Input::all(), $rules);
+        if(!$validator->fails()){
+            $contact_email = App\ContactEmail::find(1);
+            $contact_email->email = Input::get('email');
+            $contact_email->save();
+            return redirect('/admin/contact');
+        }
     }
 
 }

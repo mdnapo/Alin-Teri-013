@@ -6,12 +6,12 @@
 	use App\Mailinglist;
 	use DB;
 	use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\Mail;
-use Illuminate\Support\Facades\Validator;
+	use Illuminate\Support\Facades\Mail;
+	use Illuminate\Support\Facades\Validator;
 
 	class DonationController extends Controller {
 	  public function index() {
-		$donations = DB::table('donations')->where('approved', 1)->get();
+		$donations = Donation::approvedDonations();
 		return view('pages.donaties-slider', ['donations' => $donations]);
 	  }
 
@@ -34,12 +34,12 @@ use Illuminate\Support\Facades\Validator;
 				  $img = \Image::Make(Input::file('image'));
 				  $img->rotate(Input::get('rotation'));
 				  $img->crop(Input::get('width'), Input::get('height'), Input::get('x'), Input::get('y'));
+				  $img->resize(400,400);
 				  $img->save('img/donaties/' . (count(\File::files('img\donaties'))+1) . '.png');
 				  $donation = new Donation;
 				  $donation->email = Input::get('email');
 				  $donation->message = Input::get('opmerking');
-				  $donation->save();
-				  $donation->pic_loc = 'img/donaties/' . $donation->id . '.png';
+				  $donation->pic_loc = 'img/donaties/' . count(\File::files('img\donaties')) . '.png';
 				  $donation->save();
 
 				  if (isset($_POST['mailinglistcb'])){
