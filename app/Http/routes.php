@@ -45,6 +45,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('dashboard', 'AdminController@dashboard');
         Route::get('pages', 'AdminController@pages');
         Route::get('donations', 'AdminController@donations');
+        Route::get('contact', 'AdminController@contact');
         Route::group(['prefix' => 'pages'], function(){
             Route::get('create', 'AdminController@makePage');
             Route::post('create', 'AdminController@createPage');
@@ -67,6 +68,11 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/{id}', ['uses' => 'AdminController@cat'])->where('id', '[0-9]');
             Route::post('/{id}', ['uses' => 'AdminController@catSave'])->where('id', '[0-9]');
             Route::delete('/{id}', ['uses' => 'AdminController@catDestroy'])->where('id', '[0-9]');
+        });
+        Route::group(['prefix' => 'contact'], function(){
+            Route::get('view/{id}', ['uses' => 'AdminController@viewContact'])->where('id', '([0-9]+)');
+            Route::post('delete/{id}', ['uses' => 'AdminController@deleteContact'])->where('id', '([0-9]+)');
+            Route::post('setContactEmail', ['uses' => 'AdminController@setContactEmail']);
         });
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');

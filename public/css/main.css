@@ -11,6 +11,10 @@
     width: 100%;
 }
 
+a.plain_link{
+    text-decoration: none;
+}
+
 /********************************/
 /*** Styling for the carousel ***/
 /********************************/
