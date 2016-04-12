@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
@@ -23,7 +24,7 @@ class ContactController extends Controller
     /**
      * Inserts question into DB and sends e-mail.
      */
-    public function insertIntoDb(){
+    public function insertIntoDb(Request $request){
         //Validate form
         $rules = array(
             'email' => 'email|required',
@@ -45,6 +46,13 @@ class ContactController extends Controller
                 $message->to($to);
                 $message->replyTo($sender);
             });
+            session()->forget('email');
+            session()->forget('opmerking');
+        }
+        else{
+            session()->flash('contact_failed', true);
+            session(['email' => Input::get('email')]);
+            session(['opmerking' => Input::get('opmerking')]);
         }
         return back();
     }
