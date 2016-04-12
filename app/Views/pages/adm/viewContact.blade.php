@@ -25,7 +25,7 @@
             Terug
         </button>
     </a>
-    
+
     <a onclick="delete_contact('{{ $contact->id }}')" class="plain_link">
         <button class="btn btn-primary">
             Vraag verwijderen

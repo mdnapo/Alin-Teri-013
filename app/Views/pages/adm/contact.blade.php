@@ -33,9 +33,9 @@
                 <td>{{ $item->email }}</td>
                 <td>{!! substr($item->bericht, 0, 60) !!}</td>
                 <td>{{ $item->created_at }}</td>
-                <td><a href="{{ url('/admin/contact/view/'.$item->id) }}" class="glyphicon glyphicon-file"></a></td>
+                <td><a href="{{ url('/admin/contact/view/'.$item->id) }}" class="glyphicon glyphicon-file plain_link"></a></td>
                 <td>
-                    <a onclick="delete_contact('{{ $item->id }}')" class="glyphicon glyphicon-remove">
+                    <a onclick="delete_contact('{{ $item->id }}')" class="glyphicon glyphicon-remove plain_link">
                         <form id="{{ $item->id }}" action="{{ url('/admin/contact/delete/'.$item->id) }}" method="POST">
                             <input type="hidden" name="_token" value="{!! csrf_token() !!}">
                             <input type="hidden" name="id" value="{{ $item->id }}">

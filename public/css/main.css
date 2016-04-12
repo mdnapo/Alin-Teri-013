@@ -15,6 +15,10 @@ a.plain_link{
     text-decoration: none;
 }
 
+a.plain_link:hover{
+    cursor: pointer;
+}
+
 /********************************/
 /*** Styling for the carousel ***/
 /********************************/
