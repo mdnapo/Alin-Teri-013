@@ -4,6 +4,7 @@ $items = App\Page::all();
 
 @extends('layouts.admindashboard')
 @section('adminPanel')
+    <h1>Pagina's</h1>
     <table class="table table-bordered" >
         <thead>
             <th>#</th>
