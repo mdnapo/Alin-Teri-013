@@ -35,7 +35,14 @@
                 </div>
                 <div class="col-lg-6">
                     <h4>Eerder verstuurde bestanden:</h4>
-                    <table class="table table-striped table-hover">
+                    <form>
+                        <div class="form-group label-placeholder is-empty">
+                            <label for="search" class="control-label">Zoeken</label>
+                            <input type="text" autocomplete="off" class="form-control" id="search">
+                        </div>
+
+                    </form>
+                    <table id="table" class="table table-striped table-hover">
                         <tbody>
                         @foreach(File::allFiles('newsletter') as $file)
                             <tr>
@@ -49,4 +56,5 @@
 
         </div>
     </form>
+    <script src="{{url("js/newsletter.js")}}"></script>
 @endsection
