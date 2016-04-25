@@ -44,7 +44,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('/', 'AdminController@dashboard');
         Route::get('dashboard', 'AdminController@dashboard');
         Route::get('pages', 'AdminController@pages');
-        Route::get('donations', 'AdminController@donations');
+        Route::get('steun-ons', 'AdminController@donations');
         Route::get('contact', 'AdminController@contact');
         Route::group(['prefix' => 'pages'], function(){
             Route::get('create', 'AdminController@makePage');

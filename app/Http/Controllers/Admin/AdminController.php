@@ -300,7 +300,7 @@ class AdminController extends Controller {
         $donation = App\Donation::find($id);
         \File::delete($donation->pic_loc);
         $donation->delete();
-        return redirect('/admin/donations');
+        return redirect('/admin/steun-ons');
     }
 
     /**
@@ -310,7 +310,7 @@ class AdminController extends Controller {
      */
     public function acceptDonation($id){
         App\Donation::setApproved($id, 1);
-        return redirect('/admin/donations');
+        return redirect('/admin/steun-ons');
     }
 
     /**
@@ -319,6 +319,9 @@ class AdminController extends Controller {
     public function contact(){
         $items = Contact::all();
         $contact_email = App\ContactEmail::find(1);
+        if($contact_email == null){
+            $contact_email = new App\ContactEmail();
+        }
         return view('pages.adm.contact', [ 'items' => $items, 'contact_email' => $contact_email ]);
     }
 

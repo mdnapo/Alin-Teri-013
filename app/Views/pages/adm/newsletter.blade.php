@@ -3,6 +3,7 @@
 ?>
 @extends('layouts.admindashboard')
 @section('adminPanel')
+    <h1>Nieuwsbrief</h1>
     <form method="POST" enctype="multipart/form-data" action="{{ url('/admin/newsletter') }}">
         <div class="control-group form-group">
             Upload een bestand en deze wordt automatisch verstuurd naar iedereen die zich heeft ingeschreven voor de nieuwsbrief!
