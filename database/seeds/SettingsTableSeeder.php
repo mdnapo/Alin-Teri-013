@@ -15,6 +15,7 @@ class SettingsTableSeeder extends Seeder
             'name' => 'Rijen',
             'value' => '3',
             'setting_category_id' => 1,
+            'setting_type_id' => 1,
         ]);
     }
 }

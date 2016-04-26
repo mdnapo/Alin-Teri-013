@@ -15,11 +15,13 @@ class CreateSettingsTable extends Migration
         Schema::create('settings', function (Blueprint $table) {
             $table->increments('id')->unsigned();
             $table->integer('setting_category_id')->unsigned();
+            $table->integer('setting_type_id')->unsigned();
             $table->string('name');
             $table->string('value');
             $table->timestamps();
 
             $table->foreign('setting_category_id')->references('id')->on('setting_categories');
+            $table->foreign('setting_type_id')->references('id')->on('setting_types');
         });
     }
 
