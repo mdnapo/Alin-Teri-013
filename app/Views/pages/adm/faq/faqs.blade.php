@@ -1,5 +1,6 @@
 @extends('layouts.admindashboard')
 @section('adminPanel')
+    <h1>FAQ</h1>
     @foreach($cats as $cat)
         <div>
             <form action="{{ url('/admin/cat/' . $cat->id) }}" method="POST">

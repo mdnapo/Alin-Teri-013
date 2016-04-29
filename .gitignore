@@ -1,4 +1,5 @@
-**/.idea/
-*.iws
+.idea/
+.iws
+storage/
 workspace.xml
 tasks.xml
