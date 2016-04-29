@@ -3,10 +3,10 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-xs-10 col-xs-offset-1">
+            <div class="col-xs-12">
                 <h2><strong>Steun ons!</strong></h2>
             </div>
-            <div class="col-xs-10 col-xs-offset-1">
+            <div class="col-xs-12">
                 <p>
                     <strong>AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
                         vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
@@ -14,68 +14,37 @@
                         ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!</strong>
                 </p>
             </div>
-            <div class="col-xs-8 col-xs-offset-2">
-                <strong><em>Onze ambassadeurs, bondgenoten en vrijwilligers</em></strong>
+            <div class="col-xs-12">
+                <p><strong><em>Onze ambassadeurs, bondgenoten en vrijwilligers</em></strong></p>
             </div>
 
-            <div class="col-xs-10 col-xs-offset-1">
+            <div class="col-xs-12">
                 <div class="btn-group pull-right">
                     <a href="{{ url('steun-ons-carousel') }}"><div class="btn btn-primary">Carousel</div></a>
                     <a href="{{ url('steun-ons-gallery') }}"> <div class="btn btn-primary">Gallerij</div></a>
                 </div>
             </div>
 
+            <!--The gallery-->
             <div class="col-xs-12">
-                <div class="col-md-8 col-md-offset-2">
-                    <!--The thumbnail carousel-->
-                    <div id="thumb_carousel" class="carousel slide" data-interval="false">
-                        <div class="carousel-inner">
-                            @for($i = 0; $i < ceil(count($donations)/5); $i++)
-                                <div class="item @if($i == 0){{ 'active' }}@endif">
-                                    @for($j = ($i*5); $j < ($i*5) + 5 && $j < count($donations); $j++)
-                                        <div data-target="#main_carousel" data-slide-to="{{$j}}" class="thumb">
-                                            <img class="img-responsive" src="{{ $donations[$j]->pic_loc }}">
-                                        </div>
-                                    @endfor
-                                </div>
-                            @endfor
-                        </div><!-- /carousel-inner -->
-                        {{--If there are more then 5 pictures show add carousel controls--}}
-                        @if(ceil(count($donations)/5) > 1)
-                            <a class="left carousel-control" href="#thumb_carousel" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
+                @foreach($donations as $donation)
+                    <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="img-thumbnail">
+                            <a data-toggle="lightbox" href="{{ asset($donation->pic_loc) }}" data-title="{{ $donation->message }}">
+                                <img src="{{ asset($donation->pic_loc) }}" class="img-responsive">
                             </a>
-                            <a class="right carousel-control" href="#thumb_carousel" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        @endif
-                    </div><!-- /thumbcarousel -->
-                </div>
-
-                <!--The main carousel-->
-                <div class="col-md-8 col-md-offset-2">
-                    <div id="main_carousel" class="carousel slide" data-ride="carousel">
-                        <div class="carousel-inner">
-                            @for($i = 0; $i < count($donations); $i++)
-                                <div class="item @if($i == 0){{ 'active' }}@endif">
-                                    <a data-toggle="lightbox" href="{{ $donations[$i]->pic_loc }}" data-gallery="donations_gallery"  data-footer="{{ $donations[$i]->message }}">
-                                        <img class="center-block img-responsive" src="{{ $donations[$i]->pic_loc }}">
-                                    </a>
-                                </div>
-                            @endfor
                         </div>
-                        {{--If there is more than 1 picture add carousel controls--}}
-                        @if(count($donations) > 1)
-                            <a class="left carousel-control" href="#main_carousel" role="button" data-slide="prev">
-                                <span class="glyphicon glyphicon-chevron-left"></span>
-                            </a>
-                            <a class="right carousel-control" href="#main_carousel" role="button" data-slide="next">
-                                <span class="glyphicon glyphicon-chevron-right"></span>
-                            </a>
-                        @endif
-                    </div><!-- /main carousel -->
+                    </div>
+                @endforeach
+            </div>
+
+            <!--Pagination-->
+            <div class="col-xs-12">
+                <div class="text-center">
+                    {!! $donations->render() !!}
                 </div>
             </div>
+
             <div class="col-xs-10 col-xs-offset-1" id="doneer_nu">
                 <button class="btn btn-primary btn-block" id="doneer_knop" data-toggle="modal"
                         data-target="#upload_modal">Steun ons!

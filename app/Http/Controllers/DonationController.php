@@ -10,10 +10,15 @@
 	use Illuminate\Support\Facades\Validator;
 
 	class DonationController extends Controller {
-	  public function index() {
-		$donations = Donation::approvedDonations();
-		return view('pages.donaties-slider', ['donations' => $donations]);
-	  }
+	   	public function index() {
+	    	$donations = Donation::approvedDonations();
+			return view('pages.donaties-slider', ['donations' => $donations]);
+	  	}
+
+		public function gallery(){
+			$donations = Donation::paginatedDonations();
+			return view('pages.donaties-gallery', ['donations' => $donations]);
+		}
 
 		public function optin(){
 			$mailinglist = new Mailinglist();
@@ -22,8 +27,8 @@
 			return back();
 		}
 
-	  	public function upload(){
-		  if(Input::file('image')->isValid()){
+		public function upload(){
+	 	 if(Input::file('image')->isValid()){
 			  $rules = array(
 				  'image' => 'required|image',
 				  'email' => 'required|email',
@@ -49,7 +54,7 @@
 					  $mailinglist->save();
 				  }
 			  }
-		  }
+	 	 }
 		return back();
 	  }
 	}
