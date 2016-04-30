@@ -359,4 +359,12 @@ class AdminController extends Controller {
         }
     }
 
+    /**
+     * Get media admin page
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function media(){
+        $publications = App\Publication::all();
+        return view('pages.adm.media', ['publications' => $publications]);
+    }
 }

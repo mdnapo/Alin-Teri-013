@@ -33,6 +33,8 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('steun-ons-carousel', 'DonationController@index');
     Route::post('newsletter/optin', 'DonationController@optin');
 
+    Route::get('in-de-media', 'MediaController@index');
+
     Route::get('contact', 'ContactController@index');
     Route::post('contact', 'ContactController@insertIntoDb');
     
@@ -48,6 +50,7 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('pages', 'AdminController@pages');
         Route::get('donations', 'AdminController@donations');
         Route::get('contact', 'AdminController@contact');
+        Route::get('media', 'AdminController@media');
         Route::group(['prefix' => 'pages'], function(){
             Route::get('create', 'AdminController@makePage');
             Route::post('create', 'AdminController@createPage');
@@ -75,6 +78,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('view/{id}', ['uses' => 'AdminController@viewContact'])->where('id', '([0-9]+)');
             Route::post('delete/{id}', ['uses' => 'AdminController@deleteContact'])->where('id', '([0-9]+)');
             Route::post('setContactEmail', ['uses' => 'AdminController@setContactEmail']);
+        });
+        Route::group(['prefix' => 'media'], function(){
+
         });
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');
