@@ -30,6 +30,8 @@
         </tbody>
     </table>
 
+    <form id="delete" method="POST"></form>
+
     <div class="btn btn-raised">
         <a href="{{ url('/admin/media/0') }}">Toevoegen</a>
     </div>
@@ -39,12 +41,13 @@
         function delete_publication(id){
             bootbox.confirm('Weet u zeker dat u deze publicatie wilt verwijderen?', function(answer){
                 if(answer === true){
-                    var formData = new FormData();
-                    formData.append('_token', '{{ csrf_token() }}');
-                    var request = new XMLHttpRequest();
-                    request.open('POST', '{{ url('/admin/media/delete') }}' +'/' + id);
-                    request.send(formData);
-                    window.location.href = '{{ url('/admin/media') }}';
+                    var form = $('#delete')[0];
+                    form.action  = '{{ url('/admin/media/delete') }}/' + id;
+                    var token = document.createElement('input');
+                    token.name = '_token';
+                    token.value = '{{ csrf_token() }}';
+                    form.appendChild(token);
+                    form.submit();
                 }
             });
         }
