@@ -50,7 +50,6 @@ Route::group(['middleware' => ['web']], function () {
         Route::get('pages', 'AdminController@pages');
         Route::get('donations', 'AdminController@donations');
         Route::get('contact', 'AdminController@contact');
-        Route::get('media', 'AdminController@media');
         Route::group(['prefix' => 'pages'], function(){
             Route::get('create', 'AdminController@makePage');
             Route::post('create', 'AdminController@createPage');
@@ -80,7 +79,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('setContactEmail', ['uses' => 'AdminController@setContactEmail']);
         });
         Route::group(['prefix' => 'media'], function(){
-
+            Route::get('/', 'AdminController@publications');
+            Route::get('/{id}', ['uses' => 'AdminController@editPublication'])->where('id', '([0-9]+)');
+            Route::post('/{id}', ['uses' => 'AdminController@savePublication'])->where('id', '([0-9]+)');
         });
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');

@@ -16,6 +16,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Yaml\Tests\A;
 
 class AdminController extends Controller {
     /**
@@ -360,11 +361,56 @@ class AdminController extends Controller {
     }
 
     /**
-     * Get media admin page
+     * Get publications admin page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function media(){
+    public function publications(){
         $publications = App\Publication::all();
-        return view('pages.adm.media', ['publications' => $publications]);
+        return view('pages.adm.publications', ['publications' => $publications]);
+    }
+
+    /**
+     * Get publications edit/create page
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function editPublication($id = null){
+        $publication = $id == 0 ? new App\Publication() :
+            App\Publication::where('id', $id)->firstOrFail();
+        return view('pages.adm.publication', ['publication' => $publication]);
+    }
+
+    /**
+     * Insert publication into database
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function savePublication($id = null){
+        $publication = $id == 0 ? new App\Publication() :
+            App\Publication::where('id', $id)->firstOrFail();
+
+        $messages = array(
+            'required' => 'Het veld :attribute is verplicht!'
+        );
+
+        $rules = array(
+            'bron' => 'string|required',
+            'artikel' => 'string|required',
+            'video' => 'string'
+        );
+        $validator = Validator::make(Input::all(), $rules, $messages);
+
+        if(!$validator->fails()){
+            $publication->source = Input::get('bron');
+            $publication->article = Input::get('artikel');
+            $publication->video = Input::get('video');
+            $publication->save();
+            return redirect('admin/media');
+        }
+        else{
+            return back()->
+            withErrors($validator->errors())->
+            withInput();
+        }
     }
 }
