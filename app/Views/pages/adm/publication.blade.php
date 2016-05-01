@@ -21,7 +21,7 @@
                        value="{{ old('bron') != null ? old('bron') : $publication->source }}" required>
                 <span class="material-input"></span>
                 <span class="help-block">
-                    Geef de publicatie bron op.
+                    Geef hier de publicatie bron op.
                 </span>
             </div>
             <div class="form-group">
@@ -38,10 +38,26 @@
             </div>
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
-                    <a href="{{ url('/admin/media') }}" class="btn btn-default">Cancel</a>
-                    <input type="submit" class="btn btn-default" value="Aanmaken" />
+                    <a href="{{ url('/admin/media') }}" class="btn btn-default">Terug</a>
+                    @if($publication->id > 0)
+                        <a class="btn btn-default" onclick="delete_publication()">Verwijderen</a>
+                    @endif
+                    <input type="submit" class="btn btn-default" value="{{ $publication->id > 0 ? 'Opslaan' : 'Aanmaken' }}" />
                 </div>
             </div>
         </fieldset>
     </form>
+
+    <form id="delete" method="POST" action="{{ url('/admin/media/delete/' . $publication->id) }}">
+        <input name="_token" value="{{ csrf_token() }}" hidden>
+    </form>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script>
+        function delete_publication(){
+            bootbox.confirm('Weet u zeker dat u deze publicatie wilt verwijderen?', function(answer){
+                if(answer === true) $('#delete').submit();
+            });
+        }
+    </script>
 @endsection

@@ -27,7 +27,6 @@ Route::group(['middleware' => ['web']], function () {
         return view('pages.home');
     });
 
-//    Route::get('steun-ons', 'DonationController@gallery');
     Route::post('steun-ons', 'DonationController@upload');
     Route::get('steun-ons-gallery', 'DonationController@gallery');
     Route::get('steun-ons-carousel', 'DonationController@index');
@@ -82,6 +81,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('/', 'AdminController@publications');
             Route::get('/{id}', ['uses' => 'AdminController@editPublication'])->where('id', '([0-9]+)');
             Route::post('/{id}', ['uses' => 'AdminController@savePublication'])->where('id', '([0-9]+)');
+            Route::post('/delete/{id}', ['uses' => 'AdminController@deletePublication'])->where('id', '([0-9]+)');
         });
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');

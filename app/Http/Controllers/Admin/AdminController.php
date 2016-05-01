@@ -413,4 +413,15 @@ class AdminController extends Controller {
             withInput();
         }
     }
+
+    /**
+     * Delete publication from database
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function deletePublication($id = null){
+        $publication = App\Publication::where('id', $id)->firstOrFail();
+        $publication->delete();
+        return redirect('/admin/media');
+    }
 }
