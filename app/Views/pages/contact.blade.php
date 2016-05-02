@@ -1,3 +1,13 @@
+<?php
+$text = App\Page::where('name', 'Contact')->first();
+if($text == null){
+    $text = new App\Page();
+    $text->name = "Contact";
+    $text->protected = 1;
+    $text->save();
+}
+?>
+
 @extends('layouts.master')
 @section('content')
 
@@ -5,10 +15,7 @@
         <div class="col-md-8">
             <h1> Contactpagina </h1>
 
-            <p><b>Naam:</b> Alin Teri</p>
-            <p><b>Telefoonnummer:</b> +316123456</p>
-            <p><b>Email adres:</b> AlinTeri@Voorbeeld.nl</p>
-            <p><b>Locatie:</b> Voorbeeldstraat 1</p>
+            <?php echo $text->html ?>
 
             <br>
 

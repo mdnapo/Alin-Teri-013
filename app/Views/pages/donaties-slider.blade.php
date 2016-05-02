@@ -1,3 +1,13 @@
+<?php
+$text = App\Page::where('name', 'Steun ons')->first();
+if($text == null){
+    $text = new App\Page();
+    $text->name = "Steun ons";
+    $text->protected = 1;
+    $text->save();
+}
+?>
+
 @extends('layouts.master')
 @section('content')
 
@@ -7,12 +17,7 @@
                 <h2><strong>Steun ons!</strong></h2>
             </div>
             <div class="col-xs-10 col-xs-offset-1">
-                <p>
-                    <strong>AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
-                        vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
-                        doelen is het krijgen van 5000 profielfoto’s als steunbetuiging. Onze vrijwilligers en
-                        ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!</strong>
-                </p>
+                <?php echo $text->html ?>
             </div>
             <div class="col-xs-8 col-xs-offset-2">
                 <strong><em>Onze ambassadeurs, bondgenoten en vrijwilligers</em></strong>

@@ -26,6 +26,28 @@ class PagesTableSeeder extends Seeder {
         ]);
 
         App\Page::create([
+            'name' => 'Steun ons',
+            'route' => '',
+            'html' => '<p>
+                    <strong>AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
+                        vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
+                        doelen is het krijgen van 5000 profielfoto’s als steunbetuiging. Onze vrijwilligers en
+                        ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!</strong>
+                </p>',
+            'protected' => 1,
+        ]);
+
+        App\Page::create([
+            'name' => 'Contact',
+            'route' => '',
+            'html' => '<p><b>Naam:</b> Alin Teri</p>
+            <p><b>Telefoonnummer:</b> +316123456</p>
+            <p><b>Email adres:</b> AlinTeri@Voorbeeld.nl</p>
+            <p><b>Locatie:</b> Voorbeeldstraat 1</p>',
+            'protected' => 1,
+        ]);
+
+        App\Page::create([
             'name' => 'Over Ons',
             'route' => 'Over-Ons',
             'html' => 'Dit is een demo over ons pagina<br />',
