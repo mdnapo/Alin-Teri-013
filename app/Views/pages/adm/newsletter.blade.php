@@ -3,6 +3,7 @@
 ?>
 @extends('layouts.admindashboard')
 @section('adminPanel')
+    <h1>Nieuwsbrief</h1>
     <form method="POST" enctype="multipart/form-data" action="{{ url('/admin/newsletter') }}">
         <div class="control-group form-group">
             Upload een bestand en deze wordt automatisch verstuurd naar iedereen die zich heeft ingeschreven voor de nieuwsbrief!
@@ -34,7 +35,14 @@
                 </div>
                 <div class="col-lg-6">
                     <h4>Eerder verstuurde bestanden:</h4>
-                    <table class="table table-striped table-hover">
+                    <form>
+                        <div class="form-group label-placeholder is-empty">
+                            <label for="search" class="control-label">Zoeken</label>
+                            <input type="text" autocomplete="off" class="form-control" id="search">
+                        </div>
+
+                    </form>
+                    <table id="table" class="table table-striped table-hover">
                         <tbody>
                         @foreach(File::allFiles('newsletter') as $file)
                             <tr>
@@ -48,4 +56,5 @@
 
         </div>
     </form>
+    <script src="{{url("js/newsletter.js")}}"></script>
 @endsection

@@ -1,6 +1,7 @@
 @extends('layouts.admindashboard')
 @section('adminPanel')
     {{--Pending donations--}}
+    <h1>Steun ons</h1>
     <h3>Nog niet geaccepteerd</h3>
     <div class="row">
         @foreach($pending_donations as $pending)

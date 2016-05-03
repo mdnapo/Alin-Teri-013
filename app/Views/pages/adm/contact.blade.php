@@ -1,6 +1,6 @@
 @extends('layouts.admindashboard')
 @section('adminPanel')
-
+    <h1>Contact</h1>
     <div class="col-xs-12">
         <h3>Wijzig hieronder het contact emailadres voor gestelde vragen.</h3>
     </div>
