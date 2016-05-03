@@ -1,12 +1,10 @@
 <?php
 	namespace App\Http\Controllers;
 
-	use App\Http\Controllers\Controller;
 	use App\Donation;
 	use App\Mailinglist;
 	use DB;
-	use Illuminate\Support\Facades\Input;
-	use Illuminate\Support\Facades\Mail;
+	use Illuminate\Http\Request;
 	use Illuminate\Support\Facades\Validator;
 
 	class DonationController extends Controller {
@@ -20,29 +18,30 @@
 			return view('pages.donaties-gallery', ['donations' => $donations]);
 		}
 
-		public function optin(){
+		public function optin(Request $request){
 			$mailinglist = new Mailinglist();
-			$mailinglist->email = Input::get('email');
+			$mailinglist->email = $request->email;
 			$mailinglist->save();
 			return back();
 		}
 
-		public function upload(){
-	 	 if(Input::file('image')->isValid()){
+		public function upload(Request $request){
+	 	 if($request->file('image')->isValid()){
 			  $rules = array(
 				  'image' => 'required|image',
 				  'email' => 'required|email',
 				  'opmerking' => 'string'
 			  );
-			  $validator = Validator::make(Input::all(), $rules);
+			  $validator = Validator::make($request->all(), $rules);
+
 			  if(!$validator->fails()){
-				  $img = \Image::Make(Input::file('image'));
-				  $img->rotate(Input::get('rotation'));
-				  $img->crop(Input::get('width'), Input::get('height'), Input::get('x'), Input::get('y'));
+				  $img = \Image::Make($request->image);
+				  $img->rotate($request->rotation);
+				  $img->crop($request->width, $request->height, $request->x, $request->y);
 				  $img->resize(400,400);
 				  $donation = new Donation;
-				  $donation->email = Input::get('email');
-				  $donation->message = Input::get('opmerking');
+				  $donation->email = $request->email;
+				  $donation->message = $request->opmerking;
 				  $donation->save();
 				  $img->save('img/donaties/' . $donation->id . '.png');
 				  $donation->pic_loc = 'img/donaties/' . $donation->id . '.png';
@@ -50,7 +49,7 @@
 
 				  if (isset($_POST['mailinglistcb'])){
 					  $mailinglist = new Mailinglist();
-					  $mailinglist->email = Input::get('email');
+					  $mailinglist->email = $request->email;
 					  $mailinglist->save();
 				  }
 			  }

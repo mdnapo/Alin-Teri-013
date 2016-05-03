@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 use Carbon\Carbon;
 use App\Contact;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Yaml\Tests\A;
@@ -63,17 +62,17 @@ class AdminController extends Controller {
      * Handle page creation
      * @param Request $request
      */
-    public function createPage() {
-        var_dump(Input::get('name'));
-        if (!(empty(Input::get('name')) || empty(Input::get('route')))) {
+    public function createPage(Request $request) {
+        var_dump($request->name);
+        if (!(empty($request->name) || empty($request->route))) {
             $page = new App\Page();
-            $page->name = Input::get('name');
-            if (!(empty(Input::get('parent')) || Input::get('parent') == NULL)) {
-                $page->parent = Input::get('parent');
+            $page->name = $request->name;
+            if (!(empty($request->parent) || $request->parent == NULL)) {
+                $page->parent = $request->parent;
             }
             $page->html = '<br />';
-            $page->route = Input::get('route');
-            $page->active = Input::get('active');
+            $page->route = $request->route;
+            $page->active = $request->active;
             $page->save();
         }
         return back();
@@ -90,9 +89,9 @@ class AdminController extends Controller {
     /**
      * Saves changes made to Dynamic Paging
      */
-    public function savePage($id = null) {
+    public function savePage($id = null, Request $request) {
         $page = App\Page::where('id', $id)->firstOrFail();
-        $page->html = Input::get('html');
+        $page->html = $request->html;
         $page->save();
         return back();
     }
@@ -131,19 +130,19 @@ class AdminController extends Controller {
         }
     }
 
-    public function sendNewsletter(){
+    public function sendNewsletter(Request $request){
         if(!empty(App\Mailinglist::all())){
-            if(Input::file('newsletter')->isValid()){
+            if($request->file('newsletter')->isValid()){
                 $rules = array(
                     'newsletter' => 'required',
                     'subject' => 'string|required'
                 );
-                $validator = Validator::make(Input::all(), $rules);
+                $validator = Validator::make($request->all(), $rules);
                 if(!$validator->fails()){
-                    Input::file('newsletter')->move("newsletter/", Input::file('newsletter')->getClientOriginalName());
-                    Mail::raw('', function ($message) {
-                        $message->subject(Input::get('subject'));
-                        $message->attach("newsletter/" . Input::file('newsletter')->getClientOriginalName());
+                    $request->file('newsletter')->move("newsletter/", $request->file('newsletter')->getClientOriginalName());
+                    Mail::raw('', function ($message) use ($request) {
+                        $message->subject($request->subject);
+                        $message->attach("newsletter/" . $request->file('newsletter')->getClientOriginalName());
                         $message->from('testmail34125@gmail.com');
                         foreach(App\Mailinglist::all() as $mail){
                             $message->bcc($mail->email);
@@ -347,14 +346,14 @@ class AdminController extends Controller {
     /**
      * Sets the contact email adres in the database.
      */
-    public function setContactEmail(){
+    public function setContactEmail(Request $request){
         $rules = array(
             'email' => 'email|required'
         );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
         if(!$validator->fails()){
             $contact_email = App\ContactEmail::find(1);
-            $contact_email->email = Input::get('email');
+            $contact_email->email = $request->email;
             $contact_email->save();
             return redirect('/admin/contact');
         }
@@ -385,7 +384,7 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function savePublication($id = null){
+    public function savePublication($id = null, Request $request){
         $publication = $id == 0 ? new App\Publication() :
             App\Publication::where('id', $id)->firstOrFail();
 
@@ -398,12 +397,12 @@ class AdminController extends Controller {
             'artikel' => 'string|required',
             'video' => 'string'
         );
-        $validator = Validator::make(Input::all(), $rules, $messages);
+        $validator = Validator::make($request->all(), $rules, $messages);
 
         if(!$validator->fails()){
-            $publication->source = Input::get('bron');
-            $publication->article = Input::get('artikel');
-            $publication->video = Input::get('video');
+            $publication->source = $request->bron;
+            $publication->article = $request->artikel;
+            $publication->video = $request->video;
             $publication->save();
             return redirect('admin/media');
         }

@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
@@ -30,11 +29,11 @@ class ContactController extends Controller
             'email' => 'email|required',
             'opmerking' => 'string|required'
         );
-        $validator = Validator::make(Input::all(), $rules);
+        $validator = Validator::make($request->all(), $rules);
         //If form is valid insert question in database and send email
         if(!$validator->fails()){
-            $content = Input::get('opmerking');
-            $sender = Input::get('email');
+            $content = $request->opmerking;
+            $sender = $request->email;
             $to = App\ContactEmail::find(1)->email;
             $contact = new App\Contact;
             $contact->email = $sender;
@@ -51,8 +50,8 @@ class ContactController extends Controller
         }
         else{
             session()->flash('contact_failed', true);
-            session(['email' => Input::get('email')]);
-            session(['opmerking' => Input::get('opmerking')]);
+            session(['email' => $request->opmerking]);
+            session(['opmerking' => $request->email]);
         }
         return back();
     }
