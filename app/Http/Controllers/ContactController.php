@@ -27,12 +27,16 @@ class ContactController extends Controller
         //Validate form
         $rules = array(
             'email' => 'email|required',
-            'opmerking' => 'string|required'
+            'vraag' => 'string|required'
         );
-        $validator = Validator::make($request->all(), $rules);
+        $messages = array(
+            'required' => 'Het veld :attribute is verplicht!'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
         //If form is valid insert question in database and send email
         if(!$validator->fails()){
-            $content = $request->opmerking;
+            $content = $request->vraag;
             $sender = $request->email;
             $to = App\ContactEmail::find(1)->email;
             $contact = new App\Contact;
@@ -45,14 +49,9 @@ class ContactController extends Controller
                 $message->to($to);
                 $message->replyTo($sender);
             });
-            session()->forget('email');
-            session()->forget('opmerking');
         }
-        else{
-            session()->flash('contact_failed', true);
-            session(['email' => $request->opmerking]);
-            session(['opmerking' => $request->email]);
-        }
-        return back();
+        return back()->
+        withErrors($validator->errors())->
+        withInput();
     }
 }
