@@ -20,7 +20,7 @@
                 <td>{{ $publication->source }}</td>
                 <td>{{ $publication->created_at }}</td>
                 <td>
-                    <a href="{{ url('/admin/media/' . $publication->id) }}" class="glyphicon glyphicon-file plain_link"></a>
+                    <a href="{{ url('/admin/media/' . $publication->id) }}" class="glyphicon glyphicon-pencil plain_link"></a>
                 </td>
                 <td>
                     <a id="{{ $publication->id }}" class="glyphicon glyphicon-remove plain_link delete_publication"></a>

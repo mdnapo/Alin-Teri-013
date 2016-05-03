@@ -40,9 +40,9 @@
                 <div class="col-md-10 col-md-offset-2">
                     <a href="{{ url('/admin/media') }}" class="btn btn-default">Terug</a>
                     @if($publication->id > 0)
-                        <a class="btn btn-default" onclick="delete_publication()">Verwijderen</a>
+                        <a id="delete_publication" class="btn btn-primary delete">Verwijderen</a>
                     @endif
-                    <input type="submit" class="btn btn-default" value="{{ $publication->id > 0 ? 'Opslaan' : 'Aanmaken' }}" />
+                    <input type="submit" class="btn btn-primary" value="{{ $publication->id > 0 ? 'Opslaan' : 'Aanmaken' }}" />
                 </div>
             </div>
         </fieldset>
@@ -54,10 +54,12 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script>
-        function delete_publication(){
-            bootbox.confirm('Weet u zeker dat u deze publicatie wilt verwijderen?', function(answer){
-                if(answer === true) $('#delete').submit();
+        $(document).ready(function(){
+            $('#delete_publication').click(function delete_publication(){
+                bootbox.confirm('Weet u zeker dat u deze publicatie wilt verwijderen?', function(answer){
+                    if(answer === true) $('#delete').submit();
+                });
             });
-        }
+        });
     </script>
 @endsection
