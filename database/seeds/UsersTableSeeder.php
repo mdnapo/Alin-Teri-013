@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Administrator',
             'email' => 'admin@alinteri.nl',
             'password' => bcrypt('admin'),
-            'role' => 1,
+            'role_id' => 1,
         ]);
     }
 }
