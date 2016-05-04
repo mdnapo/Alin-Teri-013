@@ -1,54 +1,59 @@
 <?php
 	namespace App\Http\Controllers;
 
-	use App\Http\Controllers\Controller;
 	use App\Donation;
 	use App\Mailinglist;
 	use DB;
-	use Illuminate\Support\Facades\Input;
-	use Illuminate\Support\Facades\Mail;
+	use Illuminate\Http\Request;
 	use Illuminate\Support\Facades\Validator;
 
 	class DonationController extends Controller {
-	  public function index() {
-		$donations = Donation::approvedDonations();
-		return view('pages.donaties-slider', ['donations' => $donations]);
-	  }
+	   	public function index() {
+	    	$donations = Donation::approvedDonations();
+			return view('pages.donaties-slider', ['donations' => $donations]);
+	  	}
 
-		public function optin(){
+		public function gallery(){
+			$donations = Donation::paginatedDonations();
+			return view('pages.donaties-gallery', ['donations' => $donations]);
+		}
+
+		public function optin(Request $request){
 			$mailinglist = new Mailinglist();
-			$mailinglist->email = Input::get('email');
+			$mailinglist->email = $request->email;
 			$mailinglist->save();
 			return back();
 		}
 
-	  	public function upload(){
-		  if(Input::file('image')->isValid()){
+		public function upload(Request $request){
+	 	 if($request->file('image')->isValid()){
 			  $rules = array(
 				  'image' => 'required|image',
 				  'email' => 'required|email',
 				  'opmerking' => 'string'
 			  );
-			  $validator = Validator::make(Input::all(), $rules);
+			  $validator = Validator::make($request->all(), $rules);
+
 			  if(!$validator->fails()){
-				  $img = \Image::Make(Input::file('image'));
-				  $img->rotate(Input::get('rotation'));
-				  $img->crop(Input::get('width'), Input::get('height'), Input::get('x'), Input::get('y'));
+				  $img = \Image::Make($request->image);
+				  $img->rotate($request->rotation);
+				  $img->crop($request->width, $request->height, $request->x, $request->y);
 				  $img->resize(400,400);
-				  $img->save('img/donaties/' . (count(\File::files('img\donaties'))+1) . '.png');
 				  $donation = new Donation;
-				  $donation->email = Input::get('email');
-				  $donation->message = Input::get('opmerking');
-				  $donation->pic_loc = 'img/donaties/' . count(\File::files('img\donaties')) . '.png';
+				  $donation->email = $request->email;
+				  $donation->message = $request->opmerking;
+				  $donation->save();
+				  $img->save('img/donaties/' . $donation->id . '.png');
+				  $donation->pic_loc = 'img/donaties/' . $donation->id . '.png';
 				  $donation->save();
 
 				  if (isset($_POST['mailinglistcb'])){
 					  $mailinglist = new Mailinglist();
-					  $mailinglist->email = Input::get('email');
+					  $mailinglist->email = $request->email;
 					  $mailinglist->save();
 				  }
 			  }
-		  }
+	 	 }
 		return back();
 	  }
 	}

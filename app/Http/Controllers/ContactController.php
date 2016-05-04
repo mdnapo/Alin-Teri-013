@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Mail;
 
@@ -23,17 +23,21 @@ class ContactController extends Controller
     /**
      * Inserts question into DB and sends e-mail.
      */
-    public function insertIntoDb(){
+    public function insertIntoDb(Request $request){
         //Validate form
         $rules = array(
-            'email' => 'email',
-            'opmerking' => 'string|required'
+            'email' => 'email|required',
+            'vraag' => 'string|required'
         );
-        $validator = Validator::make(Input::all(), $rules);
+        $messages = array(
+            'required' => 'Het veld :attribute is verplicht!'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
         //If form is valid insert question in database and send email
         if(!$validator->fails()){
-            $content = Input::get('opmerking');
-            $sender = Input::get('email');
+            $content = $request->vraag;
+            $sender = $request->email;
             $to = App\ContactEmail::find(1)->email;
             $contact = new App\Contact;
             $contact->email = $sender;
@@ -46,6 +50,8 @@ class ContactController extends Controller
                 $message->replyTo($sender);
             });
         }
-        return back();
+        return back()->
+        withErrors($validator->errors())->
+        withInput();
     }
 }
