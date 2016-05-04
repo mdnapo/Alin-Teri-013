@@ -42,4 +42,13 @@ class Role extends Model
         $roles = Role::all();
         return $roles;
     }
+
+    /**
+     * Get all users with this role.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function users() {
+        return $this->hasMany('App\User');
+    }
 }

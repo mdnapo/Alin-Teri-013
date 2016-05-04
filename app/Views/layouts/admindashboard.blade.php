@@ -1,8 +1,3 @@
-<?php
-if(!App\User::isAdmin(Auth::user()->id)){
-    return redirect('/');
-}
-?>
 @extends('layouts.master')
 @section('content')
     <div id="adm-pnl-left" class="col-sm-3 col-lg-2">
