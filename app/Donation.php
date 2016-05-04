@@ -40,4 +40,13 @@ class Donation extends Model
         }
     }
 
+    /**
+     * Returns checked foto's with paginations
+     * @returns $donations
+     */
+    public static function paginatedDonations(){
+        $donations = Donation::where('approved', 1)->paginate(24);
+        return $donations;
+    }
+
 }

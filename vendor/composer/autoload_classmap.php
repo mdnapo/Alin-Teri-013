@@ -17,6 +17,7 @@ return array(
     'CreateNewsletterTable' => $baseDir . '/database/migrations/2016_03_09_113850_create_newsletter_table.php',
     'CreatePagesTable' => $baseDir . '/database/migrations/2016_03_15_190838_create_pages_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreatePublicationsTable' => $baseDir . '/database/migrations/2016_04_30_190857_create_publications_table.php',
     'CreateRoleTable' => $baseDir . '/database/migrations/2013_03_09_113450_create_role_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
     'DatabaseSeeder' => $baseDir . '/database/seeds/DatabaseSeeder.php',

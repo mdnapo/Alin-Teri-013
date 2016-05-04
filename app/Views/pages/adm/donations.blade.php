@@ -19,28 +19,22 @@
                         <div class="text-center">
                             <div class="btn-group" role="group">
                                 <!--The accept button-->
-                                <button type="submit" form="{{"donation_accept_$pending->id"}}" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-check"></span>
+                                <button id="{{ $pending->id }}"  class="btn btn-default accept_image">
+                                    <a class="glyphicon glyphicon-check plain_link"></a>
                                 </button>
                                 <!--The delete button-->
-                                <button onclick="delete_image('{{"donation_delete_$pending->id"}}')" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove"></span>
+                                <button id="{{ $pending->id }}" class="btn btn-default delete_image">
+                                    <a class="glyphicon glyphicon-remove plain_link"></a>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <form method="post" id="{{ "donation_accept_$pending->id" }}" action="./donations/accept/{{ $pending->id }}">
-                        <input type="hidden" name="_token" value="<?= csrf_token(); ?>" >
-                    </form>
-                    <form method="post" id="{{ "donation_delete_$pending->id" }}" action="./donations/delete/{{ $pending->id }}">
-                        <input type="hidden" name="_token" value="<?= csrf_token(); ?>" >
-                    </form>
                 </div>
             </div>
         @endforeach
     </div>
 
-    {{--Pending donations--}}
+    {{--Accepted donations--}}
     <h3>Geaccepteerd</h3>
     <div class="row">
         @foreach($approved_donations as $approved)
@@ -58,15 +52,12 @@
                         <div class="text-center">
                             <div class="btn-group" role="group">
                                 <!--The delete button-->
-                                <button onclick="delete_image('{{ "donation_delete_$approved->id" }}')" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-remove"></span>
+                                <button id="{{ $approved->id }}"  class="btn btn-default delete_image">
+                                    <a class="glyphicon glyphicon-remove plain_link"></a>
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <form method="post" id="{{ "donation_delete_$approved->id" }}" action="./donations/delete/{{ $approved->id }}">
-                        <input type="hidden" name="_token" value="<?= csrf_token(); ?>" >
-                    </form>
                 </div>
             </div>
         @endforeach
@@ -75,15 +66,36 @@
     <script src="{{ asset('js/ekko-lightbox.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script>
-        function delete_image(form_id){
-            bootbox.confirm('Weet u zeker dat u deze afbeelding wilt verwijderen?', function(answer){
-                if(answer === true) $('#' + form_id).submit();
-            });
-        }
         $(document).ready(function(){
             $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
                 event.preventDefault();
                 $(this).ekkoLightbox();
+            });
+            $('.accept_image').click(function(){
+                var id = $(this).attr('id');
+                var form = document.createElement('form');
+                form.method = 'POST';
+                form.action  = '{{ url('/admin/donations/accept') }}/' + id;
+                var token = document.createElement('input');
+                token.name = '_token';
+                token.value = '{{ csrf_token() }}';
+                form.appendChild(token);
+                form.submit();
+            });
+            $('.delete_image').click(function(){
+                var id = $(this).attr('id');
+                bootbox.confirm('Weet u zeker dat u deze afbeelding wilt verwijderen?', function(answer){
+                    if(answer === true){
+                        var form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action  = '{{ url('/admin/donations/delete') }}/' + id;
+                        var token = document.createElement('input');
+                        token.name = '_token';
+                        token.value = '{{ csrf_token() }}';
+                        form.appendChild(token);
+                        form.submit();
+                    }
+                });
             });
         });
     </script>

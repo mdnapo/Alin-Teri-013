@@ -13,7 +13,6 @@
         </form>
     </div>
 
-
     <div class="col-xs-12">
         <h2>Gestelde vragen</h2>
     </div>
@@ -33,14 +32,11 @@
                 <td>{{ $item->email }}</td>
                 <td>{!! substr($item->bericht, 0, 60) !!}</td>
                 <td>{{ $item->created_at }}</td>
-                <td><a href="{{ url('/admin/contact/view/'.$item->id) }}" class="glyphicon glyphicon-file plain_link"></a></td>
                 <td>
-                    <a onclick="delete_contact('{{ $item->id }}')" class="glyphicon glyphicon-remove plain_link">
-                        <form id="{{ $item->id }}" action="{{ url('/admin/contact/delete/'.$item->id) }}" method="POST">
-                            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
-                            <input type="hidden" name="id" value="{{ $item->id }}">
-                        </form>
-                    </a>
+                    <a href="{{ url('/admin/contact/view/'.$item->id) }}" class="glyphicon glyphicon-file plain_link"></a>
+                </td>
+                <td>
+                    <a id="{{ $item->id }}" class="glyphicon glyphicon-remove plain_link delete_message"></a>
                 </td>
             </tr>
         @endforeach
@@ -49,10 +45,22 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script>
-        function delete_contact(id){
-            bootbox.confirm('Weet u zeker dat u dit bericht wilt verwijderen?', function(answer){
-                if(answer === true) $('#' + id).submit();
+        $(document).ready(function(){
+            $('.delete_message').click(function(){
+                var id = $(this).attr('id');
+                bootbox.confirm('Weet u zeker dat u dit bericht wilt verwijderen?', function(answer){
+                    if(answer === true){
+                        var form = document.createElement('form');
+                        form.method = 'POST';
+                        form.action  = '{{ url('/admin/contact/delete') }}/' + id;
+                        var token = document.createElement('input');
+                        token.name = '_token';
+                        token.value = '{{ csrf_token() }}';
+                        form.appendChild(token);
+                        form.submit();
+                    }
+                });
             });
-        }
-    </script>
+        })
+    </script>;
 @endsection
