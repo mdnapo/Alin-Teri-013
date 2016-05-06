@@ -426,4 +426,34 @@ class AdminController extends Controller {
         $publication->delete();
         return redirect('/admin/media');
     }
+
+    public function movePageUp($id){
+        $page = App\Page::where('id', $id)->firstOrFail();
+        if($page->sort > 0){
+            $pageGoingDown = App\Page::where('sort', $page->sort-1)->firstOrFail();
+            $sort = $page->sort;
+            $pageGoingDown->sort = App\Page::orderBy('sort', 'DESC')->first()->sort+1;
+            $page->sort = $page->sort-1;
+            $pageGoingDown->save();
+            $page->save();
+            $pageGoingDown->sort = $sort;
+            $pageGoingDown->save();
+        }
+        return redirect('/admin/pages');
+    }
+
+    public function movePageDown($id){
+        $page = App\Page::where('id', $id)->firstOrFail();
+        if($page->sort < App\Page::orderBy('sort', 'DESC')->first()->sort){
+            $pageGoingUp = App\Page::where('sort', $page->sort+1)->firstOrFail();
+            $sort = $page->sort;
+            $pageGoingUp->sort = App\Page::orderBy('sort', 'DESC')->first()->sort+1;
+            $page->sort = $page->sort+1;
+            $pageGoingUp->save();
+            $page->save();
+            $pageGoingUp->sort = $sort;
+            $pageGoingUp->save();
+        }
+        return redirect('/admin/pages');
+    }
 }

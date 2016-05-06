@@ -1,5 +1,5 @@
 <?php
-$items = App\Page::where('active', 1)->where('route', '!=', '')->get();
+    $items = App\Page::where('active', 1)->orderBy('sort')->get();
 ?>
 <nav class="navbar navbar-default shadow-z-1">
     <div class="container-fluid">
@@ -21,15 +21,17 @@ $items = App\Page::where('active', 1)->where('route', '!=', '')->get();
         <div class="navbar-collapse collapse navbar-responsive-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
-                <li class="link"><a href="{{ url('/') }}">Home</a></li>
-                <li class="link"><a href="{{ url('/steun-ons-gallery') }}">Steun ons</a></li>
-                <li class="link"><a href="{{ url('/contact') }}">Contact</a></li>
                 @foreach($items as $item)
-                    <li class="link">
-                        <a href="{{ url('/p/'.$item->route) }}">{{ $item->name }}</a>
-                    </li>
+                    @if($item->protected == 1)
+                        <li class="link">
+                            <a href="{{ url('/'.$item->route) }}">{{ $item->name }}</a>
+                        </li>
+                    @else
+                        <li class="link">
+                            <a href="{{ url('/p/'.$item->route) }}">{{ $item->name }}</a>
+                        </li>
+                    @endif
                 @endforeach
-                <li class="link"><a href="{{ url('/faq') }}">FAQ</a></li>
             </ul>
 
             <!-- Right Side Of Navbar -->

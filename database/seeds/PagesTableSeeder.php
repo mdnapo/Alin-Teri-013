@@ -28,7 +28,7 @@ class PagesTableSeeder extends Seeder {
 
         App\Page::create([
             'name' => 'Steun ons',
-            'route' => '',
+            'route' => 'steun-ons-gallery',
             'html' => '<p>
                     <strong>AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
                         vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
@@ -36,23 +36,33 @@ class PagesTableSeeder extends Seeder {
                         ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!</strong>
                 </p>',
             'protected' => 1,
+            'sort' => 1,
         ]);
 
         App\Page::create([
             'name' => 'Contact',
-            'route' => '',
+            'route' => 'contact',
             'html' => '<p><b>Naam:</b> Alin Teri</p>
             <p><b>Telefoonnummer:</b> +316123456</p>
             <p><b>Email adres:</b> AlinTeri@Voorbeeld.nl</p>
             <p><b>Locatie:</b> Voorbeeldstraat 1</p>',
             'protected' => 1,
+            'sort' => 2,
         ]);
 
         App\Page::create([
             'name' => 'Over Ons',
             'route' => 'Over-Ons',
             'html' => 'Dit is een demo over ons pagina<br />',
-            'sort' => 1,
+            'sort' => 3,
+        ]);
+
+        App\Page::create([
+            'name' => 'FAQ',
+            'route' => 'faq',
+            'html' => '',
+            'sort' => 4,
+            'protected' => 1,
         ]);
 
         App\Page::create([
@@ -60,7 +70,7 @@ class PagesTableSeeder extends Seeder {
             'route' => 'demopagina',
             'html' => '',
             'active' => 0,
-            'sort' => 2,
+            'sort' => 5,
         ]);
     }
 }

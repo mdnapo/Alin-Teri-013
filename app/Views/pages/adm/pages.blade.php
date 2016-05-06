@@ -25,7 +25,7 @@ $items = App\Page::orderBy('sort')->get();
                     <a href="{{ url('/admin/pages/edit/'.$item->id) }}" class="glyphicon glyphicon-pencil"></a>
                 </td>
                 <td>
-                    @if($item->route != "")
+                    @if($item->protected == 0)
                         @if($item->active == 1)
                             <a href="{{ url('/admin/pages/visibility/'.$item->id.'/0') }}" class="glyphicon glyphicon-eye-close"></a>
                         @else
