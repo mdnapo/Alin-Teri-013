@@ -3,6 +3,7 @@
     <div class="row">
         <div class="col-xs-12">
             <h1>Frequently Asked Questions</h1>
+            <a href="{{ url("/contact") }}">Staat jou vraag niet in deze lijst? Klik dan hier om naar de contactpagina te gaan om jou vraag te stellen!</a>
             <div class="form-group label-placeholder is-empty">
                 <label for="search" class="control-label">Zoeken</label>
                 <input type="text" autocomplete="off" class="form-control" id="search">
