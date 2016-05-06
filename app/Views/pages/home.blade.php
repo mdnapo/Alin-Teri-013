@@ -4,6 +4,7 @@
         $text = new App\Page();
         $text->name = "Home";
         $text->sort = 0;
+        $text->protected = 1;
         $text->save();
     }
 ?>
@@ -20,7 +21,7 @@
         }(document, 'script', 'facebook-jssdk'));</script>
     <div class="row">
         <div class="col-md-8">
-            @if (!Auth::guest() && App\User::isAdmin(Auth::user()->id))
+            @if (!Auth::guest() && Auth::user()->isAdmin())
                 <a href="{{ url('/admin/pages/edit/'.$text->id) }}" id="edit_button" class="glyphicon glyphicon-pencil" style="position: absolute; right: 20px; top: 30px; font-size: 1.5em;"></a>
             @endif
             <?php echo $text->html ?>

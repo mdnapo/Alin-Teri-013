@@ -4,8 +4,7 @@ namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
     /**
      * The attributes that are mass assignable.
      *
@@ -25,16 +24,19 @@ class User extends Authenticatable
     ];
 
     /**
+     * Get the role that the user belongs to.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role() {
+        return $this->belongsTo('App\Role');
+    }
+
+    /**
      * Is user an administrator?
-     * @param $userId
      * @return boolean
      */
-    public static function isAdmin($userId){
-        $user = User::find($userId)->role;
-        $role = Role::where('name', 'admin')->first()->id;
-        if($role == $user){
-            return true;
-        }
-        return false;
+    public function isAdmin() {
+        return ($this->role->id == 1) ? true : false;
     }
+
 }

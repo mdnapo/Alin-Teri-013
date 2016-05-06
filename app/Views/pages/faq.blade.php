@@ -3,6 +3,10 @@
     <div class="row">
         <div class="col-xs-12">
             <h1>Frequently Asked Questions</h1>
+            <div class="form-group label-placeholder is-empty">
+                <label for="search" class="control-label">Zoeken</label>
+                <input type="text" autocomplete="off" class="form-control" id="search">
+            </div>
         </div>
     </div>
     @foreach($cats as $cat)

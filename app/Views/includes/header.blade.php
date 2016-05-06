@@ -41,7 +41,7 @@ $items = App\Page::where('active', 1)->where('route', '!=', '')->get();
                             Welkom {{ Auth::user()->name }} <span class="caret"></span>
                         </a>
                         <ul class="dropdown-menu" role="menu">
-                            @if(App\User::isAdmin(Auth::user()->id))
+                            @if(Auth::user()->isAdmin())
                                 <li><a href="{{ url('/admin/dashboard') }}"><i class="fa fa-btn">DashBoard</i></a></li>
                             @endif
                             <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
