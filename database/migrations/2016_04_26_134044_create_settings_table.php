@@ -18,6 +18,7 @@ class CreateSettingsTable extends Migration
             $table->integer('setting_type_id')->unsigned();
             $table->string('name');
             $table->string('value');
+            $table->string('possible_values')->nullable();
             $table->timestamps();
 
             $table->foreign('setting_category_id')->references('id')->on('setting_categories');
