@@ -11,13 +11,7 @@
             <div class="row">
                 @foreach($cat->faqs as $faq)
                     <div class="
-                    @if ($settings->where('name', 'Rijen - PC')->first()->value == 2)
-                            col-lg-6
-                    @elseif($settings->where('name', 'Rijen - PC')->first()->value == 3)
-                            col-lg-4
-                    @else
-                            col-lg-3
-                    @endif
+                    {{ ($settings->where('name', 'Rijen - PC')->first()->value == 4) ? 'col-lg-3':'col-lg-4' }}
                     {{ ($settings->where('name', 'Rijen - Tablet')->first()->value == 3) ? 'col-md-4':'col-md-6' }}
                     {{ ($settings->where('name', 'Rijen - Telefoon')->first()->value == 2) ? 'col-sm-6':'col-sm-12' }}
                             searchable">
