@@ -1,45 +1,49 @@
 @extends('layouts.admindashboard')
 @section('adminPanel')
     <h1>Settings</h1>
+    @if (count($errors) > 0)
+        <div class="row">
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
     @foreach($cats as $cat)
         <div class="row">
-            <h2 style="display:inline;">{{ $cat->name }}</h2>
+            <h4>{{ $cat->name }}</h4>
         </div>
         <div class="row">
-            <table class="table table-bordered">
-                <thead>
-                <th>Setting</th>
-                <th>Waarde</th>
-                </thead>
-                <tbody>
-                @foreach($cat->$settings as $setting)
-                    <tr>
-                        <th scope="row" class="#{{ $faq->id }}">{{ $faq->id }}</th>
-                        <td>{{ $faq->question }}</td>
-                        <td>{{ $faq->answer }}</td>
-                        <td>
-                            <a href="{{ url('/admin/faq/'.$faq->id) }}" class="glyphicon glyphicon-pencil"></a>
-                        </td>
-                        <td>
-                            <form action="{{ url('/admin/faq/' . $faq->id) }}" method="POST">
-                                {!! csrf_field() !!}
-                                {!! method_field('DELETE') !!}
-
-                                <button type="submit" id="delete-faq-{{ $faq->id }}"
-                                        style="outline: 0; border: 0; background:0;" class="glyphicon glyphicon-remove">
-                                </button>
-                            </form>
-                        </td>
-                    </tr>
+            <form action="{{ url('/admin/settings/' . $cat->id) }}" method="POST">
+                {!! csrf_field() !!}
+                @foreach ($cat->settings as $setting)
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">{{ $setting->name }}</label>
+                        <div class="col-md-10">
+                            @if ($setting->setting_type_id == 1)
+                                @foreach (explode(',', $setting->possible_values) as $option)
+                                    <div class="radio radio-primary">
+                                        <label>
+                                            <input type="radio" name="{{ "set" . $setting->id }}"
+                                                   id="{{ "set" . $setting->id }}"
+                                                   value="{{ $option }}" {{ ($setting->value == $option) ? "checked":"" }}>{{ $option }}
+                                            </input>
+                                        </label>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
+                    </div>
                 @endforeach
-                </tbody>
-            </table>
+                <div class="col-md-2 col-md-offset-10">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="material-icons">done</i>
+                    </button>
+                </div>
+            </form>
         </div>
     @endforeach
-    <div class="btn btn-raised">
-        <a href="{{ url('/admin/cat/0') }}">Categorie Toevoegen</a>
-    </div>
-    <div class="btn btn-raised">
-        <a href="{{ url('/admin/faq/0') }}">FAQ Toevoegen</a>
-    </div>
 @endsection

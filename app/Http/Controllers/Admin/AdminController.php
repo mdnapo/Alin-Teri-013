@@ -426,4 +426,14 @@ class AdminController extends Controller {
         $publication->delete();
         return redirect('/admin/media');
     }
+
+    /**
+     * Shows all settings.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function settings() {
+        $cats = App\SettingCategory::all();
+        return view('pages.adm.settings', compact('cats'));
+    }
 }

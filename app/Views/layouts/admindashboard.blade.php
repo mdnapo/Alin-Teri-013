@@ -15,6 +15,7 @@ if(!App\User::isAdmin(Auth::user()->id)){
             <div class="btn btn-raised"><a href="{{ url('/admin/contact') }}">Contact</a></div>
             {{--<div class="btn btn-raised"><a href="{{ url('/admin/users') }}">Gebruikers</a></div>--}}
             <div class="btn btn-raised"><a href="{{ url('/admin/faq') }}">F.A.Q.</a></div>
+            <div class="btn btn-raised"><a href="{{ url('/admin/settings') }}">Settings</a></div>
         </div>
     </div>
     <div id="adm-pnl-right" class="col-xs-12 col-sm-9 col-lq-10">

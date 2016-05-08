@@ -83,6 +83,9 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('/{id}', ['uses' => 'AdminController@savePublication'])->where('id', '([0-9]+)');
             Route::post('/delete/{id}', ['uses' => 'AdminController@deletePublication'])->where('id', '([0-9]+)');
         });
+        Route::group(['prefix' => 'settings'], function() {
+            Route::get('/', 'AdminController@settings');
+        });
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');
     });
