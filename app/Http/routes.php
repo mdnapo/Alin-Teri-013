@@ -85,6 +85,7 @@ Route::group(['middleware' => ['web']], function () {
         });
         Route::group(['prefix' => 'settings'], function() {
             Route::get('/', 'AdminController@settings');
+            Route::post('/{id}', 'AdminController@saveSettings');
         });
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');
