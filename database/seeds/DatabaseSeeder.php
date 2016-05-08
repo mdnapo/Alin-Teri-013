@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder {
         $this->call(FaqTableSeeder::class);
         $this->call(ContactEmailTableSeeder::class);
         $this->call(SettingCategoriesTableSeeder::class);
-        $this->call(SettingTypesTableSeeder::class);
         $this->call(SettingsTableSeeder::class);
+        $this->call(SettingValuesTableSeeder::class);
     }
 }

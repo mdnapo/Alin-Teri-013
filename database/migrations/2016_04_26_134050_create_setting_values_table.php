@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSettingTypesTable extends Migration
+class CreateSettingValuesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,13 @@ class CreateSettingTypesTable extends Migration
      */
     public function up()
     {
-        Schema::create('setting_types', function (Blueprint $table) {
+        Schema::create('setting_values', function (Blueprint $table) {
             $table->increments('id')->unsigned();
-            $table->string('name');
+            $table->integer('setting_id')->unsigned();
+            $table->string('value');
             $table->timestamps();
+
+            $table->foreign('setting_id')->references('id')->on('settings');
         });
     }
 
@@ -26,6 +29,6 @@ class CreateSettingTypesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('setting_types');
+        Schema::drop('setting_values');
     }
 }

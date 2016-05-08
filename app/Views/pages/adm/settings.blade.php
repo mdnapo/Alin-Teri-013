@@ -23,18 +23,16 @@
                     <div class="form-group">
                         <label class="col-md-2 control-label">{{ $setting->name }}</label>
                         <div class="col-md-10">
-                            @if ($setting->setting_type_id == 1)
-                                @foreach (explode(',', $setting->possible_values) as $option)
-                                    <div class="radio radio-primary">
-                                        <label>
-                                            <input type="radio" name="{{ "set" . $setting->id }}"
-                                                   id="{{ "set" . $setting->id }}"
-                                                   value="{{ $option }}" {{ ($setting->value == $option) ? "checked":"" }}>{{ $option }}
-                                            </input>
-                                        </label>
-                                    </div>
-                                @endforeach
-                            @endif
+                            @foreach ($setting->values as $option)
+                                <div class="radio radio-primary">
+                                    <label>
+                                        <input type="radio" name="{{ "set" . $setting->id }}"
+                                               id="{{ "set" . $setting->id }}"
+                                               value="{{ $option->value }}" {{ ($setting->value == $option->value) ? 'checked=""':'' }}>{{ $option->value }}
+                                        </input>
+                                    </label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 @endforeach
