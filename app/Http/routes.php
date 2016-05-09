@@ -46,50 +46,50 @@ Route::group(['middleware' => ['web']], function () {
     Route::group(['middleware' => ['auth', 'admin'], 'namespace' => 'Admin', 'prefix' => 'admin'], function(){
         Route::get('/', 'AdminController@dashboard');
         Route::get('dashboard', 'AdminController@dashboard');
-        Route::get('pages', 'AdminController@pages');
-        Route::get('steun-ons', 'AdminController@donations');
-        Route::get('contact', 'AdminController@contact');
+        Route::get('pages', 'PagesController@pages');
+        Route::get('steun-ons', 'DonationsController@donations');
+        Route::get('contact', 'ContactsController@contact');
         Route::group(['prefix' => 'pages'], function(){
-            Route::get('create', 'AdminController@makePage');
-            Route::post('create', 'AdminController@createPage');
-            Route::get('edit/{id}', ['uses' => 'AdminController@editPage'])->where('id', '([0-9])');
-            Route::post('edit/{id}', ['uses' => 'AdminController@savePage'])->where('id', '([0-9])');
-            Route::get('delete/{id}', ['uses' => 'AdminController@deletePage'])->where('id', '([0-9])');
-            Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9])')->where('visibility', '([0-1])');
-            Route::get('move-up/{id}', ['uses' => 'AdminController@movePageUp'])->where('id', '([0-9])');
-            Route::get('move-down/{id}', ['uses' => 'AdminController@movePageDown'])->where('id', '([0-9])');
+            Route::get('create', 'PagesController@makePage');
+            Route::post('create', 'PagesController@createPage');
+            Route::get('edit/{id}', ['uses' => 'PagesController@editPage'])->where('id', '([0-9])');
+            Route::post('edit/{id}', ['uses' => 'PagesController@savePage'])->where('id', '([0-9])');
+            Route::get('delete/{id}', ['uses' => 'PagesController@deletePage'])->where('id', '([0-9])');
+            Route::get('visibility/{id}/{visibility}', ['uses' => 'PagesController@setVisibility'])->where('id', '([0-9])')->where('visibility', '([0-1])');
+            Route::get('move-up/{id}', ['uses' => 'PagesController@movePageUp'])->where('id', '([0-9])');
+            Route::get('move-down/{id}', ['uses' => 'PagesController@movePageDown'])->where('id', '([0-9])');
         });
         Route::group(['prefix' => 'donations'], function(){
-            Route::post('accept/{id}', ['uses' => 'AdminController@acceptDonation'])->where('id', '([0-9]+)');
-            Route::post('delete/{id}', ['uses' => 'AdminController@deleteDonation'])->where('id', '([0-9]+)');
+            Route::post('accept/{id}', ['uses' => 'DonationsController@acceptDonation'])->where('id', '([0-9]+)');
+            Route::post('delete/{id}', ['uses' => 'DonationsController@deleteDonation'])->where('id', '([0-9]+)');
         });
         Route::group(['prefix' => 'faq'], function() {
-            Route::get('/', 'AdminController@faqs');
-            Route::get('/{id}', ['uses' => 'AdminController@faq'])->where('id', '[0-9]');
-            Route::post('/{id}', ['uses' => 'AdminController@faqSave'])->where('id', '[0-9]');
-            Route::delete('/{id}', ['uses' => 'AdminController@faqDestroy'])->where('id', '[0-9]');
+            Route::get('/', 'FaqsController@faqs');
+            Route::get('/{id}', ['uses' => 'FaqsController@faq'])->where('id', '[0-9]');
+            Route::post('/{id}', ['uses' => 'FaqsController@faqSave'])->where('id', '[0-9]');
+            Route::delete('/{id}', ['uses' => 'FaqsController@faqDestroy'])->where('id', '[0-9]');
         });
         Route::group(['prefix' => 'cat'], function() {
-            Route::get('/{id}', ['uses' => 'AdminController@cat'])->where('id', '[0-9]');
-            Route::post('/{id}', ['uses' => 'AdminController@catSave'])->where('id', '[0-9]');
-            Route::delete('/{id}', ['uses' => 'AdminController@catDestroy'])->where('id', '[0-9]');
+            Route::get('/{id}', ['uses' => 'CategoryController@cat'])->where('id', '[0-9]');
+            Route::post('/{id}', ['uses' => 'CategoryController@catSave'])->where('id', '[0-9]');
+            Route::delete('/{id}', ['uses' => 'CategoryController@catDestroy'])->where('id', '[0-9]');
         });
         Route::group(['prefix' => 'contact'], function(){
-            Route::get('view/{id}', ['uses' => 'AdminController@viewContact'])->where('id', '([0-9]+)');
-            Route::post('delete/{id}', ['uses' => 'AdminController@deleteContact'])->where('id', '([0-9]+)');
-            Route::post('setContactEmail', ['uses' => 'AdminController@setContactEmail']);
+            Route::get('view/{id}', ['uses' => 'ContactsController@viewContact'])->where('id', '([0-9]+)');
+            Route::post('delete/{id}', ['uses' => 'ContactsController@deleteContact'])->where('id', '([0-9]+)');
+            Route::post('setContactEmail', ['uses' => 'ContactsController@setContactEmail']);
         });
         Route::group(['prefix' => 'media'], function(){
-            Route::get('/', 'AdminController@publications');
-            Route::get('/{id}', ['uses' => 'AdminController@editPublication'])->where('id', '([0-9]+)');
-            Route::post('/{id}', ['uses' => 'AdminController@savePublication'])->where('id', '([0-9]+)');
-            Route::post('/delete/{id}', ['uses' => 'AdminController@deletePublication'])->where('id', '([0-9]+)');
+            Route::get('/', 'MediaController@publications');
+            Route::get('/{id}', ['uses' => 'MediaController@editPublication'])->where('id', '([0-9]+)');
+            Route::post('/{id}', ['uses' => 'MediaController@savePublication'])->where('id', '([0-9]+)');
+            Route::post('/delete/{id}', ['uses' => 'MediaController@deletePublication'])->where('id', '([0-9]+)');
         });
         Route::group(['prefix' => 'settings'], function() {
-            Route::get('/', 'AdminController@settings');
-            Route::post('/{id}', 'AdminController@saveSettings');
+            Route::get('/', 'SettingsController@settings');
+            Route::post('/{id}', 'SettingsController@saveSettings');
         });
-        Route::get('newsletter', 'AdminController@newsletter');
-        Route::post('newsletter', 'AdminController@sendNewsletter');
+        Route::get('newsletter', 'NewsletterController@newsletter');
+        Route::post('newsletter', 'NewsletterController@sendNewsletter');
     });
 });

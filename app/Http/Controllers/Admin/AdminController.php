@@ -10,14 +10,12 @@ namespace app\Http\Controllers\Admin;
 
 use App;
 use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Contact;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
-use Symfony\Component\Yaml\Tests\A;
 
-class AdminController extends Controller {
+class AdminController extends Controller
+{
     /**
      * AdminController constructor.
      * Uses Auth middleware to check access.
