@@ -3,7 +3,7 @@ $pages = App\Page::all();
 ?>
 @extends('layouts.admindashboard')
 @section('adminPanel')
-    <form class="well well-lg form-horizontal" method="POST" target="/create">
+    <form class="well well-lg form-horizontal" method="POST" target="./create">
         <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" >
         <fieldset>
             <legend>PAGINA AANMAKEN</legend>
@@ -19,7 +19,7 @@ $pages = App\Page::all();
                 <label for="parent" class="control-label"> Ouder: </label>
                 <div class="">
                     <select id="parent" class="form-control" name="parent">
-                        <option value="">Geen</option>
+                        <option value="0">Geen</option>
                         @foreach($pages as $page)
                             <option value="{{ $page->id }}">{{ $page->name }}</option>
                         @endforeach
@@ -36,7 +36,7 @@ $pages = App\Page::all();
             </div>
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="active">
+                    <input type="checkbox" name="active" value="1" checked="checked">
                     <span class="checkbox-material"> Actief</span>
                 </label>
             </div>

@@ -22,14 +22,28 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 @foreach($items as $item)
-                    @if($item->protected == 1)
+                    @if($item->hasNoParent())
+                        @if(!$item->isFirst())
+                            <li class="divider"></li>
+                        @endif
                         <li class="link">
-                            <a href="{{ url('/'.$item->route) }}">{{ $item->name }}</a>
+                            @if($item->protected != 1)
+                                <a href="{{ url('/p/'.$item->route) }}">{{ $item->name }}</a>
+                            @else
+                                <a href="{{ url($item->route) }}">{{ $item->name }}</a>
+                            @endif
                         </li>
-                    @else
-                        <li class="link">
-                            <a href="{{ url('/p/'.$item->route) }}">{{ $item->name }}</a>
-                        </li>
+                        @foreach($items as $i)
+                            @if($i->isSubOf($item->id))
+                                <li class="link">
+                                    @if($item->protected != 1)
+                                        <a href="{{ url('/p/'.$i->route) }}">{{ $i->name }}</a>
+                                    @else
+                                        <a href="{{ url($i->route) }}">{{ $i->name }}</a>
+                                    @endif
+                                </li>
+                            @endif
+                        @endforeach
                     @endif
                 @endforeach
             </ul>

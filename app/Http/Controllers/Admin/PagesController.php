@@ -11,7 +11,7 @@ namespace app\Http\Controllers\Admin;
 use App;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\DB;
 
 class PagesController extends Controller
 {
@@ -44,16 +44,18 @@ class PagesController extends Controller
      * @param Request $request
      */
     public function createPage(Request $request) {
-        var_dump($request->name);
-        if (!(empty($request->name) || empty($request->route))) {
-            $page = new App\Page();
+        if (!empty($request->name) || !empty($request->route)) {
+            $page = new App\Page;
             $page->name = $request->name;
-            if (!(empty($request->parent) || $request->parent == NULL)) {
-                $page->parent = $request->parent;
-            }
+            $page->parent = $request->parent;
             $page->html = '<br />';
             $page->route = $request->route;
-            $page->active = $request->active;
+            if($request->active != 1){
+                $page->active = 0;
+            }else{
+                $page->active = $request->active;
+            }
+            $page->sort = DB::table('pages')->max('sort')+1;
             $page->save();
         }
         return back();
