@@ -8,11 +8,11 @@ $page = App\Page::where('id', $id)->firstOrFail();
         <fieldset>
             <legend>PAGINA BEWERKEN</legend>
             <div class="form-group">
-                <textarea name="html">{{ $page->html }}</textarea>
+                <textarea id="c" name="html">{{ $page->html }}</textarea>
             </div>
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
-                    <a href="{{ url('/admin/dashboard') }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ url('/admin/pages') }}" class="btn btn-default">Cancel</a>
                     <input type="submit" class="btn btn-default" value="Save" />
                 </div>
             </div>
