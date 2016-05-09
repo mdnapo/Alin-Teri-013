@@ -14,7 +14,11 @@
             <h3>{{ $cat->name }}</h3>
             <div class="row">
                 @foreach($cat->faqs as $faq)
-                    <div class="col-sm-6 col-md-4 col-lg-3 searchable">
+                    <div class="
+                    {{ ($settings->where('name', 'Rijen - PC')->first()->value == 4) ? 'col-lg-3':'col-lg-4' }}
+                    {{ ($settings->where('name', 'Rijen - Tablet')->first()->value == 3) ? 'col-md-4':'col-md-6' }}
+                    {{ ($settings->where('name', 'Rijen - Telefoon')->first()->value == 2) ? 'col-sm-6':'col-sm-12' }}
+                            searchable">
                         <div class="panel panel-default">
                             <div class="panel-heading question">{{ $faq->question }}</div>
                             <div class="panel-body answer">{{ $faq->answer }}</div>

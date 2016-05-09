@@ -46,7 +46,7 @@ class AdminController extends Controller {
      * Get Newsletter
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function newsletter(){
+    public function newsletter() {
         return View('pages.adm.newsletter');
     }
 
@@ -123,28 +123,28 @@ class AdminController extends Controller {
             $page->active = 0;
             $page->save();
             return redirect('/admin/pages');
-        }else{
+        } else {
             $page->active = 1;
             $page->save();
             return redirect('/admin/pages');
         }
     }
 
-    public function sendNewsletter(Request $request){
-        if(!empty(App\Mailinglist::all())){
-            if($request->file('newsletter')->isValid()){
+    public function sendNewsletter(Request $request) {
+        if (!empty(App\Mailinglist::all())) {
+            if ($request->file('newsletter')->isValid()) {
                 $rules = array(
                     'newsletter' => 'required',
                     'subject' => 'string|required'
                 );
                 $validator = Validator::make($request->all(), $rules);
-                if(!$validator->fails()){
+                if (!$validator->fails()) {
                     $request->file('newsletter')->move("newsletter/", $request->file('newsletter')->getClientOriginalName());
                     Mail::raw('', function ($message) use ($request) {
                         $message->subject($request->subject);
                         $message->attach("newsletter/" . $request->file('newsletter')->getClientOriginalName());
                         $message->from('testmail34125@gmail.com');
-                        foreach(App\Mailinglist::all() as $mail){
+                        foreach (App\Mailinglist::all() as $mail) {
                             $message->bcc($mail->email);
                         }
                     });
@@ -153,7 +153,8 @@ class AdminController extends Controller {
         }
 
         return back();
-}
+    }
+
     /**
      * Shows faq overview
      *
@@ -284,7 +285,7 @@ class AdminController extends Controller {
      * Get donations admin page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function donations(){
+    public function donations() {
         $pending_donations = App\Donation::didNotCheckYet();
         $approved_donations = App\Donation::approvedDonations();
         return View('pages.adm.donations', ['pending_donations' => $pending_donations,
@@ -296,7 +297,7 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function deleteDonation($id){
+    public function deleteDonation($id) {
         $donation = App\Donation::find($id);
         \File::delete($donation->pic_loc);
         $donation->delete();
@@ -308,7 +309,7 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function acceptDonation($id){
+    public function acceptDonation($id) {
         App\Donation::setApproved($id, 1);
         return redirect('/admin/steun-ons');
     }
@@ -316,13 +317,13 @@ class AdminController extends Controller {
     /**
      * Redirects user to the Contact adminpanel.
      */
-    public function contact(){
+    public function contact() {
         $items = Contact::all();
         $contact_email = App\ContactEmail::find(1);
-        if($contact_email == null){
+        if ($contact_email == null) {
             $contact_email = new App\ContactEmail();
         }
-        return view('pages.adm.contact', [ 'items' => $items, 'contact_email' => $contact_email ]);
+        return view('pages.adm.contact', ['items' => $items, 'contact_email' => $contact_email]);
     }
 
     /**
@@ -330,9 +331,9 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function viewContact($id = null){
+    public function viewContact($id = null) {
         $contact = Contact::where('id', $id)->firstOrFail();
-        return view('pages.adm.viewContact', [ 'contact' => $contact ]);
+        return view('pages.adm.viewContact', ['contact' => $contact]);
     }
 
     /**
@@ -340,7 +341,7 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function deleteContact($id = null){
+    public function deleteContact($id = null) {
         $contact = Contact::where('id', $id)->firstOrFail();
         $contact->delete();
         return redirect('/admin/contact');
@@ -349,12 +350,12 @@ class AdminController extends Controller {
     /**
      * Sets the contact email adres in the database.
      */
-    public function setContactEmail(Request $request){
+    public function setContactEmail(Request $request) {
         $rules = array(
             'email' => 'email|required'
         );
         $validator = Validator::make($request->all(), $rules);
-        if(!$validator->fails()){
+        if (!$validator->fails()) {
             $contact_email = App\ContactEmail::find(1);
             $contact_email->email = $request->email;
             $contact_email->save();
@@ -366,7 +367,7 @@ class AdminController extends Controller {
      * Get publications admin page
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function publications(){
+    public function publications() {
         $publications = App\Publication::all();
         return view('pages.adm.publications', ['publications' => $publications]);
     }
@@ -376,7 +377,7 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function editPublication($id = null){
+    public function editPublication($id = null) {
         $publication = $id == 0 ? new App\Publication() :
             App\Publication::where('id', $id)->firstOrFail();
         return view('pages.adm.publication', ['publication' => $publication]);
@@ -387,7 +388,7 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function savePublication($id = null, Request $request){
+    public function savePublication($id = null, Request $request) {
         $publication = $id == 0 ? new App\Publication() :
             App\Publication::where('id', $id)->firstOrFail();
 
@@ -402,14 +403,13 @@ class AdminController extends Controller {
         );
         $validator = Validator::make($request->all(), $rules, $messages);
 
-        if(!$validator->fails()){
+        if (!$validator->fails()) {
             $publication->source = $request->bron;
             $publication->article = $request->artikel;
             $publication->video = $request->video;
             $publication->save();
             return redirect('admin/media');
-        }
-        else{
+        } else {
             return back()->
             withErrors($validator->errors())->
             withInput();
@@ -421,9 +421,48 @@ class AdminController extends Controller {
      * @param int $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function deletePublication($id = null){
+    public function deletePublication($id = null) {
         $publication = App\Publication::where('id', $id)->firstOrFail();
         $publication->delete();
         return redirect('/admin/media');
+    }
+
+    /**
+     * Shows all settings.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function settings() {
+        $cats = App\SettingCategory::all();
+        return view('pages.adm.settings', compact('cats'));
+    }
+
+    /**
+     * Saves the settings for the given category
+     *
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function saveSettings($id = null, Request $request) {
+        $settings = App\SettingCategory::findOrFail($id)->settings;
+        $rules = array();
+        foreach ($settings as $setting) {
+            array_push($rules, ['set' . $setting->id => 'string|required']);
+        }
+
+        $validator = Validator::make($request->all(), $rules);
+
+        if ($validator->fails()) {
+            return redirect('/admin/settings')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            foreach ($settings as $setting) {
+                $setting->value = $request->input('set' . $setting->id);
+                $setting->save();
+            }
+        }
+
+        return redirect('/admin/settings');
     }
 }

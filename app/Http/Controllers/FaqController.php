@@ -14,6 +14,10 @@ class FaqController extends Controller {
      */
     function index() {
         $cats = App\Category::all();
-        return view('pages.faq', ['cats' => $cats]);
+        $settings = App\SettingCategory::find('1')->settings;
+        return view('pages.faq', compact(
+            'cats',
+            'settings'
+        ));
     }
 }
