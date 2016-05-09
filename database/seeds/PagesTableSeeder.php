@@ -23,11 +23,12 @@ class PagesTableSeeder extends Seeder {
 <p class="entry-title"><img class="size-medium wp-image-200 alignright" style="float: right;" src="http://www.alinteri.nl/wp-content/uploads/2015/04/logo-223x300.jpg" alt="Burgerinitiatief Alinteri013 is open voor iedereen die zich uit wil spreken tegen de thuisteelt van hennep." width="223" height="300" />De hennepteelt ondermijnt niet alleen onze rechtstaat, maar ook de Turkse waarde Alin Teri. Alleen al in Tilburg zijn 2.500 mensen werkzaam in de hennepteelt, waarin zo&rsquo;n 800 miljoen euro omgaat. De Brabantse stad kent tussen de 600 tot 900 illegale wietplantages en het is daarmee uitgegroeid tot &eacute;&eacute;n van de grootste bedrijfstakken. De hennephandel vormt een serieuze bedreiging voor de veiligheid en integriteit van de samenleving.</p>
 <p class="entry-title">Wij, als groep Turkse Nederlanders uit Tilburg, zijn niet blij met de huidige stand van zaken. De relatieve oververtegenwoordiging van de Turkse Nederlanders in de hennepteelt kunnen en willen wij niet accepteren. Dat heeft er voor gezorgd dat we de publiekcampagne AlinTeri013 zijn begonnen.</p>',
             'protected' => 1,
+            'sort' => 0,
         ]);
 
         App\Page::create([
             'name' => 'Steun ons',
-            'route' => '',
+            'route' => 'steun-ons-gallery',
             'html' => '<p>
                     <strong>AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
                         vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
@@ -35,22 +36,33 @@ class PagesTableSeeder extends Seeder {
                         ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!</strong>
                 </p>',
             'protected' => 1,
+            'sort' => 1,
         ]);
 
         App\Page::create([
             'name' => 'Contact',
-            'route' => '',
+            'route' => 'contact',
             'html' => '<p><b>Naam:</b> Alin Teri</p>
             <p><b>Telefoonnummer:</b> +316123456</p>
             <p><b>Email adres:</b> AlinTeri@Voorbeeld.nl</p>
             <p><b>Locatie:</b> Voorbeeldstraat 1</p>',
             'protected' => 1,
+            'sort' => 2,
         ]);
 
         App\Page::create([
             'name' => 'Over Ons',
             'route' => 'Over-Ons',
             'html' => 'Dit is een demo over ons pagina<br />',
+            'sort' => 3,
+        ]);
+
+        App\Page::create([
+            'name' => 'FAQ',
+            'route' => 'faq',
+            'html' => '',
+            'sort' => 4,
+            'protected' => 1,
         ]);
 
         App\Page::create([
@@ -58,6 +70,7 @@ class PagesTableSeeder extends Seeder {
             'route' => 'demopagina',
             'html' => '',
             'active' => 0,
+            'sort' => 5,
         ]);
     }
 }

@@ -20,6 +20,7 @@ class CreatePagesTable extends Migration
             $table->longText('html');
             $table->boolean('active')->default(1);
             $table->boolean('protected')->default(0);
+            $table->integer('sort')->unique();
             $table->timestamps();
         });
     }

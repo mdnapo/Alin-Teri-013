@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddSortColumnPages' => $baseDir . '/database/migrations/2016_05_04_175056_add_sort_column_pages.php',
     'CategoriesTableSeeder' => $baseDir . '/database/seeds/CategoriesTableSeeder.php',
     'ContactEmailTableSeeder' => $baseDir . '/database/seeds/ContactEmailTableSeeder.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_03_09_103658_create_categories_table.php',

@@ -1,5 +1,5 @@
 <?php
-$items = App\Page::all();
+$items = App\Page::orderBy('sort')->get();
 ?>
 
 @extends('layouts.admindashboard')
@@ -12,6 +12,7 @@ $items = App\Page::all();
             <th>Link</th>
             <th>Aanpassen</th>
             <th>Zichtbaar</th>
+            <th>Sorteren</th>
             <th>Verwijderen</th>
         </thead>
         <tbody>
@@ -24,7 +25,7 @@ $items = App\Page::all();
                     <a href="{{ url('/admin/pages/edit/'.$item->id) }}" class="glyphicon glyphicon-pencil"></a>
                 </td>
                 <td>
-                    @if($item->route != "")
+                    @if($item->protected == 0)
                         @if($item->active == 1)
                             <a href="{{ url('/admin/pages/visibility/'.$item->id.'/0') }}" class="glyphicon glyphicon-eye-close"></a>
                         @else
@@ -33,7 +34,15 @@ $items = App\Page::all();
                     @endif
                 </td>
                 <td>
-                    @if($item->route != "")
+                    @if($item->sort > 0)
+                        <a href="{{ url('/admin/pages/move-up/'.$item->id) }}" class="glyphicon glyphicon-arrow-up"></a>
+                    @endif
+                    @if($item->sort < App\Page::orderBy('sort', 'DESC')->first()->sort)
+                        <a href="{{ url('/admin/pages/move-down/'.$item->id) }}" class="glyphicon glyphicon-arrow-down"></a>
+                    @endif
+                </td>
+                <td>
+                    @if($item->protected == 0)
                         <a href="{{ url('/admin/pages/delete/'.$item->id) }}" class="glyphicon glyphicon-remove"></a>
                     @endif
                 </td>
