@@ -37,7 +37,7 @@ if($text == null){
                 <label class="control-label" for="email">Uw email</label>
                 <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
                 <label class="control-label" for="bericht">Uw vraag</label>
-                <p><td><br><textarea name="vraag">{{ session('opmerking') }}</textarea></td></p>
+                <p><td><br><textarea name="vraag">{{ old('opmerking') }}</textarea></td></p>
                 <input type="submit" class="btn btn-default" value="Versturen" />
             </form>
         </div>

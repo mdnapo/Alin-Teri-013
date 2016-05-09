@@ -28,7 +28,7 @@ class PagesTableSeeder extends Seeder {
 
         App\Page::create([
             'name' => 'Steun ons',
-            'route' => 'steun-ons-gallery',
+            'route' => 'steun-ons-gallerij',
             'html' => '<p>
                     <strong>AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
                         vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
@@ -50,18 +50,26 @@ class PagesTableSeeder extends Seeder {
             'sort' => 2,
         ]);
 
+        \App\Page::create([
+            'name' => 'In de media',
+            'route' => 'in-de-media',
+            'html' => '',
+            'protected' => 1,
+            'sort' => 3
+        ]);
+
         App\Page::create([
             'name' => 'Over Ons',
             'route' => 'Over-Ons',
             'html' => 'Dit is een demo over ons pagina<br />',
-            'sort' => 3,
+            'sort' => 4,
         ]);
 
         App\Page::create([
             'name' => 'FAQ',
             'route' => 'faq',
             'html' => '',
-            'sort' => 4,
+            'sort' => 5,
             'protected' => 1,
         ]);
 
@@ -70,7 +78,7 @@ class PagesTableSeeder extends Seeder {
             'route' => 'demopagina',
             'html' => '',
             'active' => 0,
-            'sort' => 5,
+            'sort' => 6,
         ]);
     }
 }
