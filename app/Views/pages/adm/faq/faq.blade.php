@@ -17,9 +17,9 @@
         <div class="form-group">
             <label for="parent" class="col-md-4 control-label">Categorie</label>
             <div class="col-md-6">
-                <select id="cat" class="form-control" name="cat" value="">
+                <select id="cat" class="form-control" name="cat">
                     @foreach($cats as $cat)
-                        <option selected="{{ ((old('cat') == $cat->id) || ((old('cat') == null) && ($faq->category_id == $cat->id))) ? "selected":"" }}"
+                        <option {{ ((old('cat') == $cat->id) || ((old('cat') == null) && ($faq->category_id == $cat->id))) ? "selected":"" }}
                                 value="{{ $cat->id }}">{{ $cat->name }}</option>
                     @endforeach
                 </select>
@@ -38,8 +38,7 @@
             <label class="col-md-4 control-label">Antwoord</label>
 
             <div class="col-md-6">
-                <textarea class="form-control" rows="2" name="answer">
-                    {{ (old('answer') != null) ? old('answer'):$faq->answer }}
+                <textarea class="form-control" rows="2" name="answer">{{ (old('answer') != null) ? old('answer'):$faq->answer }}
                 </textarea>
             </div>
         </div>
