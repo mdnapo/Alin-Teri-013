@@ -5,13 +5,15 @@
             <h2><strong>In de media</strong></h2>
         </div>
         <div class="col-xs-12">
-            @if(!$publications)
+            @if(count($publications) > 0)
                 @foreach($publications as $publication)
                     <div class="panel panel-primary">
                         <div class="panel-heading"> {{ $publication->source }} </div>
                         <div class="panel-body">
-                            {{ $publication->article }}
-                            <div> {{ $publication->video }} </div>
+                            <div class="col-xs-12">{!! $publication->article !!}</div>
+                            @if($publication->video != '')
+                                <div class="col-xs-12 text-center top_buffer"> {!! $publication->video !!} </div>
+                            @endif
                         </div>
                     </div>
                 @endforeach

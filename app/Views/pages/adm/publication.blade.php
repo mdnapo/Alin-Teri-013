@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label" for="artikel">Artikel</label>
-                <textarea name="artikel">{{ old('artikel') != null ? old('artikel') : $publication->article }}</textarea>
+                <textarea id="c" name="artikel">{{ old('artikel') != null ? old('artikel') : $publication->article }}</textarea>
             </div>
             <div class="form-group">
                 <label class="control-label" for="iframe">Video</label>
@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
-                    <a href="{{ url('/admin/media') }}" class="btn btn-default">Terug</a>
+                    <a href="{{ url('/admin/media') }}" class="btn btn-primary">Terug</a>
                     @if($publication->id > 0)
                         <a id="delete_publication" class="btn btn-primary delete">Verwijderen</a>
                     @endif
