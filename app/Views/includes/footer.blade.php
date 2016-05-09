@@ -8,6 +8,6 @@
 <script>
     $(document).ready(function() {
         $.material.init();
-        if (typeof CHEDITOR != undefined)CKEDITOR.replace('c');
+        if (typeof CKEDITOR != undefined)CKEDITOR.replace('c');
     });
 </script>
