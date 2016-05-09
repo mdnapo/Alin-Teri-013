@@ -54,4 +54,4 @@ $items = App\Page::orderBy('sort')->get();
         <a href="{{ url('/admin/pages/create') }}">Toevoegen</a>
     </div>
 
-@endsection
+@stop

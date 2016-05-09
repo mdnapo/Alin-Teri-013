@@ -16,5 +16,16 @@ $page = App\Page::where('id', $id)->firstOrFail();
                     <input type="submit" class="btn btn-default" value="Save" />
                 </div>
             </div>
+        </fieldset>
     </form>
-@endsection
+@stop
+
+@section('footer')
+    <script src="https://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
+    <script>
+        $(document).ready(function() {
+            $.material.init();
+            CKEDITOR.replace('c');
+        });
+    </script>
+@stop

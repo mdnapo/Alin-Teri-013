@@ -10,7 +10,6 @@ if($text == null){
 
 @extends('layouts.master')
 @section('content')
-
     <div class="row">
         @if(count($errors) > 0)
             <div class="col-md-8">
@@ -42,5 +41,9 @@ if($text == null){
             </form>
         </div>
     </div>
+@stop
 
-@endsection
+@section('footer')
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector: 'textarea' })</script>
+@stop

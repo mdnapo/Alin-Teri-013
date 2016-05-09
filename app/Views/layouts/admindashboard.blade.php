@@ -17,6 +17,3 @@
         @yield('adminPanel')
     </div>
 @stop
-@section('footer')
-    <script src="https://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
-@stop

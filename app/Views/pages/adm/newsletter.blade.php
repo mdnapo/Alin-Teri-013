@@ -57,4 +57,4 @@
         </div>
     </form>
     <script src="{{url("js/newsletter.js")}}"></script>
-@endsection
+@stop

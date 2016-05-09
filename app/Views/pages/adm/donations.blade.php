@@ -62,7 +62,9 @@
             </div>
         @endforeach
     </div>
+@stop
 
+@section('footer')
     <script src="{{ asset('js/ekko-lightbox.min.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script>
@@ -99,4 +101,4 @@
             });
         });
     </script>
-@endsection
+@stop

@@ -9,8 +9,12 @@ if($text == null){
 ?>
 
 @extends('layouts.master')
-@section('content')
+@section('head')
+    <link rel="stylesheet" href="css/ekko-lightbox.min.css"/>
+    <link href="css/cropper.min.css" rel="stylesheet">
+@stop
 
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
@@ -188,8 +192,9 @@ if($text == null){
 
         </div>
     </div>
-    <link rel="stylesheet" href="css/ekko-lightbox.min.css"/>
-    <link href="css/cropper.min.css" rel="stylesheet">
+@stop
+
+@section('footer')
     <script src="js/ekko-lightbox.min.js"></script>
     <script src="js/cropper.min.js"></script>
     <script>

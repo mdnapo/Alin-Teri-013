@@ -1,6 +1,7 @@
 <?php
 $pages = App\Page::all();
 ?>
+
 @extends('layouts.admindashboard')
 @section('adminPanel')
     <form class="well well-lg form-horizontal" method="POST" target="/create">
@@ -37,7 +38,7 @@ $pages = App\Page::all();
             <div class="checkbox">
                 <label>
                     <input type="checkbox" name="active">
-                    <span class="checkbox-material"> Actief</span>
+                    <span class="checkbox-material">Actief</span>
                 </label>
             </div>
             <div class="form-group">
@@ -48,4 +49,4 @@ $pages = App\Page::all();
             </div>
         </fieldset>
     </form>
-@endsection
+@stop

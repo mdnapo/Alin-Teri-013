@@ -55,4 +55,4 @@
     <div class="btn btn-raised">
         <a href="{{ url('/admin/faq/0') }}">FAQ Toevoegen</a>
     </div>
-@endsection
+@stop

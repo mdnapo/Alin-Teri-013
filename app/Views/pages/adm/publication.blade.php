@@ -51,8 +51,11 @@
     <form id="delete" method="POST" action="{{ url('/admin/media/delete/' . $publication->id) }}">
         <input name="_token" value="{{ csrf_token() }}" hidden>
     </form>
+@stop
 
+@section('footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
     <script>
         $(document).ready(function(){
             $('#delete_publication').click(function delete_publication(){
@@ -60,6 +63,7 @@
                     if(answer === true) $('#delete').submit();
                 });
             });
+            CKEDITOR.replace('c');
         });
     </script>
-@endsection
+@stop

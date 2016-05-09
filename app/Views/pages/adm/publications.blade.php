@@ -33,7 +33,9 @@
     <div class="btn btn-raised">
         <a href="{{ url('/admin/media/0') }}">Toevoegen</a>
     </div>
+@stop
 
+@section('footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script>
         $(document).ready(function(){
@@ -54,4 +56,4 @@
             });
         });
     </script>
-@endsection
+@stop
