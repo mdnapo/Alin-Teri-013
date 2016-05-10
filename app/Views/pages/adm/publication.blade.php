@@ -58,7 +58,7 @@
     <script src="https://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
     <script>
         $(document).ready(function(){
-            $('#delete_publication').click(function delete_publication(){
+            $('#delete_publication').click(function(){
                 bootbox.confirm('Weet u zeker dat u deze publicatie wilt verwijderen?', function(answer){
                     if(answer === true) $('#delete').submit();
                 });
