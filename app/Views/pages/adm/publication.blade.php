@@ -26,7 +26,7 @@
             </div>
             <div class="form-group">
                 <label class="control-label" for="artikel">Artikel</label>
-                <textarea name="artikel">{{ old('artikel') != null ? old('artikel') : $publication->article }}</textarea>
+                <textarea id="c" name="artikel">{{ old('artikel') != null ? old('artikel') : $publication->article }}</textarea>
             </div>
             <div class="form-group">
                 <label class="control-label" for="iframe">Video</label>
@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
-                    <a href="{{ url('/admin/media') }}" class="btn btn-default">Terug</a>
+                    <a href="{{ url('/admin/media') }}" class="btn btn-primary">Terug</a>
                     @if($publication->id > 0)
                         <a id="delete_publication" class="btn btn-primary delete">Verwijderen</a>
                     @endif
@@ -51,15 +51,19 @@
     <form id="delete" method="POST" action="{{ url('/admin/media/delete/' . $publication->id) }}">
         <input name="_token" value="{{ csrf_token() }}" hidden>
     </form>
+@stop
 
+@section('footer')
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="https://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
     <script>
         $(document).ready(function(){
-            $('#delete_publication').click(function delete_publication(){
+            $('#delete_publication').click(function(){
                 bootbox.confirm('Weet u zeker dat u deze publicatie wilt verwijderen?', function(answer){
                     if(answer === true) $('#delete').submit();
                 });
             });
+            CKEDITOR.replace('c');
         });
     </script>
-@endsection
+@stop

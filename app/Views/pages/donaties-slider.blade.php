@@ -9,24 +9,28 @@ if($text == null){
 ?>
 
 @extends('layouts.master')
-@section('content')
+@section('head')
+    <link rel="stylesheet" href="css/ekko-lightbox.min.css"/>
+    <link href="css/cropper.min.css" rel="stylesheet">
+@stop
 
+@section('content')
     <div class="container">
         <div class="row">
-            <div class="col-xs-10 col-xs-offset-1">
+            <div class="col-xs-12">
                 <h2><strong>Steun ons!</strong></h2>
             </div>
-            <div class="col-xs-10 col-xs-offset-1">
+            <div class="col-xs-12">
                 <?php echo $text->html ?>
             </div>
-            <div class="col-xs-8 col-xs-offset-2">
+            <div class="col-xs-12">
                 <strong><em>Onze ambassadeurs, bondgenoten en vrijwilligers</em></strong>
             </div>
 
             <div class="col-xs-10 col-xs-offset-1">
                 <div class="btn-group pull-right">
                     <a href="{{ url('steun-ons-carousel') }}"><div class="btn btn-primary">Carousel</div></a>
-                    <a href="{{ url('steun-ons-gallery') }}"> <div class="btn btn-primary">Gallerij</div></a>
+                    <a href="{{ url('steun-ons-gallerij') }}"> <div class="btn btn-primary">Gallerij</div></a>
                 </div>
             </div>
 
@@ -188,8 +192,9 @@ if($text == null){
 
         </div>
     </div>
-    <link rel="stylesheet" href="css/ekko-lightbox.min.css"/>
-    <link href="css/cropper.min.css" rel="stylesheet">
+@stop
+
+@section('footer')
     <script src="js/ekko-lightbox.min.js"></script>
     <script src="js/cropper.min.js"></script>
     <script>

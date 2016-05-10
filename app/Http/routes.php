@@ -28,11 +28,13 @@ Route::group(['middleware' => ['web']], function () {
     });
 
     Route::post('steun-ons', 'DonationController@upload');
-    Route::get('steun-ons-gallery', 'DonationController@gallery');
+    Route::get('steun-ons-gallerij', 'DonationController@gallery');
     Route::get('steun-ons-carousel', 'DonationController@index');
     Route::post('newsletter/optin', 'DonationController@optin');
 
     Route::get('in-de-media', 'MediaController@index');
+    Route::post('media-search', 'MediaController@search');
+
 
     Route::get('contact', 'ContactController@index');
     Route::post('contact', 'ContactController@insertIntoDb');

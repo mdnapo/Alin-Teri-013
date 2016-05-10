@@ -110,3 +110,7 @@ a.plain_link:hover{
         height: 50px;
     }
 }
+
+.top_buffer{
+    margin-top: 20px;
+}

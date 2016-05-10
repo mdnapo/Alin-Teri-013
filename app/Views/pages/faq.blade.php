@@ -29,5 +29,8 @@
             </div>
         </div>
     @endforeach
+@stop
+
+@section('footer')
     <script src="{{ asset('js/searcher.js') }}"></script>
-@endsection
+@stop

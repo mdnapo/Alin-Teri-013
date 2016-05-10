@@ -10,7 +10,6 @@ if($text == null){
 
 @extends('layouts.master')
 @section('content')
-
     <div class="row">
         @if(count($errors) > 0)
             <div class="col-md-8">
@@ -37,10 +36,14 @@ if($text == null){
                 <label class="control-label" for="email">Uw email</label>
                 <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" required>
                 <label class="control-label" for="bericht">Uw vraag</label>
-                <p><td><br><textarea name="vraag">{{ session('opmerking') }}</textarea></td></p>
+                <p><td><br><textarea name="vraag">{{ old('opmerking') }}</textarea></td></p>
                 <input type="submit" class="btn btn-default" value="Versturen" />
             </form>
         </div>
     </div>
+@stop
 
-@endsection
+@section('footer')
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector: 'textarea' })</script>
+@stop
