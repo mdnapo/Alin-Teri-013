@@ -6,12 +6,11 @@ $texts = App\Story::all();
     <div class="row">
         <h1 class="entry-title">Verhalen: </h1>
     </div>
-    <div class="col-xs-12">
-        <div class="form-group label-placeholder is-empty">
-            <label for="search" class="control-label">Zoeken</label>
-            <input type="text" autocomplete="off" class="form-control" id="search">
-        </div>
+    <div class="form-group label-placeholder is-empty">
+        <label for="search" class="control-label">Zoeken</label>
+        <input type="text" autocomplete="off" class="form-control" id="search">
     </div>
+
     @foreach($texts as $text)
         <div class="row searchable">
             <h2 class="entry-title title">{{ $text->naam }}</h2>
