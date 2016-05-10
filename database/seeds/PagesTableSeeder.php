@@ -59,6 +59,13 @@ class PagesTableSeeder extends Seeder {
         ]);
 
         App\Page::create([
+            'name' => 'Verhalen',
+            'route' => 'verhalen',
+            'html' => '',
+            'protected' => 1,
+        ]);
+
+        App\Page::create([
             'name' => 'Over Ons',
             'route' => 'Over-Ons',
             'html' => 'Dit is een demo over ons pagina<br />',
