@@ -96,16 +96,16 @@
                         $('#publications_holder').replaceWith(data);
                         $('.collapse.publication').collapse();
                         fluidvids.init({
-                            selector: ['iframe'], // runs querySelectorAll()
+                            selector: ['iframe'],
                             players: ['www.youtube.com', 'player.vimeo.com'] // players to support
                         });
                     }
                 });
             });
-            $('.collapse').collapse();
+            $('.collapse.publication').collapse();
             $('img').addClass('img-responsive');
             fluidvids.init({
-                selector: ['iframe'], // runs querySelectorAll()
+                selector: ['iframe'],
                 players: ['www.youtube.com', 'player.vimeo.com'] // players to support
             });
         });

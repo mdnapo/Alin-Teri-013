@@ -12,16 +12,15 @@ use Illuminate\Support\Facades\View;
 class MediaController extends Controller
 {
     public function index(){
-        $publications = Publication::paginatePublications();
+        $publications = Publication::publications();
         return view('pages.media', ['publications' => $publications]);
     }
 
     public function search(Request $request){
         $needle = $request->needle;
         $publications = $needle == '' ?
-            Publication::paginatePublications():
-            Publication::where('source', 'LIKE', "%$needle%")->
-        orWhere('article', 'LIKE', "%$needle%")->paginate(10);
+            Publication::publications():
+            Publication::search($needle);
 
         $view = View::make('subviews/media/media-publications', ['publications' => $publications, 'needle' => $needle]);
         echo $view->render();

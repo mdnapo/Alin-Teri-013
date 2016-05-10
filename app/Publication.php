@@ -10,8 +10,14 @@ class Publication extends Model
 
     protected $guarded = 'id';
 
-    public static function paginatePublications(){
+    public static function publications(){
         $publications = Publication::paginate(10);
+        return $publications;
+    }
+
+    public static function search($needle){
+        $publications = Publication::where('source', 'LIKE', "%$needle%")->
+            orWhere('article', 'LIKE', "%$needle%")->paginate(10);
         return $publications;
     }
 }
