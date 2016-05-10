@@ -16,6 +16,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Yaml\Tests\A;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller {
     /**
@@ -73,6 +74,7 @@ class AdminController extends Controller {
             $page->html = '<br />';
             $page->route = $request->route;
             $page->active = $request->active;
+            $page->sort = DB::table('pages')->max('sort')+1;
             $page->save();
         }
         return back();
