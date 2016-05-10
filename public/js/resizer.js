@@ -3,10 +3,12 @@
  */
 
 function resize() {
-    $('.answer').height($('.faq').height() - ($('.question').height() + 65));
+    $('.answer').each(function(index) {
+        $(this).outerHeight($('.faq:eq(' + index + ')').height() - $('.question:eq(' + index + ')').outerHeight());
+    });
 }
 
-$(function(){
+$(function () {
     resize();
     $(window).resize(resize);
 });
