@@ -63,20 +63,21 @@ class PagesTableSeeder extends Seeder {
             'route' => 'verhalen',
             'html' => '',
             'protected' => 1,
+            'sort' => 4,
         ]);
 
         App\Page::create([
             'name' => 'Over Ons',
             'route' => 'Over-Ons',
             'html' => 'Dit is een demo over ons pagina<br />',
-            'sort' => 4,
+            'sort' => 5,
         ]);
 
         App\Page::create([
             'name' => 'FAQ',
             'route' => 'faq',
             'html' => '',
-            'sort' => 5,
+            'sort' => 6,
             'protected' => 1,
         ]);
 
@@ -85,7 +86,7 @@ class PagesTableSeeder extends Seeder {
             'route' => 'demopagina',
             'html' => '',
             'active' => 0,
-            'sort' => 6,
+            'sort' => 7,
         ]);
     }
 }
