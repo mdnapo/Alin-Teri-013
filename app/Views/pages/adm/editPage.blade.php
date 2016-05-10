@@ -24,7 +24,6 @@ $page = App\Page::where('id', $id)->firstOrFail();
     <script src="https://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
     <script>
         $(document).ready(function() {
-            $.material.init();
             CKEDITOR.replace('c');
         });
     </script>
