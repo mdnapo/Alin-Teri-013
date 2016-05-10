@@ -495,4 +495,48 @@ class AdminController extends Controller {
 
         return redirect('/admin/settings');
     }
+
+    /**
+     *
+     */
+    public function stories() {
+        return view('pages.adm.stories');
+    }
+
+    public function makeStory() {
+        return View('pages.adm.makeStory');
+    }
+
+    public function createStory(Request $request) {
+        var_dump($request->name);
+        if (!(empty($request->name))) {
+            $story = new App\Story();
+            $story->naam = $request->name;
+            $story->verhaal = $request->story;
+            $story->save();
+        }
+        return redirect('/admin/stories');
+    }
+
+    public function editStory($id = null) {
+        return view('pages.adm.editStory', ['id' => $id]);
+    }
+
+    public function saveStory($id = null, Request $request) {
+        $story = App\Story::where('id', $id)->firstOrFail();
+        $story->naam = $request->naam;
+        $story->verhaal = $request->verhaal;
+        $story->save();
+        return redirect('/admin/stories');
+    }
+
+    public function deleteStory($id = null) {
+        $story = App\Story::where('id', $id)->firstOrFail();
+        if (empty($id)) {
+            return redirect('/admin/stories');
+        } else {
+            $story->delete();
+            return redirect('/admin/stories');
+        }
+    }
 }

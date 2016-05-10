@@ -9,10 +9,9 @@
 <!--Page specific scripts-->
 @yield('footer')
 
-
 <!-- Material initialisation -->
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         $.material.init();
     });
 </script>
