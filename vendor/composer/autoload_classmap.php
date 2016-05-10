@@ -533,6 +533,7 @@ return array(
     'SettingCategoriesTableSeeder' => $baseDir . '/database/seeds/SettingCategoriesTableSeeder.php',
     'SettingValuesTableSeeder' => $baseDir . '/database/seeds/SettingValuesTableSeeder.php',
     'SettingsTableSeeder' => $baseDir . '/database/seeds/SettingsTableSeeder.php',
+    'Stories' => $baseDir . '/database/migrations/2016_05_09_124956_stories.php',
     'TestCase' => $baseDir . '/tests/TestCase.php',
     'Text_Template' => $vendorDir . '/phpunit/php-text-template/src/Template.php',
     'UsersTableSeeder' => $baseDir . '/database/seeds/UsersTableSeeder.php',
