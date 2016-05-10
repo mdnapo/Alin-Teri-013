@@ -11,7 +11,7 @@ use App\Http\Controllers\Controller;
 class MediaController extends Controller
 {
     public function index(){
-        $publications = Publication::all();
+        $publications = Publication::paginatePublications();
         return view('pages.media', ['publications' => $publications]);
     }
 }

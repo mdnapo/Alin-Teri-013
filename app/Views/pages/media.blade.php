@@ -31,6 +31,13 @@
                 <h3>Nog geen media publicaties</h3>
             @endif
         </div>
+
+        <!--Pagination-->
+        <div class="col-xs-12">
+            <div class="text-center">
+                {!! $publications->render() !!}
+            </div>
+        </div>
     </div>
 @stop
 
@@ -42,13 +49,13 @@
                 var id = $(this).attr('id');
                 var publication = $('div#publication' + id);
                 var collapse_span = $('span#' + id);
-                if(publication.hasClass('collapsed')){
-                    publication.removeClass('collapsed');
+                if(!publication.hasClass('collapsed')){
+                    publication.addClass('collapsed');
                     collapse_span.removeClass('glyphicon-chevron-up').
                             addClass('glyphicon-chevron-down');
                 }
                 else{
-                    publication.addClass('collapsed');
+                    publication.removeClass('collapsed');
                     collapse_span.removeClass('glyphicon-chevron-down').
                             addClass('glyphicon-chevron-up');
                 }
@@ -58,14 +65,14 @@
                 if($(this).hasClass('collapse_all')){
                     $(this).removeClass('collapse_all');
                     $('#collapse_button').html('Alles openklappen');
-                    $('.panel-collapse').removeClass('in').removeClass('collapsed');
+                    $('.collapse').collapse('hide').addClass('collapsed');
                     $('.collapse_publication').removeClass('glyphicon-chevron-up').
                             addClass('glyphicon-chevron-down');
                 }
                 else{
                     $(this).addClass('collapse_all');
                     $("#collapse_button").html('Alles dichtklappen');
-                    $('.panel-collapse').addClass('in').addClass('collapsed');
+                    $('.collapse').collapse('show').removeClass('collapsed');
                     $('.collapse_publication').removeClass('glyphicon-chevron-down').
                             addClass('glyphicon-chevron-up');
                 }
