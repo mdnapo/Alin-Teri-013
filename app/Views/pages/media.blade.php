@@ -2,15 +2,17 @@
 @section('content')
     <div class="row">
         <div class="col-xs-12">
-            <h2><strong>In de media</strong></h2>
+            <h1>In de media</h1>
         </div>
         <div class="col-xs-12">
-            <div class="input-group">
-                <input id="needle" type="text" class="form-control" placeholder="Zoeken naar...">
-                <span class="input-group-btn">
-                    <button id="search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
+            <form action="media-search">
+                <div class="input-group">
+                    <input name="needle" type="text" class="form-control" placeholder="Zoeken naar..." value="{{ isset($needle) ? $needle : '' }}">
+                    <span class="input-group-btn">
+                        <button type="submit" id="search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                    </span>
+                </div>
+            </form>
         </div>
         <div class="col-xs-12">
             <button id="collapse_button" class="btn btn-primary">Alles openklappen</button>
@@ -36,15 +38,17 @@
                             </div>
                         </div>
                     @endforeach
+                @elseif(isset($needle) && $needle != '')
+                    <h3>Geen publicaties gevonden voor de term '{{ $needle }}'.</h3>
                 @else
-                    <h3>Nog geen media publicaties</h3>
+                    <h3>Nog geen media publicaties.</h3>
                 @endif
             </div>
 
             <!--Pagination-->
             <div class="col-xs-12">
                 <div class="text-center">
-                    {!! $publications->render() !!}
+                    {!! isset($needle) ? $publications->appends(['needle' => $needle])->render() : $publications->render() !!}
                 </div>
             </div>
         </div>
@@ -87,25 +91,10 @@
                             addClass('glyphicon-chevron-up');
                 }
             });
-            $('#search').click(function(){
-                $.ajax({
-                    url: '{{ url('media-search') }}',
-                    type: 'POST',
-                    data: { _token: '{{ csrf_token() }}', needle: $('#needle').val() },
-                    success: function(data){
-                        $('#publications_holder').replaceWith(data);
-                        $('.collapse.publication').collapse();
-                        fluidvids.init({
-                            selector: ['iframe'], // runs querySelectorAll()
-                            players: ['www.youtube.com', 'player.vimeo.com'] // players to support
-                        });
-                    }
-                });
-            });
-            $('.collapse').collapse();
+            $('.collapse.publication').collapse();
             $('img').addClass('img-responsive');
             fluidvids.init({
-                selector: ['iframe'], // runs querySelectorAll()
+                selector: ['iframe'],
                 players: ['www.youtube.com', 'player.vimeo.com'] // players to support
             });
         });

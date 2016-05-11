@@ -33,7 +33,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('newsletter/optin', 'DonationController@optin');
 
     Route::get('in-de-media', 'MediaController@index');
-    Route::post('media-search', 'MediaController@search');
+    Route::get('media-search', 'MediaController@search');
 
 
     Route::get('contact', 'ContactController@index');
