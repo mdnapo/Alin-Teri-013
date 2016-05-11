@@ -13,5 +13,6 @@
 <script type="text/javascript">
     $(function () {
         $.material.init();
+        $('#app-navbar-collapse').collapse();
     });
 </script>

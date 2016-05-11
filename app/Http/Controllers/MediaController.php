@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\View;
 
 class MediaController extends Controller
@@ -21,8 +22,6 @@ class MediaController extends Controller
         $publications = $needle == '' ?
             Publication::publications():
             Publication::search($needle);
-
-        $view = View::make('subviews/media/media-publications', ['publications' => $publications, 'needle' => $needle]);
-        echo $view->render();
+        return view('pages.media', ['publications' => $publications, 'needle' => $needle]);
     }
 }
