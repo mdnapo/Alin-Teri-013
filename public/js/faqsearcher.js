@@ -11,10 +11,8 @@ $('#search').keyup(function() {
 
     $categories.show().filter(function(){
         if($(this).find('.panel').children(':visible').length > 0){
-            console.log("false");
             return false;
         } else{
-            console.log("true");
             return true;
         }
     }).hide();

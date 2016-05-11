@@ -34,7 +34,7 @@
     </div>
 @endsection
 @section('footer')
-    <script type="text/javascript" src="{{ asset('js/searcher.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/faqsearcher.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/resizer.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/bootbox.min.js') }}"></script>
     <script type="text/javascript">

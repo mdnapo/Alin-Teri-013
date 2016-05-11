@@ -56,12 +56,12 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'pages'], function () {
             Route::get('create', 'AdminController@makePage');
             Route::post('create', 'AdminController@createPage');
-            Route::get('edit/{id}', ['uses' => 'AdminController@editPage'])->where('id', '([0-9])');
-            Route::post('edit/{id}', ['uses' => 'AdminController@savePage'])->where('id', '([0-9])');
-            Route::get('delete/{id}', ['uses' => 'AdminController@deletePage'])->where('id', '([0-9])');
-            Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9])')->where('visibility', '([0-1])');
-            Route::get('move-up/{id}', ['uses' => 'AdminController@movePageUp'])->where('id', '([0-9])');
-            Route::get('move-down/{id}', ['uses' => 'AdminController@movePageDown'])->where('id', '([0-9])');
+            Route::get('edit/{id}', ['uses' => 'AdminController@editPage'])->where('id', '([0-9]+)');
+            Route::post('edit/{id}', ['uses' => 'AdminController@savePage'])->where('id', '([0-9]+)');
+            Route::get('delete/{id}', ['uses' => 'AdminController@deletePage'])->where('id', '([0-9]+)');
+            Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9]+)')->where('visibility', '([0-1])');
+            Route::get('move-up/{id}', ['uses' => 'AdminController@movePageUp'])->where('id', '([0-9]+)');
+            Route::get('move-down/{id}', ['uses' => 'AdminController@movePageDown'])->where('id', '([0-9]+)');
         });
         Route::group(['prefix' => 'donations'], function () {
             Route::post('accept/{id}', ['uses' => 'AdminController@acceptDonation'])->where('id', '([0-9]+)');
@@ -69,14 +69,14 @@ Route::group(['middleware' => ['web']], function () {
         });
         Route::group(['prefix' => 'faq'], function () {
             Route::get('/', 'AdminController@faqs');
-            Route::get('/{id}', ['uses' => 'AdminController@faq'])->where('id', '[0-9]');
-            Route::post('/{id}', ['uses' => 'AdminController@faqSave'])->where('id', '[0-9]');
-            Route::delete('/{id}', ['uses' => 'AdminController@faqDestroy'])->where('id', '[0-9]');
+            Route::get('/{id}', ['uses' => 'AdminController@faq'])->where('id', '[0-9]+');
+            Route::post('/{id}', ['uses' => 'AdminController@faqSave'])->where('id', '[0-9]+');
+            Route::delete('/{id}', ['uses' => 'AdminController@faqDestroy'])->where('id', '[0-9]+');
         });
         Route::group(['prefix' => 'cat'], function () {
-            Route::get('/{id}', ['uses' => 'AdminController@cat'])->where('id', '[0-9]');
-            Route::post('/{id}', ['uses' => 'AdminController@catSave'])->where('id', '[0-9]');
-            Route::delete('/{id}', ['uses' => 'AdminController@catDestroy'])->where('id', '[0-9]');
+            Route::get('/{id}', ['uses' => 'AdminController@cat'])->where('id', '[0-9]+');
+            Route::post('/{id}', ['uses' => 'AdminController@catSave'])->where('id', '[0-9]+');
+            Route::delete('/{id}', ['uses' => 'AdminController@catDestroy'])->where('id', '[0-9]+');
         });
         Route::group(['prefix' => 'contact'], function () {
             Route::get('view/{id}', ['uses' => 'AdminController@viewContact'])->where('id', '([0-9]+)');
