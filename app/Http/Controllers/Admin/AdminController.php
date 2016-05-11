@@ -146,7 +146,7 @@ class AdminController extends Controller {
                 $validator = Validator::make($request->all(), $rules);
                 if (!$validator->fails()) {
                     $request->file('newsletter')->move("newsletter/", $request->file('newsletter')->getClientOriginalName());
-                    Mail::raw('Klik hier om je uit te schrijven voor de nieuwsbrief: https://www.youtube.com/watch?v=dQw4w9WgXcQ', function ($message) use ($request) {
+                    Mail::raw('Klik hier om je uit te schrijven voor de nieuwsbrief: http://alinteri.dj33.nl/optout', function ($message) use ($request) {
                         $message->subject($request->subject);
                         $message->attach("newsletter/" . $request->file('newsletter')->getClientOriginalName());
                         $message->from('testmail34125@gmail.com');
