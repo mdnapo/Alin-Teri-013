@@ -73,6 +73,7 @@ return array(
     'ClassPreloader\\Parser\\StrictTypesVisitor' => $vendorDir . '/classpreloader/classpreloader/src/Parser/StrictTypesVisitor.php',
     'CommentsTableSeeder' => $baseDir . '/database/seeds/CommentsTableSeeder.php',
     'ContactEmailTableSeeder' => $baseDir . '/database/seeds/ContactEmailTableSeeder.php',
+    'CreateArchivesTable' => $baseDir . '/database/migrations/2016_05_13_121406_create_archives_table.php',
     'CreateCategoriesTable' => $baseDir . '/database/migrations/2016_03_09_103658_create_categories_table.php',
     'CreateCommentsTable' => $baseDir . '/database/migrations/2016_05_20_174901_create_comments_table.php',
     'CreateContactEmailTable' => $baseDir . '/database/migrations/2016_04_12_000920_create_contact_email_table.php',
