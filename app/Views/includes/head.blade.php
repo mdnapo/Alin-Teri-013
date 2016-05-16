@@ -5,17 +5,15 @@
 <meta name="author" content="">
 
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap.min.css') }}">
 
 <!-- Material Design fonts -->
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
-<link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/robotofonts.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/materialicons.css') }}">
 
 <!-- Bootstrap Material Design -->
-<link rel="stylesheet" type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/bootstrap-material-design.css">
-<link rel="stylesheet" type="text/css"
-      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-material-design/0.5.9/css/ripples.min.css">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-material-design.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('css/ripples.min.css') }}">
 
 <!-- Custom css -->
 <link rel="stylesheet" href="{{ asset('css/main.css') }}">
