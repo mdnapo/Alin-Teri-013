@@ -550,9 +550,14 @@ class AdminController extends Controller {
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function mailinglist() {
-        $list = App\Mailinglist::orderBy('email', 'ASC')->paginate(10);
-        return view('pages.adm.mailinglist', compact('list'));
+    public function mailinglist(Request $request) {
+        $needle = $request->needle;
+        $list = $needle == '' ? App\Mailinglist::orderBy('email', 'ASC')->paginate(10) :
+            App\Mailinglist::search($needle)->orderBy('email', 'ASC')->paginate(10);
+        return view('pages.adm.mailinglist', compact(
+            'list',
+            'needle'
+        ));
     }
 
     /**
@@ -561,7 +566,7 @@ class AdminController extends Controller {
     public function deleteMailing($id) {
         $mailing = App\Mailinglist::findOrFail($id);
         $mailing->delete();
-        return redirect('/admin/mailinglist');
+        return back();
     }
 
     /**
@@ -574,19 +579,19 @@ class AdminController extends Controller {
             'email' => 'Er zit een fout in een e-mail op positie :attribute'
         ];
         $validator = Validator::make($mails, ['*' => 'email'], $messages);
-        
+
         if ($validator->fails()) {
             return redirect('/admin/mailinglist')
                 ->withErrors($validator)
                 ->withInput();
         } else {
-            foreach($mails as $mail) {
+            foreach ($mails as $mail) {
                 if (!count(App\Mailinglist::where('email', $mail)->get())) {
                     App\Mailinglist::create(['email' => $mail]);
                 }
             }
         }
-        
-        return redirect('/admin/mailinglist');
+
+        return back();
     }
 }
