@@ -7,23 +7,25 @@
                 {!! csrf_field() !!}
                 {!! method_field('DELETE') !!}
                 <h2 style="display:inline;">{{ $cat->name }}</h2>
-                    <a href="{{ url('/admin/cat/'.$cat->id) }}" class="glyphicon glyphicon-pencil"></a>
+                <a href="{{ url('/admin/cat/'.$cat->id) }}" class="glyphicon glyphicon-pencil"></a>
 
-                    @if($cat->faqs->isEmpty())
-                        <button type="submit" id="delete-faq-{{ $cat->id }}"
-                                style="outline: 0; border: 0; background:0;" class="glyphicon glyphicon-remove">
-                        </button>
-                    @endif
+                @if($cat->faqs->isEmpty())
+                    <button type="submit" id="delete-faq-{{ $cat->id }}"
+                            style="outline: 0; border: 0; background:0;" class="glyphicon glyphicon-remove">
+                    </button>
+                @endif
 
             </form>
         </div>
         <table class="table table-bordered">
             <thead>
-            <th>#</th>
-            <th>Vraag</th>
-            <th>Antwoord</th>
-            <th>Aanpassen</th>
-            <th>Verwijderen</th>
+            <tr>
+                <th>#</th>
+                <th>Vraag</th>
+                <th>Antwoord</th>
+                <th>Aanpassen</th>
+                <th>Verwijderen</th>
+            </tr>
             </thead>
             <tbody>
             @foreach($cat->faqs as $faq)

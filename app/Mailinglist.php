@@ -8,5 +8,7 @@ class Mailinglist extends Model
 {
     protected $table = 'mailinglists';
 
+    protected $fillable = ['email'];
+
     protected $guarded = 'id';
 }

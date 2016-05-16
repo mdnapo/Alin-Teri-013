@@ -544,4 +544,49 @@ class AdminController extends Controller {
             return redirect('/admin/stories');
         }
     }
+
+    /**
+     * Shows the mailinglist.
+     *
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function mailinglist() {
+        $list = App\Mailinglist::all();
+        return view('pages.adm.mailinglist', compact('list'));
+    }
+
+    /**
+     * Removes a given email entry from the mailinglist.
+     */
+    public function deleteMailing($id) {
+        $mailing = App\Mailinglist::findOrFail($id);
+        $mailing->delete();
+        return redirect('/admin/mailinglist');
+    }
+
+    /**
+     * Adds entries to the mailinglist
+     */
+    public function saveMailing(Request $request) {
+        $mails = str_getcsv(strtolower(str_replace(" ", "", $request->mails)));
+
+        $messages = [
+            'email' => 'Er zit een fout in een e-mail op positie :attribute'
+        ];
+        $validator = Validator::make($mails, ['*' => 'email'], $messages);
+        
+        if ($validator->fails()) {
+            return redirect('/admin/mailinglist')
+                ->withErrors($validator)
+                ->withInput();
+        } else {
+            foreach($mails as $mail) {
+                if (!count(App\Mailinglist::where('email', $mail)->get())) {
+                    App\Mailinglist::create(['email' => $mail]);
+                }
+            }
+        }
+        
+        return redirect('/admin/mailinglist');
+    }
 }
