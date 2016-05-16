@@ -18,7 +18,7 @@ $items = App\Page::where('active', 1)->orderBy('sort')->get();
             </a>
         </div>
 
-        <div class="navbar-collapse collapse navbar-responsive-collapse in" id="app-navbar-collapse">
+        <div class="navbar-collapse collapse navbar-responsive-collapse" id="app-navbar-collapse">
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 @foreach($items as $item)

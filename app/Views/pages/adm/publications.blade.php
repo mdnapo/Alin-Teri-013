@@ -36,7 +36,7 @@
 @stop
 
 @section('footer')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+    <script src="{{ asset('js/bootbox.min.js') }}"></script>
     <script>
         $(document).ready(function(){
             $('.delete_publication').click(function(){
