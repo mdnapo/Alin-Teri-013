@@ -551,7 +551,7 @@ class AdminController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function mailinglist() {
-        $list = App\Mailinglist::all();
+        $list = App\Mailinglist::orderBy('email', 'ASC')->paginate(10);
         return view('pages.adm.mailinglist', compact('list'));
     }
 

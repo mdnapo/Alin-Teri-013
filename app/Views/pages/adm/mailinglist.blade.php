@@ -13,6 +13,29 @@
         </div>
     @endif
     <div class="row">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>E-Mail</th>
+                <th>Delete</th>
+            </thead>
+            </tr>
+            <tbody>
+            @foreach($list as $mailing)
+                <tr>
+                    <td>{{ $mailing->email }}</td>
+                    <td><a id="{{ $mailing->id }}" class="delete_mail"><i
+                                    class="material-icons">delete</i></a></td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+    <div class="row">
+        <div class="pagination-centered col-xs-12">{!! $list->render() !!}</div>
+    </div>
+    <div class="row">
+        <h4>Voeg nieuwe mail adressen toe:</h4>
         <form action="{{ url('/admin/mailinglist') }}" method="POST">
             {!! csrf_field() !!}
             <div class="form-group">
@@ -28,27 +51,6 @@
                 </div>
             </div>
         </form>
-    </div>
-    <div class="row">
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>#</th>
-                <th>E-Mail</th>
-                <th>Delete</th>
-            </thead>
-            </tr>
-            <tbody>
-            @foreach($list as $mailing)
-                <tr>
-                    <th scope="row" class="#{{ $mailing->id }}">{{ $mailing->id }}</th>
-                    <td>{{ $mailing->email }}</td>
-                    <td><a id="{{ $mailing->id }}" class="delete_mail"><i
-                                    class="material-icons">delete</i></a></td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
     </div>
 @stop
 @section('footer')
