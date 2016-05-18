@@ -146,3 +146,7 @@ a.plain_link:hover {
     background-color: yellow !important;
     color: black;
 }
+
+.collapse_publication:hover{
+    cursor: pointer;
+}

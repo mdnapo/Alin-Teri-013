@@ -20,9 +20,9 @@
                 @if(count($publications) > 0)
                     @foreach($publications as $publication)
                         <div class="panel panel-primary">
-                            <div class="panel-heading">
+                            <div class="panel-heading collapse_publication" id="{{ $publication->id }}">
                                 {{ $publication->source }}
-                                <span id="{{ $publication->id }}" class="glyphicon glyphicon-chevron-down pull-right collapse_publication"
+                                <span class="glyphicon glyphicon-chevron-down pull-right"
                                       data-toggle="collapse" href="#publication{{ $publication->id }}">
                             </span>
                             </div>
@@ -61,7 +61,7 @@
             $('.collapse_publication').click(function(){
                 var id = $(this).attr('id');
                 var publication = $('div#publication' + id);
-                var collapse_span = $('span#' + id);
+                var collapse_span = $(this).find('span');
                 if(collapse_span.hasClass('glyphicon-chevron-up'))
                     collapse_span.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
                 else
@@ -73,14 +73,16 @@
                     $(this).removeClass('collapse_all');
                     $(this).html('Alles openklappen');
                     $('.collapse.publication').collapse('hide');
-                    $('.collapse_publication').removeClass('glyphicon-chevron-up').
+                    $('.collapse_publication').find('span').
+                            removeClass('glyphicon-chevron-up').
                             addClass('glyphicon-chevron-down');
                 }
                 else{
                     $(this).addClass('collapse_all');
                     $(this).html('Alles dichtklappen');
                     $('.collapse.publication').collapse('show');
-                    $('.collapse_publication').removeClass('glyphicon-chevron-down').
+                    $('.collapse_publication').find('span').
+                            removeClass('glyphicon-chevron-down').
                             addClass('glyphicon-chevron-up');
                 }
             });
