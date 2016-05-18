@@ -5,14 +5,12 @@
             <h1>In de media</h1>
         </div>
         <div class="col-xs-12">
-            <form action="media-search">
-                <div class="input-group">
-                    <input name="needle" type="text" class="form-control" placeholder="Zoeken naar..." value="{{ isset($needle) ? $needle : '' }}">
-                    <span class="input-group-btn">
-                        <button type="submit" id="search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
-                    </span>
-                </div>
-            </form>
+            <div class="input-group">
+                <input id="needle" name="needle" type="text" class="form-control" placeholder="Zoeken naar..." value="{{ isset($needle) ? $needle : '' }}">
+                <span class="input-group-btn">
+                    <button type="submit" id="search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
+                </span>
+            </div>
         </div>
         <div class="col-xs-12">
             <button id="collapse_button" class="btn btn-primary">Alles openklappen</button>
@@ -90,6 +88,17 @@
                     $('.collapse_publication').removeClass('glyphicon-chevron-down').
                             addClass('glyphicon-chevron-up');
                 }
+            });
+            $('#search').click(function(){
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ url('media-search') }}',
+                    data: { needle: $('#needle').val(), ajax: '' },
+                    success: function(data){
+                        $('#publications_holder').replaceWith(data);
+                        $('.collapse.publication').collapse();
+                    }
+                });
             });
             $('.collapse.publication').collapse();
             $('img').addClass('img-responsive');

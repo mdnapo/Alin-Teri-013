@@ -22,6 +22,12 @@ class MediaController extends Controller
         $publications = $needle == '' ?
             Publication::publications():
             Publication::search($needle);
-        return view('pages.media', ['publications' => $publications, 'needle' => $needle]);
+
+        if(isset($request->ajax)){
+            $view =  View::make('subviews.media-search', ['publications' => $publications, 'needle' => $needle]);
+            echo $view->render();
+        }
+        else
+            return view('pages.media', ['publications' => $publications, 'needle' => $needle]);
     }
 }
