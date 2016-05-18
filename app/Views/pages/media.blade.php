@@ -55,6 +55,7 @@
 
 @section('footer')
     <script src="{{ asset('js/fluidvids.js') }}"></script>
+    <script src="{{ asset('js/jquery.highlight.js') }}"></script>
     <script>
         $(document).ready(function(){
             $('.collapse_publication').click(function(){
@@ -97,6 +98,7 @@
                     success: function(data){
                         $('#publications_holder').replaceWith(data);
                         $('.collapse.publication').collapse();
+                        $('#publications_holder').highlight($('#needle').val());
                     }
                 });
             });
