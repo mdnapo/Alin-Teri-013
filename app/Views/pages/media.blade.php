@@ -62,30 +62,24 @@
                 var id = $(this).attr('id');
                 var publication = $('div#publication' + id);
                 var collapse_span = $('span#' + id);
-                if(!publication.hasClass('collapsed')){
-                    publication.addClass('collapsed');
-                    collapse_span.removeClass('glyphicon-chevron-up').
-                            addClass('glyphicon-chevron-down');
-                }
-                else{
-                    publication.removeClass('collapsed');
-                    collapse_span.removeClass('glyphicon-chevron-down').
-                            addClass('glyphicon-chevron-up');
-                }
+                if(collapse_span.hasClass('glyphicon-chevron-up'))
+                    collapse_span.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                else
+                    collapse_span.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
                 publication.collapse('toggle');
             });
             $('#collapse_button').click(function(){
                 if($(this).hasClass('collapse_all')){
                     $(this).removeClass('collapse_all');
                     $(this).html('Alles openklappen');
-                    $('.collapse.publication').collapse('hide').addClass('collapsed');
+                    $('.collapse.publication').collapse('hide');
                     $('.collapse_publication').removeClass('glyphicon-chevron-up').
                             addClass('glyphicon-chevron-down');
                 }
                 else{
                     $(this).addClass('collapse_all');
                     $(this).html('Alles dichtklappen');
-                    $('.collapse.publication').collapse('show').removeClass('collapsed');
+                    $('.collapse.publication').collapse('show');
                     $('.collapse_publication').removeClass('glyphicon-chevron-down').
                             addClass('glyphicon-chevron-up');
                 }
