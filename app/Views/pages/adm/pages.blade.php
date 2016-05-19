@@ -28,17 +28,17 @@ $archived = App\Page::where('archived', 1)->get();
                 <td>
                     @if($item->protected == 0)
                         @if($item->active == 1)
-                            <a href="{{ url('/admin/pages/visibility/'.$item->id.'/0') }}" class="glyphicon glyphicon-eye-close plain_link"></a>
+                            <a href="{{ url('/admin/pages/visibility/'.$item->id.'/0') }}" class="glyphicon glyphicon-eye-close"></a>
                         @else
-                            <a href="{{ url('/admin/pages/visibility/'.$item->id.'/1') }}" class="glyphicon glyphicon-eye-open plain_link"></a>
+                            <a href="{{ url('/admin/pages/visibility/'.$item->id.'/1') }}" class="glyphicon glyphicon-eye-open"></a>
                         @endif
                     @endif
                 </td>
                 <td>
-                    @if($item->sort > 0)
+                    @if($item->sort > App\Page::where('archived', 0)->orderBy('sort')->first()->sort)
                         <a href="{{ url('/admin/pages/move-up/'.$item->id) }}" class="glyphicon glyphicon-arrow-up plain_link"></a>
                     @endif
-                    @if($item->sort < App\Page::orderBy('sort', 'DESC')->first()->sort)
+                    @if($item->sort < App\Page::where('archived', 0)->orderBy('sort', 'DESC')->first()->sort)
                         <a href="{{ url('/admin/pages/move-down/'.$item->id) }}" class="glyphicon glyphicon-arrow-down plain_link"></a>
                     @endif
                 </td>

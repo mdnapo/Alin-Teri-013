@@ -443,11 +443,13 @@ class AdminController extends Controller {
 
     public function movePageUp($id) {
         $page = App\Page::where('id', $id)->firstOrFail();
-        if ($page->sort > 0) {
-            $pageGoingDown = App\Page::where('sort', $page->sort - 1)->firstOrFail();
+        if ($page->sort > App\Page::where('archived', 0)->orderBy('sort')->first()->sort) {
+            $pageGoingDownID = App\Page::where('archived', 0)->where('sort', '<', $page->sort)->max('sort');
+            $pageGoingDown = App\Page::where('sort', $pageGoingDownID)->firstOrFail();
             $sort = $page->sort;
+            $pageSort = $pageGoingDown->sort;
             $pageGoingDown->sort = App\Page::orderBy('sort', 'DESC')->first()->sort + 1;
-            $page->sort = $page->sort - 1;
+            $page->sort = $pageSort;
             $pageGoingDown->save();
             $page->save();
             $pageGoingDown->sort = $sort;
@@ -458,11 +460,13 @@ class AdminController extends Controller {
 
     public function movePageDown($id) {
         $page = App\Page::where('id', $id)->firstOrFail();
-        if ($page->sort < App\Page::orderBy('sort', 'DESC')->first()->sort) {
-            $pageGoingUp = App\Page::where('sort', $page->sort + 1)->firstOrFail();
+        if ($page->sort < App\Page::where('archived', 0)->orderBy('sort', 'DESC')->first()->sort) {
+            $pageGoingUpID = App\Page::where('archived', 0)->where('sort', '>', $page->sort)->min('sort');
+            $pageGoingUp = App\Page::where('sort', $pageGoingUpID)->firstOrFail();
             $sort = $page->sort;
+            $pageSort = $pageGoingUp->sort;
             $pageGoingUp->sort = App\Page::orderBy('sort', 'DESC')->first()->sort + 1;
-            $page->sort = $page->sort + 1;
+            $page->sort = $pageSort;
             $pageGoingUp->save();
             $page->save();
             $pageGoingUp->sort = $sort;
