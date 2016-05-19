@@ -100,8 +100,14 @@ class AdminController extends Controller {
      */
     public function savePage($id = null, Request $request) {
         $page = App\Page::where('id', $id)->firstOrFail();
-        $page->html = $request->html;
-        $page->save();
+        if($page->html != $request->html){
+            $archive = new App\Archive();
+            $archive->page_id = $id;
+            $archive->html = $page->html;
+            $archive->save();
+            $page->html = $request->html;
+            $page->save();    
+        }
         return back();
     }
 
