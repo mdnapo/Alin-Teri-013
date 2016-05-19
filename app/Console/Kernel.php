@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel {
      */
     protected $commands = [
         // Commands\Inspire::class,
+        Commands\AdminMailUpdate::class,
     ];
 
     /**
@@ -28,17 +29,21 @@ class Kernel extends ConsoleKernel {
         // $schedule->command('inspire')
         //          ->hourly();
 
-        $schedule->call(function () {
-            AdminController::donationMail();
-        })->when(function () {
-            if (file_exists('./Storage/mailupdate.yaml'))
-                yaml_parse_file('./Storage/mailupdate.yaml');
-            if (Donation::where('approved', 0)->count() > 0)
+        $schedule->command('admin:emailupdate')->when(function () {
+            $file = "/srv/http/alinteri/app/Console/Storage/mailupdate.json";
+            if (file_exists($file)) {
+                $status = json_decode(file_get_contents($file), true);
+                if (isset($status['contacts']) && ($status['contacts'] < ($count = Contact::all()->count()))) {
+                    $status['contacts'] = $count;
+                    file_put_contents($file, json_encode($status));
+                    return true;
+                }
+            }
+            if (Donation::where('approved', 0)->count() > 0) {
                 return true;
-            else if (isset($contacts) && (Contact::all()->count() > $contacts))
-                return true;
-            else
-                return false;
-        });
+            }
+            return false;
+        }
+        );
     }
 }
