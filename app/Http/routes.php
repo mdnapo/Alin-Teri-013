@@ -23,9 +23,7 @@ use Intervention\Image\ImageManager;
 Route::group(['middleware' => ['web']], function () {
     Route::auth();
 
-    Route::get('/', function () {
-        return view('pages.home');
-    });
+    Route::get('/', 'HomeController@index');
 
     Route::post('steun-ons', 'DonationController@upload');
     Route::get('steun-ons-gallerij', 'DonationController@gallery');
@@ -102,7 +100,7 @@ Route::group(['middleware' => ['web']], function () {
             Route::post('edit/{id}', ['uses' => 'AdminController@saveStory'])->where('id', '([0-9])');
             Route::get('delete/{id}', ['uses' => 'AdminController@deleteStory'])->where('id', '([0-9])');
         });
-        
+
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');
     });
