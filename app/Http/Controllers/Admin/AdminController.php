@@ -121,7 +121,8 @@ class AdminController extends Controller {
         if (empty($id)) {
             return redirect('/admin/pages');
         } else {
-            $page->delete();
+            $page->archived = 1;
+            $page->save();
             return redirect('/admin/pages');
         }
     }
@@ -653,5 +654,21 @@ class AdminController extends Controller {
         }
 
         return back();
+    }
+
+    public function restorePage($id = null){
+        $page = App\Page::where('id', $id)->firstOrFail();
+        $page->archived = 0;
+        $page->save();
+        return redirect ('/admin/pages');
+    }
+
+    public function viewArchive($id = null){
+        $template = 'pages.adm.archivePage';
+        $page = App\Page::where('id', $id)->where('archived', 1)->firstOrFail();
+        if(empty($page->html)){
+            abort(404);
+        }
+        return \View::make($template, array('content' => $page->html, 'id' => $page->id));
     }
 }

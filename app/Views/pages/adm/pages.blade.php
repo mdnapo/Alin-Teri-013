@@ -1,5 +1,6 @@
 <?php
-$items = App\Page::orderBy('sort')->get();
+$items = App\Page::where('archived', 0)->orderBy('sort')->get();
+$archived = App\Page::where('archived', 1)->get();
 ?>
 
 @extends('layouts.admindashboard')
@@ -53,5 +54,32 @@ $items = App\Page::orderBy('sort')->get();
     <div class="btn btn-raised">
         <a href="{{ url('/admin/pages/create') }}">Toevoegen</a>
     </div>
+    <h1>Archief van pagina's</h1>
+    <table class="table table-bordered" >
+        <thead>
+        <th>#</th>
+        <th>Naam</th>
+        <th>Datum van verwijdering</th>
+        <th>Acties</th>
+        </thead>
+        <tbody>
+            @foreach($archived as $archive)
+                <th scope="row" class="#{{ $archive->id }}">{{ $archive->id }}</th>
+                <td>{{ $archive->name }}</td>
+                <td>{{ $archive->updated_at }}</td>
+                <td>
+                    <a class="plain_link" data-toggle="tooltip" title="Herstellen" href="{{ url('/admin/pages/restore/' . $archive->id) }}"><span class="material-icons">restore_page</span></a>
+                    <a class="plain_link" data-toggle="tooltip" title="Pagina bekijken" href="{{ url('/admin/pages/viewArchive/' . $archive->id) }}"><span class="material-icons">open_in_browser</span></a>
+                </td>
+            @endforeach
+        </tbody>
+    </table>
+@stop
 
+@section('footer')
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        });
+    </script>
 @stop
