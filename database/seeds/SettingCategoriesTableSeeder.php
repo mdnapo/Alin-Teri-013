@@ -14,5 +14,8 @@ class SettingCategoriesTableSeeder extends Seeder
         App\SettingCategory::create([
             'name' => 'FAQ',
         ]);
+        App\SettingCategory::create([
+            'name' => 'Steun ons',
+        ]);
     }
 }
