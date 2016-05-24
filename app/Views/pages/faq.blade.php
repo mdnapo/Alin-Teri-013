@@ -18,9 +18,9 @@
                 <div class="row">
                     @foreach($cat->faqs as $faq)
                         <div class="
-                    {{ ($settings->where('name', 'Rijen - PC')->first()->value == 4) ? 'col-lg-3':'col-lg-4' }}
-                        {{ ($settings->where('name', 'Rijen - Tablet')->first()->value == 3) ? 'col-md-4':'col-md-6' }}
-                        {{ ($settings->where('name', 'Rijen - Telefoon')->first()->value == 2) ? 'col-sm-6':'col-sm-12' }}
+                    {{ ($settings->where('name', 'Rijen - PC')->first()->value == 4) ? 'col-md-3':'col-md-4' }}
+                        {{ ($settings->where('name', 'Rijen - Tablet')->first()->value == 3) ? 'col-sm-4':'col-sm-6' }}
+                        {{ ($settings->where('name', 'Rijen - Telefoon')->first()->value == 2) ? 'col-xs-6':'col-xs-12' }}
                                 searchable">
                             <div class="panel panel-default faq" id="faq-{{ $faq->id }}">
                                 <div class="panel-heading question">{{ $faq->question }}</div>
