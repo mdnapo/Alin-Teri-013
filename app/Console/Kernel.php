@@ -29,13 +29,11 @@ class Kernel extends ConsoleKernel {
         // $schedule->command('inspire')
         //          ->hourly();
 
-        $schedule->command('admin:emailupdate')->when(function () {
+        $schedule->command('admin:emailupdate')->twiceDaily(9, 16)->when(function () {
             $file = "/srv/http/alinteri/app/Console/Storage/mailupdate.json";
             if (file_exists($file)) {
                 $status = json_decode(file_get_contents($file), true);
-                if (isset($status['contacts']) && ($status['contacts'] < ($count = Contact::all()->count()))) {
-                    $status['contacts'] = $count;
-                    file_put_contents($file, json_encode($status));
+                if (isset($status['contacts']) && ($status['contacts'] < (Contact::orderBy('id', 'desc')->first()->id))) {
                     return true;
                 }
             }
