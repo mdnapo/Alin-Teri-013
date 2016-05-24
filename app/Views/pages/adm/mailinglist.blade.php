@@ -76,10 +76,8 @@
     <script src="{{ asset('js/bootbox.min.js') }}"></script>
     <script>
         $(function () {
-            console.log('Setting stuff!');
             $('.delete_mail').on('click', function () {
                 var id = $(this).attr('id');
-                console.log("Opened");
                 bootbox.confirm('Weet u zeker dat u dit mail-adres uit de lijst wilt verwijderen?', function (answer) {
                     if (answer === true) {
                         var form = $('<form action="{{ url('/admin/mailinglist/') }}/' + id + '" method="POST"></form>');
