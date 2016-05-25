@@ -22,8 +22,11 @@
         <div class="col-md-4">
             <br>
             <div class="fb-page" data-href="https://www.facebook.com/alinteri013/" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/alinteri013/"><a href="https://www.facebook.com/alinteri013/">Alin Teri</a></blockquote></div></div>
-            <br>
-            <div class="fb-share-button" data-href="http://alinteri.dj33.nl/" data-layout="button_count"></div>
+            <p>
+            <div class="fb-share-button" data-layout="button_count"></div>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-text="Alin Teri tegen wietteelt">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+            </p>
         </div>
     </div>
 @stop
