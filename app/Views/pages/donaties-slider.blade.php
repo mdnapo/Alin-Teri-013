@@ -27,9 +27,8 @@ if($text == null){
                 <strong><em>Onze ambassadeurs, bondgenoten en vrijwilligers</em></strong>
             </div>
 
-            <div class="col-xs-10 col-xs-offset-1">
+            <div class="col-xs-12">
                 <div class="btn-group pull-right">
-                    {{--<a href="{{ url('steun-ons-carousel') }}"><div class="btn btn-primary">Carousel</div></a>--}}
                     <a href="{{ url('steun-ons-gallerij') }}"> <div class="btn btn-primary">Gallerij</div></a>
                 </div>
             </div>

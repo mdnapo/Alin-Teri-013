@@ -21,12 +21,13 @@
                     @foreach($publications as $publication)
                         <div class="panel panel-primary">
                             <div class="panel-heading collapse_publication" id="{{ $publication->id }}">
+                                <a href="#"  class="pop circle"></a>
                                 {{ $publication->source }}
-                                <span class="glyphicon glyphicon-chevron-down pull-right"
+                                <span id="glyph{{ $publication->id }}" class="glyphicon glyphicon-chevron-down pull-right glyph"
                                       data-toggle="collapse" href="#publication{{ $publication->id }}">
-                            </span>
+                                </span>
                             </div>
-                            <div id="publication{{ $publication->id }}" class="panel-collapse collapse in publication">
+                            <div id="publication{{ $publication->id }}" class="panel-collapse collapse publication">
                                 <div class="panel-body">
                                     <div class="col-xs-12">{!! $publication->article !!}</div>
                                     @if($publication->video != '')
@@ -60,10 +61,10 @@
     <script src="{{ asset('js/jquery.highlight.js') }}"></script>
     <script>
         $(document).ready(function(){
-            $('.collapse_publication').click(function(){
+            $(document).delegate('.collapse_publication', 'click', function(){
                 var id = $(this).attr('id');
                 var publication = $('div#publication' + id);
-                var collapse_span = $(this).find('span');
+                var collapse_span = $(this).find('#glyph' + id);
                 if(collapse_span.hasClass('glyphicon-chevron-up'))
                     collapse_span.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
                 else
@@ -75,7 +76,7 @@
                     $(this).removeClass('collapse_all');
                     $(this).html('Alles openklappen');
                     $('.collapse.publication').collapse('hide');
-                    $('.collapse_publication').find('span').
+                    $('.collapse_publication').find('.glyph').
                             removeClass('glyphicon-chevron-up').
                             addClass('glyphicon-chevron-down');
                 }
@@ -83,7 +84,7 @@
                     $(this).addClass('collapse_all');
                     $(this).html('Alles dichtklappen');
                     $('.collapse.publication').collapse('show');
-                    $('.collapse_publication').find('span').
+                    $('.collapse_publication').find('.glyph').
                             removeClass('glyphicon-chevron-down').
                             addClass('glyphicon-chevron-up');
                 }
@@ -100,13 +101,15 @@
                     }
                 });
             });
+            if($('#needle').val() != '')
+                $('#publications_holder').highlight($('#needle').val());
             $('.collapse.publication').collapse();
             $('img').addClass('img-responsive');
             fluidvids.init({
                 selector: ['iframe'],
                 players: ['www.youtube.com', 'player.vimeo.com'] // players to support
-            });
+            })
+            $('.publication').css('max-height', 200);
         });
     </script>
 @stop
-

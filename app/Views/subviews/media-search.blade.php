@@ -3,11 +3,11 @@
         @if(count($publications) > 0)
             @foreach($publications as $publication)
                 <div class="panel panel-primary">
-                    <div class="panel-heading">
+                    <div class="panel-heading collapse_publication" id="{{ $publication->id }}">
                         {{ $publication->source }}
-                        <span id="{{ $publication->id }}" class="glyphicon glyphicon-chevron-down pull-right collapse_publication"
+                        <span id="glyph{{ $publication->id }}" class="glyphicon glyphicon-chevron-down pull-right glyph"
                               data-toggle="collapse" href="#publication{{ $publication->id }}">
-                            </span>
+                                </span>
                     </div>
                     <div id="publication{{ $publication->id }}" class="panel-collapse collapse in publication">
                         <div class="panel-body">
