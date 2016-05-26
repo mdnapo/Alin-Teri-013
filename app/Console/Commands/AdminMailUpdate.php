@@ -42,13 +42,13 @@ class AdminMailUpdate extends Command {
         if (file_exists($file)) {
             $status = json_decode(file_get_contents($file), true);
             if (isset($status['contacts'])) {
-                $contacts = Contact::where('id', '>', $status['contacts']);
+                $contacts = Contact::where('id', '>', $status['contacts'])->get();
                 $status['contacts'] = Contact::orderBy('id', 'desc')->first()->id;
                 file_put_contents($file, json_encode($status));
             } else {
                 $this->error("Could not parse file correctly.");
             }
-            $donations = Donation::where('approved', 0);
+            $donations = Donation::where('approved', 0)->get();
             $this->info('Sending mail to:' . env('ADMIN_MAIL', '42in07sol@gmail.com'));
 
             Mail::send('emails.update', compact('donations', 'contacts'), function ($message) {
