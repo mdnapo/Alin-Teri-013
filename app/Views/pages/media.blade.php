@@ -30,9 +30,11 @@
                                 <div class="panel-body">
                                     <div class="col-xs-12">{!! $publication->article !!}</div>
                                     @if($publication->video != '')
-                                        <div class="col-xs-12 text-center top_buffer"> {!! $publication->video !!} </div>
+                                        <div class="col-xs-12 text-center top_buffer" style="padding-bottom: 10px;"> {!! $publication->video !!} </div>
                                     @endif
                                 </div>
+                                <a href="{{ url('reactiepagina/' . $publication->id) }}" class="btn btn-primary btn-block" role="button">Ga naar de reactiepagina</a>
+                                <br>
                             </div>
                         </div>
                     @endforeach
@@ -107,3 +109,4 @@
         });
     </script>
 @stop
+

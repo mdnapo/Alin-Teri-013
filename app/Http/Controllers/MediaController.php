@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App;
 use App\Publication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -12,15 +14,17 @@ use Illuminate\Support\Facades\View;
 
 class MediaController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         $publications = Publication::publications();
         return view('pages.media', ['publications' => $publications]);
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $needle = $request->needle;
         $publications = $needle == '' ?
-            Publication::publications():
+            Publication::publications() :
             Publication::search($needle);
 
         if(isset($request->ajax)){

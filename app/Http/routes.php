@@ -33,6 +33,9 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('in-de-media', 'MediaController@index');
     Route::get('media-search', 'MediaController@search');
 
+    Route::get('/reactiepagina/{id}', ['uses' => 'CommentController@comments'])->where('id', '([0-9]+)');
+    Route::post('/reactiepagina/comment', ['uses' => 'CommentController@comment'])->where('id', '([0-9]+)');
+
     Route::get('contact', 'ContactController@index');
     Route::post('contact', 'ContactController@insertIntoDb');
 
