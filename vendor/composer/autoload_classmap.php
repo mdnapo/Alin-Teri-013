@@ -912,6 +912,7 @@ return array(
     'Psy\\VarDumper\\Presenter' => $vendorDir . '/psy/psysh/src/Psy/VarDumper/Presenter.php',
     'Psy\\VarDumper\\PresenterAware' => $vendorDir . '/psy/psysh/src/Psy/VarDumper/PresenterAware.php',
     'PublicationsTableSeeder' => $baseDir . '/database/seeds/PublicationsTableSeeder.php',
+    'RenameMediaIdColumnOnCommentsTable' => $baseDir . '/database/migrations/2016_05_27_123814_rename_media_id_column_on_comments_table.php',
     'RolesTableSeeder' => $baseDir . '/database/seeds/RolesTableSeeder.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',

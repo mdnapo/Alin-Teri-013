@@ -27,7 +27,7 @@
                                       data-toggle="collapse" href="#publication{{ $publication->id }}">
                                 </span>
                             </div>
-                            <div id="publication{{ $publication->id }}" class="panel-collapse collapse publication">
+                            <div id="publication{{ $publication->id }}" class="panel-collapse collapse in publication">
                                 <div class="panel-body">
                                     <div class="col-xs-12">{!! $publication->article !!}</div>
                                     @if($publication->video != '')
@@ -109,7 +109,6 @@
                 selector: ['iframe'],
                 players: ['www.youtube.com', 'player.vimeo.com'] // players to support
             })
-            $('.publication').css('max-height', 200);
         });
     </script>
 @stop
