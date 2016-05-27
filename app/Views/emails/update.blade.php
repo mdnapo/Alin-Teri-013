@@ -19,7 +19,7 @@
                         <tr>
                             @endif
                             <td align="center">
-                                <img src="{{ asset('img/donaties/' . $donations[$i]->id . '.png') }}"
+                                <img src="{{ asset($donations[$i]->pic_loc) }}"
                                      height="145px"
                                      width="145px"/>
                             </td>
