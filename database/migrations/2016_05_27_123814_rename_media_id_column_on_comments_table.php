@@ -12,8 +12,13 @@ class RenameMediaIdColumnOnCommentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('comments', function($table){
-            $table->renameColumn('media_id', 'publication_id');
+        Schema::drop('comments');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer("publication_id");
+            $table->string("naam");
+            $table->longText("reactie");
+            $table->timestamps();
         });
     }
 
@@ -24,8 +29,6 @@ class RenameMediaIdColumnOnCommentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('comments', function($table){
-            $table->renameColumn('publication_id', 'media_id');
-        });
+
     }
 }
