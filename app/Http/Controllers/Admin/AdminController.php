@@ -123,13 +123,11 @@ class AdminController extends Controller {
         $page = App\Page::where('id', $id)->firstOrFail();
         if ($visibility == 0) {
             $page->active = 0;
-            $page->save();
-            return redirect('/admin/pages');
         } else {
             $page->active = 1;
-            $page->save();
-            return redirect('/admin/pages');
         }
+        $page->save();
+        return redirect('/admin/pages');
     }
 
     public function sendNewsletter(Request $request) {
