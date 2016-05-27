@@ -11,8 +11,9 @@ class ContactController extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testClass()
     {
-        $this->assertTrue(true);
+        $this->testLogin();
     }
+
 }
