@@ -60,5 +60,33 @@ class DefaultActionsTest extends TestCase
             ->see('');
     }
 
-
+    /**
+     *  Tests the admin panel.
+     *
+     * @return void
+     */
+    public function testAdminPanel(){
+        $user = new User(array('name' => 'Administrator', 'email' => 'admin@alinteri.nl', 'role_id' => 1));
+        $this->actingAs($user)
+            ->visit('/')
+            ->see('Welkom Administrator')
+            ->visit('/admin/dashboard/')
+            ->see('Welkom Administrator, op het AlinTeri administratiepaneel.')
+            ->click('pagina\'s')
+            ->see('Home')->see('Steun Ons')
+            ->click('verhalen')
+            ->see('Verhaal 1')
+            ->click('nieuwsbrief')
+            ->see('Upload een bestand en deze wordt automatisch verstuurd naar iedereen die zich heeft ingeschreven voor de nieuwsbrief!')
+            ->click('steun ons')
+            ->see('Steun ons')
+            ->click('in de media')
+            ->see('Brabants Dagblad 1 mei 2016')
+            ->click('contact')
+            ->see('Wijzig hieronder het contact emailadres voor gestelde vragen.')
+            ->click('F.A.Q.')
+            ->see('Algemeen')->see('Specifiek Onderwerp')
+            ->click('settings')
+            ->see('FAQ');
+    }
 }
