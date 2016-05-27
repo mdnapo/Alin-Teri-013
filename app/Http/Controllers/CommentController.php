@@ -14,7 +14,7 @@ class CommentController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function comments($id = null) {
-        $comments =  App\Comment::where('media_id',(int) $id)->paginate(10);
+        $comments =  App\Comment::where('publication_id',(int) $id)->paginate(10);
         return view('pages.commentpage', ['id' => $id, 'comments' => $comments]);
     }
 

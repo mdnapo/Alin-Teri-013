@@ -5,12 +5,7 @@
             <h1>In de media</h1>
         </div>
         <div class="col-xs-12">
-            <div class="input-group">
-                <input id="needle" name="needle" type="text" class="form-control" placeholder="Zoeken naar..." value="{{ isset($needle) ? $needle : '' }}">
-                <span class="input-group-btn">
-                    <button type="submit" id="search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
-                </span>
-            </div>
+            <input id="needle" name="needle" type="text" class="form-control" placeholder="Zoeken naar..." value="{{ isset($needle) ? $needle : '' }}">
         </div>
         <div class="col-xs-12">
             <button id="collapse_button" class="btn btn-primary">Alles openklappen</button>
@@ -89,15 +84,16 @@
                             addClass('glyphicon-chevron-up');
                 }
             });
-            $('#search').click(function(){
+            $('#needle').on('input', function(){
+                var needle = $(this).val();
                 $.ajax({
                     type: 'GET',
-                    url: '{{ url('media-search') }}',
-                    data: { needle: $('#needle').val(), ajax: '' },
+                    url: '{{ url('zoeken-in-media') }}',
+                    data: { needle: needle },
                     success: function(data){
                         $('#publications_holder').replaceWith(data);
                         $('.collapse.publication').collapse();
-                        $('#publications_holder').highlight($('#needle').val());
+                        $('#publications_holder').highlight(needle);
                     }
                 });
             });

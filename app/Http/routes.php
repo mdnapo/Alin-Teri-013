@@ -42,6 +42,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('faq', 'FaqController@index');
 
     Route::get('verhalen', 'StoryController@index');
+    Route::get('zoeken-in-verhalen', 'StoryController@search');
     
     Route::get('optout', 'OptoutController@index');
     Route::post('optout', 'OptoutController@optout');
