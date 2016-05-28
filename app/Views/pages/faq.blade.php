@@ -6,7 +6,7 @@
             <a href="{{ url("/contact") }}">Staat uw vraag niet in deze lijst? Klik dan hier om naar de contactpagina
                 te gaan om uw vraag te stellen!</a>
             <div class="form-group label-placeholder is-empty">
-                <label for="search" class="control-label">Zoeken</label>
+                <label for="search" class="control-label">Zoeken naar...</label>
                 <input type="text" autocomplete="off" class="form-control" id="search">
             </div>
         </div>

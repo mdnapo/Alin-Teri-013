@@ -9,7 +9,7 @@
                               data-toggle="collapse" href="#story{{ $story->id }}">
                                 </span>
                     </div>
-                    <div id="story{{ $story->id }}" class="panel-collapse collapse in publication">
+                    <div id="story{{ $story->id }}" class="panel-collapse collapse in story">
                         <div class="panel-body">
                             <div class="col-xs-12">{!! $story->verhaal !!}</div>
                         </div>

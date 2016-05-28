@@ -15,6 +15,7 @@ use App\Contact;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 use Symfony\Component\Yaml\Tests\A;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -538,12 +539,23 @@ class AdminController extends Controller {
 
     public function deleteStory($id = null) {
         $story = App\Story::where('id', $id)->firstOrFail();
-        if (empty($id)) {
-            return redirect('/admin/stories');
-        } else {
+        if (!empty($id)) {
             $story->delete();
-            return redirect('/admin/stories');
         }
+        return redirect('/admin/stories');
+    }
+
+    /**
+     * Delete comment from database
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function deleteComment($id = null){
+        $comment = App\Comment::where('id', $id)->firstOrFail();
+        $publication = App\Publication::where('id', $comment->publication_id)->firstOrFail();
+        $comment->delete();
+        $view = View::make('subviews.publication-comments', ['publication' => $publication]);
+        echo $view->render();
     }
 
     /**

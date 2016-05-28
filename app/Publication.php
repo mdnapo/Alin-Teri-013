@@ -20,4 +20,8 @@ class Publication extends Model
             orWhere('article', 'LIKE', "%$needle%")->orderBy('created_at', 'desc')->paginate(10);
         return $publications;
     }
+
+    public function comments(){
+        return $this->hasMany('App\Comment');
+    }
 }
