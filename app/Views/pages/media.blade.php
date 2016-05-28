@@ -28,9 +28,14 @@
                                     @if($publication->video != '')
                                         <div class="col-xs-12 text-center top_buffer" style="padding-bottom: 10px;"> {!! $publication->video !!} </div>
                                     @endif
+                                    <div class="col-xs-12">
+                                        <div class="text-center">
+                                            <a class="btn btn-primary" href="./reactiepagina/{{ $publication->id }}">
+                                                Reacties
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
-                                <a href="{{ url('reactiepagina/' . $publication->id) }}" class="btn btn-primary btn-block" role="button">Ga naar de reactiepagina</a>
-                                <br>
                             </div>
                         </div>
                     @endforeach

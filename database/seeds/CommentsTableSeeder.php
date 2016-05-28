@@ -15,18 +15,21 @@ class CommentsTableSeeder extends Seeder
             'publication_id' => '1',
             'naam' => 'Jan',
             'reactie' => 'Wat een mooi artikel.',
+            'geaccepteerd' => 1
         ]);
 
         App\Comment::create([
             'publication_id' => '1',
             'naam' => 'Peter',
             'reactie' => 'Bijzonder artikel, mooi om te lezen.',
+            'geaccepteerd' => 1
         ]);
 
         App\Comment::create([
             'publication_id' => '1',
             'naam' => 'Annemarie',
             'reactie' => 'Heel informatief.',
+            'geaccepteerd' => 1
         ]);
 
         App\Comment::create([
@@ -81,12 +84,14 @@ class CommentsTableSeeder extends Seeder
             'publication_id' => '2',
             'naam' => 'Lars',
             'reactie' => 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.',
+            'geaccepteerd' => 1
         ]);
 
         App\Comment::create([
             'publication_id' => '2',
             'naam' => 'Niels',
             'reactie' => 'In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.',
+            'geaccepteerd' => 1
         ]);
 
         App\Comment::create([

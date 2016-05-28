@@ -559,6 +559,19 @@ class AdminController extends Controller {
     }
 
     /**
+     * Accepts comment
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function acceptComment($id = null){
+        App\Comment::acceptComment($id);
+        $comment = App\Comment::where('id', $id)->firstOrFail();
+        $publication = App\Publication::where('id', $comment->publication_id)->firstOrFail();
+        $view = View::make('subviews.publication-comments', ['publication' => $publication]);
+        echo $view->render();
+    }
+    
+    /**
      * Shows the mailinglist.
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View

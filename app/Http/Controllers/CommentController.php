@@ -13,9 +13,9 @@ class CommentController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function comments($id = null) {
-        $comments =  App\Comment::where('publication_id',(int) $id)->paginate(10);
-        return view('pages.commentpage', ['id' => $id, 'comments' => $comments]);
+    public function comments($publication_id = null) {
+        $comments =  App\Comment::getAcceptedComments((int) $publication_id);
+        return view('pages.commentpage', ['id' => $publication_id, 'comments' => $comments]);
     }
 
     public function comment(Request $request){

@@ -66,6 +66,7 @@
                 <th>Verhaal</th>
                 <th>Gereageerd op</th>
                 <th>Bekijken</th>
+                <th>Accepteren</th>
                 <th>Verwijderen</th>
                 </thead>
                 <tbody>
@@ -85,6 +86,13 @@
                         <td>
                             <a id="{{ $comment->id }}" class="glyphicon glyphicon-zoom-in plain_link"></a>
                         </td>
+                        <th>
+                            @if($comment->geaccepteerd == 0)
+                                <a id="{{ $comment->id }}" class="glyphicon glyphicon-ok-sign plain_link"></a>
+                            @else
+                                <span class="glyphicon glyphicon-check"></span>
+                            @endif
+                        </th>
                         <td>
                             <a id="{{ $comment->id }}" class="glyphicon glyphicon-remove plain_link"></a>
                         </td>
@@ -122,12 +130,21 @@
                     if(answer === true){
                         $.ajax({
                             type: 'GET',
-                            url: '{{ url('/admin/comment/delete') }}/' + id,
+                            url: '{{ url('/admin/delete_comment') }}/' + id,
                             success: function(data){
                                 $('#comments_holder').replaceWith(data);
-                                console.log(data);
                             }
                         })
+                    }
+                });
+            });
+            $(document).delegate('.glyphicon-ok-sign', 'click', function(){
+                var id = $(this).attr('id');
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ url('/admin/accept_comment') }}/' + id,
+                    success: function(data){
+                        $('#comments_holder').replaceWith(data);
                     }
                 });
             });

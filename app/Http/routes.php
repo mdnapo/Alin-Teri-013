@@ -116,12 +116,13 @@ Route::group(['middleware' => ['web']], function () {
 
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');
-        Route::get('/comment/delete/{id}', ['uses' => 'AdminController@deleteComment'])->where('id', '([0-9]+)');
-
+        Route::get('/delete_comment/{id}', ['uses' => 'AdminController@deleteComment'])->where('id', '([0-9]+)');
+        Route::get('/accept_comment/{id}', ['uses' => 'AdminController@acceptComment'])->where('id', '([0-9]+)');
+        
         Route::group(['prefix' => 'mailinglist'], function () {
             Route::get('/', 'AdminController@mailinglist');
             Route::post('/', 'AdminController@saveMailing');
             Route::delete('/{id}', ['uses' => 'AdminController@deleteMailing'])->where('id', '[0-9]+');
-        });
+        });    
     });
 });
