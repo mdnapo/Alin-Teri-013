@@ -542,7 +542,9 @@ class AdminController extends Controller {
         if (!empty($id)) {
             $story->delete();
         }
-        return redirect('/admin/stories');
+        $stories = App\Story::all();
+        $view = View::make('subviews.stories-table', ['items' => $stories]);
+        echo $view->render();
     }
 
     /**

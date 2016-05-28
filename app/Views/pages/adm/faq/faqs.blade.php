@@ -34,7 +34,7 @@
                     <td>{{ $faq->question }}</td>
                     <td>{{ $faq->answer }}</td>
                     <td>
-                        <a href="{{ url('/admin/faq/'.$faq->id) }}" class="glyphicon glyphicon-pencil"></a>
+                        <a href="{{ url('/admin/faq/'.$faq->id) }}" class="glyphicon glyphicon-pencil plain_link"></a>
                     </td>
                     <td>
                         <form action="{{ url('/admin/faq/' . $faq->id) }}" method="POST">

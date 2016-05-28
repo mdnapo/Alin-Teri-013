@@ -16,14 +16,22 @@ $story = App\Story::where('id', $id)->firstOrFail();
                 </span>
             </div>
             <div class="form-group">
-                <textarea name="verhaal">{{ $story->verhaal }}</textarea>
+                <textarea id="c" name="verhaal">{{ $story->verhaal }}</textarea>
             </div>
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
-                    <a href="{{ url('/admin/stories') }}" class="btn btn-default">Annuleer</a>
-                    <input type="submit" class="btn btn-default" value="Opslaan"/>
+                    <a href="{{ url('/admin/stories') }}" class="btn btn-primary">Annuleer</a>
+                    <input type="submit" class="btn btn-primary" value="Opslaan"/>
                 </div>
             </div>
         </fieldset>
     </form>
-@endsection
+@stop
+@section('footer')
+    <script src="https://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
+    <script>
+        $(document).ready(function() {
+            CKEDITOR.replace('c');
+        });
+    </script>
+@stop

@@ -12,8 +12,8 @@ $page = App\Page::where('id', $id)->firstOrFail();
             </div>
             <div class="form-group">
                 <div class="col-md-10 col-md-offset-2">
-                    <a href="{{ url('/admin/pages') }}" class="btn btn-default">Cancel</a>
-                    <input type="submit" class="btn btn-default" value="Save" />
+                    <a href="{{ url('/admin/pages') }}" class="btn btn-primary">Cancel</a>
+                    <input type="submit" class="btn btn-primary" value="Save" />
                 </div>
             </div>
         </fieldset>
