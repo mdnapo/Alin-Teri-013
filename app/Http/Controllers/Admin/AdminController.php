@@ -564,8 +564,9 @@ class AdminController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function acceptComment($id = null){
-        App\Comment::acceptComment($id);
         $comment = App\Comment::where('id', $id)->firstOrFail();
+        $comment->geaccepteerd = 1;
+        $comment->save();
         $publication = App\Publication::where('id', $comment->publication_id)->firstOrFail();
         $view = View::make('subviews.publication-comments', ['publication' => $publication]);
         echo $view->render();

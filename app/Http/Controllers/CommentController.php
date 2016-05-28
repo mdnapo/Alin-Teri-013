@@ -10,11 +10,10 @@ use Illuminate\Support\Facades\Validator;
 class CommentController extends Controller {
     /**
      * Show the homepage.
-     *
      * @return \Illuminate\Http\Response
      */
     public function comments($publication_id = null) {
-        $comments =  App\Comment::getAcceptedComments((int) $publication_id);
+        $comments =  App\Comment::where(['publication_id' => $publication_id, 'geaccepteerd' => 1])->paginate(10);
         return view('pages.commentpage', ['id' => $publication_id, 'comments' => $comments]);
     }
 
