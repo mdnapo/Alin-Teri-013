@@ -515,14 +515,25 @@ class AdminController extends Controller {
     }
 
     public function createStory(Request $request) {
-        var_dump($request->name);
-        if (!(empty($request->name))) {
+        $rules = [
+            'naam' => 'required|string',
+            'verhaal' => 'required|string',
+        ];
+        $messages = array(
+            'required' => 'Het veld :attribute is verplicht!'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if(!$validator->fails()){
             $story = new App\Story();
-            $story->naam = $request->name;
-            $story->verhaal = $request->story;
+            $story->naam = $request->naam;
+            $story->verhaal = $request->verhaal;
             $story->save();
+            return redirect('/admin/stories');
         }
-        return redirect('/admin/stories');
+        return back()->
+        withErrors($validator->errors())->
+        withInput();
     }
 
     public function editStory($id = null) {
@@ -530,11 +541,25 @@ class AdminController extends Controller {
     }
 
     public function saveStory($id = null, Request $request) {
-        $story = App\Story::where('id', $id)->firstOrFail();
-        $story->naam = $request->naam;
-        $story->verhaal = $request->verhaal;
-        $story->save();
-        return redirect('/admin/stories');
+        $rules = [
+            'naam' => 'required|string',
+            'verhaal' => 'required|string',
+        ];
+        $messages = array(
+            'required' => 'Het veld :attribute is verplicht!'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if(!$validator->fails()){
+            $story = App\Story::where('id', $id)->firstOrFail();
+            $story->naam = $request->naam;
+            $story->verhaal = $request->verhaal;
+            $story->save();
+            return redirect('/admin/stories');
+        }
+        return back()->
+        withErrors($validator->errors())->
+        withInput();
     }
 
     public function deleteStory($id = null) {

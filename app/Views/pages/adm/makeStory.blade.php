@@ -20,7 +20,7 @@ $pages = App\Story::all();
                 <legend>VERHAAL AANMAKEN</legend>
                 <div class="form-group">
                     <label class="control-label" for="name">Naam</label>
-                    <input type="text" class="form-control" id="name" name="name">
+                    <input type="text" class="form-control" id="name" name="naam">
                     <span class="material-input"></span>
                 <span class="help-block">
                     Voer de naam van het verhaal in
@@ -28,7 +28,7 @@ $pages = App\Story::all();
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="name">Verhaal</label>
-                    <textarea type="text" class="form-control" id="story" name="story"></textarea>
+                    <textarea type="text" class="form-control" id="story" name="verhaal"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="col-md-10 col-md-offset-2">
