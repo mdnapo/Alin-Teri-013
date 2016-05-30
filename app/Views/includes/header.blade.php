@@ -1,5 +1,5 @@
 <?php
-$items = App\Page::where('active', 1)->orderBy('sort')->get();
+$items = App\Page::where('active', 1)->where('archived', 0)->orderBy('sort')->get();
 ?>
 <nav class="navbar navbar-default shadow-z-1">
     <div class="container-fluid">
