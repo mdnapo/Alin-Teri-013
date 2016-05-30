@@ -6,12 +6,24 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class TestFaqController extends TestCase
 {
+
     /**
-     * A basic test example.
+     * Open the page (do not use the search bar) and see if a FAQ item from default data appears
      *
      * @return void
      */
-    public function testFaqItem()
+    public function testNoSearch() {
+        $this->visit('/')
+            ->click('FAQ')
+            ->see('Dit is een veel gestelde vraag?');
+    }
+
+    /**
+     * Open the page, search for a FAQ item that should exist, see if it appears
+     *
+     * @return void
+     */
+    public function testSearchExisting()
     {
         $this->visit('/')
              ->click('FAQ')
@@ -19,11 +31,18 @@ class TestFaqController extends TestCase
              ->see('Dit is een veel gestelde vraag?');
     }
 
-    public function testNonFaq()
+    /**
+     * Open the page, run a search that should get no results with default data, see if nothing from default data appears
+     *
+     * @return void
+     */
+    public function testSearchNotExisting()
     {
         $this->visit('/')
             ->click('FAQ')
-            ->type('2013', 'search')
-            ->see('Dit is een veel gestelde vraag?');
+            ->type('Lorem ipsum dolor sit amet', 'search')
+            ->dontSee('Dit is een veel gestelde vraag?');
     }
+
+
 }
