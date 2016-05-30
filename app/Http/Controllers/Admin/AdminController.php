@@ -48,7 +48,12 @@ class AdminController extends Controller {
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function newsletter() {
-        return View('pages.adm.newsletter');
+        $mails = App\Mailinglist::all();
+        $files = File::allFiles('newsletter');
+        return View('pages.adm.newsletter', compact(
+            'mails',
+            'files'
+        ));
     }
 
     /**
@@ -74,7 +79,7 @@ class AdminController extends Controller {
             $page->html = '<br />';
             $page->route = $request->route;
             $page->active = $request->active;
-            $page->sort = DB::table('pages')->max('sort')+1;
+            $page->sort = DB::table('pages')->max('sort') + 1;
             $page->save();
         }
         return back();
