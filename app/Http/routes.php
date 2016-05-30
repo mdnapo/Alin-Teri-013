@@ -67,6 +67,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9]+)')->where('visibility', '([0-1])');
             Route::get('move-up/{id}', ['uses' => 'AdminController@movePageUp'])->where('id', '([0-9]+)');
             Route::get('move-down/{id}', ['uses' => 'AdminController@movePageDown'])->where('id', '([0-9]+)');
+            Route::get('restore/{id}', ['uses' => 'AdminController@restorePage'])->where('id', '([0-9]+)');
+            Route::get('viewArchive/{id}', ['uses' => 'AdminController@viewArchive'])->where('id', '([0-9]+)');
         });
 
         Route::group(['prefix' => 'donations'], function () {
