@@ -128,11 +128,7 @@ class AdminController extends Controller {
      */
     public function setVisibility($id = null, $visibility = 1) {
         $page = App\Page::where('id', $id)->firstOrFail();
-        if ($visibility == 0) {
-            $page->active = 0;
-        } else {
-            $page->active = 1;
-        }
+        $page->active = $visibility;
         $page->save();
         return redirect('/admin/pages');
     }
