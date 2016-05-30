@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\Yaml\Tests\A;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 
 class AdminController extends Controller {
     /**
@@ -50,7 +51,7 @@ class AdminController extends Controller {
     public function newsletter() {
         $mails = App\Mailinglist::all();
         $files = File::allFiles('newsletter');
-        return View('pages.adm.newsletter', compact(
+        return view('pages.adm.newsletter', compact(
             'mails',
             'files'
         ));
