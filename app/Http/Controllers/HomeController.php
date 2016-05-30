@@ -8,8 +8,7 @@ class HomeController extends Controller
 {
     /**
      * Show the homepage.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
