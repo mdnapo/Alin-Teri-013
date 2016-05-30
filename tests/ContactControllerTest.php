@@ -35,7 +35,26 @@ class ContactController extends TestCase
     }
 
     /**
-     * Fail to enter a basic e-mail.
+     * Changes the default e-mail address.
+     *
+     * @return void
+     */
+    public function changeContactEmail()
+    {
+        $user = App\User::find(1);
+        $this->actingAs($user)
+            ->visit('/admin/contact')
+            ->see('testmail34125@gmail.com')
+            ->type('alinteri+website@gmail.com', 'email')
+            ->press('Wijzigen')
+            ->see('alinteri+website@gmail.com')
+            ->type('testmail34125@gmail.com', 'email')
+            ->press('Wijzigen')
+            ->see('testmail34125@gmail.com');
+    }
+
+    /**
+     * See if the question is in the admin panel.
      *
      * @return void
      */
@@ -44,8 +63,22 @@ class ContactController extends TestCase
         $user = App\User::find(1);
         $this->actingAs($user)
             ->visit('/admin/contact')
-            ->see('asdasd@asdas.de');
+            ->see('asdasd@asdas.de')
+            ->see('Dit is mijn vraag');
     }
-
+    
+    /**
+     *  Deletes the first asked question.
+     *
+     * @return void
+     */
+    public function deleteAskedQuestion()
+    {
+        $user = App\User::find(1);
+        $this->actingAs($user)
+            ->visit('/admin/contact')
+            ->click("1")
+            ->dontSee('asdasd@asdas.de');
+    }
 
 }
