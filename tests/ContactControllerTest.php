@@ -7,29 +7,32 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 class ContactController extends TestCase
 {
     /**
-     * A basic test example.
+     * Valid e-mail.
      *
      * @return void
      */
     public function testSuccessfulQuestion()
     {
-        $this->visit()
+        $this->visit('/contact')
              ->type('asdasd@asdas.de', 'email')
              ->type('Dit is mijn vraag', 'vraag')
-             ->click('versturen');
+             ->press('Versturen');
     }
 
     /**
-     * A basic test example.
+     * Fail to enter a basic e-mail.
      *
      * @return void
      */
     public function testFailedQuestion()
     {
-        $this->visit()
+        $this->visit('/contact')
             ->type('asdasd', 'email')
             ->type('Dit is mijn vraag', 'vraag')
-            ->click('versturen');
+            ->press('Versturen')
+            ->see('The email must be a valid email address');
     }
+
+
 
 }
