@@ -20,7 +20,7 @@
 
 		public function optin(Request $request){
 			$mailinglist = new Mailinglist();
-			$mailinglist->email = $request->email;
+			$mailinglist->email = strtolower($request->email);
 			$mailinglist->save();
 			return back();
 		}

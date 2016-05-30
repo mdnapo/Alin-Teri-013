@@ -6,6 +6,7 @@
             <div class="btn btn-raised"><a href="{{ url('/admin/pages') }}">pagina's</a></div>
             <div class="btn btn-raised"><a href="{{ url('/admin/stories') }}">verhalen</a></div>
             <div class="btn btn-raised"><a href="{{ url('/admin/newsletter') }}">nieuwsbrief</a></div>
+            <div class="btn btn-raised"><a href="{{ url('/admin/mailinglist') }}">Mailinglist</a></div>
             <div class="btn btn-raised"><a href="{{ url('/admin/steun-ons') }}">steun ons</a></div>
             <div class="btn btn-raised"><a href="{{ url('/admin/media') }}">in de media</a></div>
             <div class="btn btn-raised"><a href="{{ url('/admin/contact') }}">contact</a></div>

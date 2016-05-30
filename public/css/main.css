@@ -1,8 +1,8 @@
-.container-fluid #content #adm-pnl-left{
+.container-fluid #content #adm-pnl-left {
     list-style-image: none;
 }
 
-.container-fluid #content #adm-pnl-left ul li a{
+.container-fluid #content #adm-pnl-left ul li a {
     padding-left: 10px;
     padding-right: 10px;
 }
@@ -11,11 +11,11 @@
     width: 100%;
 }
 
-a.plain_link{
+a.plain_link {
     text-decoration: none;
 }
 
-a.plain_link:hover{
+a.plain_link:hover {
     cursor: pointer;
 }
 
@@ -23,42 +23,44 @@ a.plain_link:hover{
 /*** Styling for the carousel ***/
 /********************************/
 
-#doneer_knop{
+#doneer_knop {
     margin-top: 10px;
     margin-bottom: 10px;
 }
 
-#edit_button{
+#edit_button {
     position: absolute;
     right: 20px;
     top: 30px;
     font-size: 1.5em;
 }
 
-#preview_container{
+#preview_container {
     width: 100%;
 }
 
-#upload_preview{
+#upload_preview {
     max-width: 100%;
 }
 
-#upload_button{
+#upload_button {
     cursor: pointer !important;
 }
 
-#donations_lead_text{
+#donations_lead_text {
     padding: 10px;
 }
 
 .carousel {
     margin-top: 10px;
 }
+
 .item .thumb {
     width: 20%;
     cursor: pointer;
     float: left;
 }
+
 .item .thumb img {
     width: 100%;
     margin: 2px;
@@ -73,9 +75,10 @@ a.plain_link:hover{
     color: black;
 }
 
-.img-thumbnail{
+.img-thumbnail {
     margin-bottom: 10px;
 }
+
 /* Large desktops and laptops */
 @media (min-width: 1200px) {
     .item .thumb img {
@@ -111,11 +114,11 @@ a.plain_link:hover{
     }
 }
 
-.top_buffer{
+.top_buffer {
     margin-top: 20px;
 }
 
-.faq{
+.faq {
     height: 175px;
 }
 
@@ -133,4 +136,8 @@ a.plain_link:hover{
     width: 50%;
     height: 2em;
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 75%);
+}
+
+.pagination-centered {
+    text-align: center;
 }
