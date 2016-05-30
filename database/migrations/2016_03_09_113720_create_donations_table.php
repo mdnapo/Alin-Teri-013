@@ -3,20 +3,19 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDonationsTable extends Migration
-{
+class CreateDonationsTable extends Migration {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('donations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('pic_loc');
             $table->string('email')->nullable();
             $table->longText('message')->nullable();
+            $table->boolean('nsfw')->default(0);
             $table->boolean('approved')->default(0);
             $table->timestamps();
         });
@@ -27,8 +26,7 @@ class CreateDonationsTable extends Migration
      *
      * @return void
      */
-    public function down()
-    {
+    public function down() {
         Schema::drop('donations');
     }
 }
