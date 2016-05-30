@@ -13,9 +13,10 @@ class PageController extends Controller
 {
     private $template = 'pages.page';
 
-    public function getPage($slug = null){
+    public function getPage($slug = null)
+    {
         $page = App\Page::where('route', $slug)->where('active', 1)->where('archived', 0)->firstOrFail();
-        if(empty($page->html)){
+        if (empty($page->html)) {
             abort(404);
         }
         return \View::make($this->template, array('content' => $page->html, 'id' => $page->id));

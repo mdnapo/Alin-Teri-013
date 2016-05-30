@@ -17,17 +17,18 @@ class MediaController extends Controller
         return view('pages.media', ['publications' => $publications]);
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $needle = $request->needle;
         $publications = $needle == '' ?
             Publication::publications() :
             Publication::search($needle);
 
-        if($request->ajax()){
-            $view =  View::make('subviews.media-search', ['publications' => $publications, 'needle' => $needle]);
+        if ($request->ajax()) {
+            $view = View::make('subviews.media-search', ['publications' => $publications, 'needle' => $needle]);
             echo $view->render();
-        }
-        else
+        } else {
             return view('pages.media', ['publications' => $publications, 'needle' => $needle]);
+        }
     }
 }

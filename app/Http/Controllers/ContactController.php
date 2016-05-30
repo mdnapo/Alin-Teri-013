@@ -23,7 +23,8 @@ class ContactController extends Controller
     /**
      * Inserts question into DB and sends e-mail.
      */
-    public function insertIntoDb(Request $request){
+    public function insertIntoDb(Request $request)
+    {
         //Validate form
         $rules = array(
             'email' => 'email|required',
@@ -35,7 +36,7 @@ class ContactController extends Controller
         $validator = Validator::make($request->all(), $rules, $messages);
 
         //If form is valid insert question in database and send email
-        if(!$validator->fails()){
+        if (!$validator->fails()) {
             $content = $request->vraag;
             $sender = $request->email;
             $to = App\ContactEmail::find(1)->email;
@@ -43,7 +44,7 @@ class ContactController extends Controller
             $contact->email = $sender;
             $contact->bericht = $content;
             $contact->save();
-            Mail::send('emails.contact', ['content' => $content], function($message) use ($sender, $to){
+            Mail::send('emails.contact', ['content' => $content], function ($message) use ($sender, $to) {
                 $message->subject('Vraag');
                 $message->from('42in07sol@gmail.com');
                 $message->to($to);

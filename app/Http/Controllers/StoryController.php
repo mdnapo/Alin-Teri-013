@@ -6,28 +6,31 @@ use Illuminate\Http\Request;
 use App\Story;
 use Illuminate\Support\Facades\View;
 
-class StoryController extends Controller {
+class StoryController extends Controller
+{
     /**
      * Show the homepage.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index() {
+    public function index()
+    {
         $stories = Story::stories();
         return view('pages.storypage', ['stories' => $stories]);
     }
 
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $needle = $request->needle;
         $stories = $needle == '' ?
-            Story::stories():
+            Story::stories() :
             Story::search($needle);
 
-        if($request->ajax()){
-            $view =  View::make('subviews.story-search', ['stories' => $stories, 'needle' => $needle]);
+        if ($request->ajax()) {
+            $view = View::make('subviews.story-search', ['stories' => $stories, 'needle' => $needle]);
             echo $view->render();
-        }
-        else
+        } else {
             return view('pages.stories', ['stories' => $stories, 'needle' => $needle]);
+        }
     }
 }
