@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
 
 class DefaultActionsTest extends TestCase
 {
@@ -41,22 +42,14 @@ class DefaultActionsTest extends TestCase
         $this->visit('/')
             ->see('Alin Teri')
             ->visit('steun-ons-gallerij')
-            ->see('AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
-                        vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
-                        doelen
-￼
- is het krijgen van 5000 profielfoto’s als steunbetuiging. Onze vrijwilligers en
-                        ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!')
+            ->see('AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld.')
             ->visit('contact')
-            ->see('<p><b>Naam:</b> Alin Teri</p>
-                    <p><b>Telefoonnummer:</b> +316123456</p>
-                    <p><b>Email adres:</b> AlinTeri@Voorbeeld.nl</p>
-                    <p><b>Locatie:</b> Voorbeeldstraat 1</p>')
+            ->see('<p><b>Naam:</b> Alin Teri</p>')
             ->visit('in-de-media')
             ->see('')
             ->visit('verhalen')
             ->see('')
-            ->visit('Over-Ons')
+            ->visit('/p/Over-Ons')
             ->see('');
     }
 
@@ -66,7 +59,7 @@ class DefaultActionsTest extends TestCase
      * @return void
      */
     public function testAdminPanel(){
-        $user = new User(array('name' => 'Administrator', 'email' => 'admin@alinteri.nl', 'role_id' => 1));
+        $user = User::find(1);
         $this->actingAs($user)
             ->visit('/')
             ->see('Welkom Administrator')
