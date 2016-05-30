@@ -11,8 +11,11 @@ class StoryControllerTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testStoryItem()
     {
-        $this->assertTrue(true);
+        $this->visit('/')
+            ->click('Verhalen')
+            ->type('Fatma', 'needle')
+            ->see('Fatma:');
     }
 }
