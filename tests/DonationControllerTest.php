@@ -11,8 +11,30 @@ class DonationController extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testCarouselPage()
     {
-        $this->assertTrue(true);
+        $this->visit('/steun-ons-gallerij')
+            ->click('Carousel')
+            ->seePageIs('/steun-ons-carousel');
+    }
+
+    public function testSignupForNewsletter()
+    {
+        $this->visit('/steun-ons-gallerij')
+            ->click("optin_knop")
+            ->type('test@signup.com', 'email')
+            ->click('Aanmelden')
+            ->seeInDatabase('mailinglists', ['email' => 'test@signup.com']);
+    }
+
+    public function testDonate()
+    {
+        $this->visit('/steun-ons-gallerij')
+            ->click("Steun ons!")
+            ->attach('C:\Users\Doubl\Pictures\kappa.png', 'image')
+            ->type('test@signup.com', 'email')
+            ->type('opmerking', 'opmerking')
+            ->click('Uploaden')
+            ->seeInDatabase('donation', ['email' => 'test@signup.com', 'message' => 'opmerking']);
     }
 }

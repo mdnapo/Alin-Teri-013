@@ -3,6 +3,7 @@
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use App\User;
 
 class NewsletterControllerTest extends TestCase
 {
@@ -11,8 +12,14 @@ class NewsletterControllerTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testSendNewsletter()
     {
-        $this->assertTrue(true);
+        $user = User::find(1);
+        $this->actingAs($user)
+            ->visit('/admin/dashboard/')
+            ->click('nieuwsbrief')
+            ->type('Onderwerp', 'subject')
+            ->attach('C:\Users\Doubl\Downloads\WEBS2_EINDOPDRACHT.pdf', 'newsletter')
+            ->press('Versturen');
     }
 }
