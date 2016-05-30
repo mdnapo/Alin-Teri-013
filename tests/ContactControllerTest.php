@@ -14,9 +14,10 @@ class ContactController extends TestCase
     public function testSuccessfulQuestion()
     {
         $this->visit('/contact')
-             ->type('asdasd@asdas.de', 'email')
-             ->type('Dit is mijn vraag', 'vraag')
-             ->press('Versturen');
+            ->type('asdasd@asdas.de', 'email')
+            ->type('Dit is mijn vraag', 'vraag')
+            ->press('Versturen')
+            ->seeInDatabase('contacts', ['email' => 'asdasd@asdas.de', 'bericht' => 'Dit is mijn vraag']);
     }
 
     /**
@@ -33,6 +34,18 @@ class ContactController extends TestCase
             ->see('The email must be a valid email address');
     }
 
+    /**
+     * Fail to enter a basic e-mail.
+     *
+     * @return void
+     */
+    public function testInputtedQuestions()
+    {
+        $user = App\User::find(1);
+        $this->actingAs($user)
+            ->visit('/admin/contact')
+            ->see('asdasd@asdas.de');
+    }
 
 
 }
