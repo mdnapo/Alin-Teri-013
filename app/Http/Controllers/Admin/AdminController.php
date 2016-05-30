@@ -71,7 +71,6 @@ class AdminController extends Controller {
      * @param Request $request
      */
     public function createPage(Request $request) {
-        var_dump($request->name);
         if (!(empty($request->name) || empty($request->route))) {
             $page = new App\Page();
             $page->name = $request->name;
