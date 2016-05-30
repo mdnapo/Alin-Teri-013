@@ -33,7 +33,7 @@ class Kernel extends ConsoleKernel {
             $file = "/srv/http/alinteri/app/Console/Storage/mailupdate.json";
             if (file_exists($file)) {
                 $status = json_decode(file_get_contents($file), true);
-                if (isset($status['contacts']) && ($status['contacts'] < (Contact::orderBy('id', 'desc')->first()->id))) {
+                if (isset($status['contacts']) && ($status['contacts'] (Contact::orderBy('id', 'desc')->first() != null) && < (Contact::orderBy('id', 'desc')->first()->id))) {
                     return true;
                 }
             }
