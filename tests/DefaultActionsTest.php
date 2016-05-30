@@ -68,9 +68,9 @@ class DefaultActionsTest extends TestCase {
             ->see('Home')->see('Steun Ons')
             ->click('verhalen')
             ->see('verhalen')
-            ->click('nieuwsbrief')
-            ->see('upload een bestand en deze wordt automatisch verstuurd naar iedereen die zich heeft ingeschreven 
-            voor de nieuwsbrief!')
+            //->click('nieuwsbrief')
+            //->see('upload een bestand en deze wordt automatisch verstuurd naar iedereen die zich heeft ingeschreven
+            // voor de nieuwsbrief!')
             ->click('steun ons')
             ->see('Steun ons')
             ->click('in de media')

@@ -11,9 +11,25 @@ class ContactController extends TestCase
      *
      * @return void
      */
-    public function testClass()
+    public function testSuccessfulQuestion()
     {
-        //$this->testLogin();
+        $this->visit()
+             ->type('asdasd@asdas.de', 'email')
+             ->type('Dit is mijn vraag', 'vraag')
+             ->click('versturen');
+    }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testFailedQuestion()
+    {
+        $this->visit()
+            ->type('asdasd', 'email')
+            ->type('Dit is mijn vraag', 'vraag')
+            ->click('versturen');
     }
 
 }
