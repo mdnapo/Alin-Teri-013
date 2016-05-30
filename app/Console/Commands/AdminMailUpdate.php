@@ -43,7 +43,10 @@ class AdminMailUpdate extends Command {
             $status = json_decode(file_get_contents($file), true);
             if (isset($status['contacts'])) {
                 $contacts = Contact::where('id', '>', $status['contacts'])->get();
-                $status['contacts'] = Contact::orderBy('id', 'desc')->first()->id;
+                if (Contact::orderBy('id', 'desc')->first() != null)
+                    $status['contacts'] = Contact::orderBy('id', 'desc')->first()->id;
+                else
+                    $status['contacts'] = 0;
                 file_put_contents($file, json_encode($status));
             } else {
                 $this->error("Could not parse file correctly.");
