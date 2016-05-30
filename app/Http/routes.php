@@ -31,7 +31,10 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('newsletter/optin', 'DonationController@optin');
 
     Route::get('in-de-media', 'MediaController@index');
-    Route::get('media-search', 'MediaController@search');
+    Route::get('zoeken-in-media', 'MediaController@search');
+
+    Route::get('/reactiepagina/{id}', ['uses' => 'CommentController@comments'])->where('id', '([0-9]+)');
+    Route::post('/reactiepagina/comment', ['uses' => 'CommentController@comment'])->where('id', '([0-9]+)');
 
     Route::get('contact', 'ContactController@index');
     Route::post('contact', 'ContactController@insertIntoDb');
@@ -39,6 +42,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('faq', 'FaqController@index');
 
     Route::get('verhalen', 'StoryController@index');
+    Route::get('zoeken-in-verhalen', 'StoryController@search');
     
     Route::get('optout', 'OptoutController@index');
     Route::post('optout', 'OptoutController@optout');
@@ -105,18 +109,20 @@ Route::group(['middleware' => ['web']], function () {
         Route::group(['prefix' => 'stories'], function () {
             Route::get('create', 'AdminController@makeStory');
             Route::post('create', 'AdminController@createStory');
-            Route::get('edit/{id}', ['uses' => 'AdminController@editStory'])->where('id', '([0-9])');
-            Route::post('edit/{id}', ['uses' => 'AdminController@saveStory'])->where('id', '([0-9])');
-            Route::get('delete/{id}', ['uses' => 'AdminController@deleteStory'])->where('id', '([0-9])');
+            Route::get('edit/{id}', ['uses' => 'AdminController@editStory'])->where('id', '([0-9]+)');
+            Route::post('edit/{id}', ['uses' => 'AdminController@saveStory'])->where('id', '([0-9]+)');
+            Route::get('delete/{id}', ['uses' => 'AdminController@deleteStory'])->where('id', '([0-9]+)');
         });
 
         Route::get('newsletter', 'AdminController@newsletter');
         Route::post('newsletter', 'AdminController@sendNewsletter');
-
+        Route::get('/delete_comment/{id}', ['uses' => 'AdminController@deleteComment'])->where('id', '([0-9]+)');
+        Route::get('/accept_comment/{id}', ['uses' => 'AdminController@acceptComment'])->where('id', '([0-9]+)');
+        
         Route::group(['prefix' => 'mailinglist'], function () {
             Route::get('/', 'AdminController@mailinglist');
             Route::post('/', 'AdminController@saveMailing');
             Route::delete('/{id}', ['uses' => 'AdminController@deleteMailing'])->where('id', '[0-9]+');
-        });
+        });    
     });
 });

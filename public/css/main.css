@@ -141,3 +141,12 @@ a.plain_link:hover {
 .pagination-centered {
     text-align: center;
 }
+
+.highlight{
+    background-color: yellow !important;
+    color: black;
+}
+
+.collapse_publication:hover{
+    cursor: pointer;
+}

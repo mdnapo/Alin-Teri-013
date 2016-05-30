@@ -33,5 +33,29 @@ class SettingValuesTableSeeder extends Seeder {
             'setting_id' => '3',
             'value' => '1'
         ]);
+        App\SettingValue::create([
+            'setting_id' => '4',
+            'value' => '4'
+        ]);
+        App\SettingValue::create([
+            'setting_id' => '4',
+            'value' => '3'
+        ]);
+        App\SettingValue::create([
+            'setting_id' => '5',
+            'value' => '3'
+        ]);
+        App\SettingValue::create([
+            'setting_id' => '5',
+            'value' => '2'
+        ]);
+        App\SettingValue::create([
+            'setting_id' => '6',
+            'value' => '2'
+        ]);
+        App\SettingValue::create([
+            'setting_id' => '6',
+            'value' => '1'
+        ]);
     }
 }

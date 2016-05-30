@@ -25,14 +25,17 @@
             <div class="col-xs-12">
                 <div class="btn-group pull-right">
                     <a href="{{ url('steun-ons-carousel') }}"><div class="btn btn-primary">Carousel</div></a>
-                    <a href="{{ url('steun-ons-gallerij') }}"> <div class="btn btn-primary">Gallerij</div></a>
                 </div>
             </div>
 
             <!--The gallery-->
             <div class="col-xs-12">
                 @foreach($donations as $donation)
-                    <div class="col-xs-12 col-sm-6 col-md-3">
+                    <div class="
+                    {{ ($settings->where('name', 'Rijen - PC')->first()->value == 4) ? 'col-md-3':'col-md-4' }}
+                    {{ ($settings->where('name', 'Rijen - Tablet')->first()->value == 3) ? 'col-sm-4':'col-sm-6' }}
+                    {{ ($settings->where('name', 'Rijen - Telefoon')->first()->value == 2) ? 'col-xs-6':'col-xs-12' }}
+                    ">
                         <div class="img-thumbnail">
                             <a data-toggle="lightbox" href="{{ asset($donation->pic_loc) }}" data-title="{{ $donation->message }}">
                                 <img src="{{ asset($donation->pic_loc) }}" class="img-responsive">

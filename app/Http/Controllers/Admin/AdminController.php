@@ -15,6 +15,7 @@ use App\Contact;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 use Symfony\Component\Yaml\Tests\A;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -514,14 +515,25 @@ class AdminController extends Controller {
     }
 
     public function createStory(Request $request) {
-        var_dump($request->name);
-        if (!(empty($request->name))) {
+        $rules = [
+            'naam' => 'required|string',
+            'verhaal' => 'required|string',
+        ];
+        $messages = array(
+            'required' => 'Het veld :attribute is verplicht!'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if(!$validator->fails()){
             $story = new App\Story();
-            $story->naam = $request->name;
-            $story->verhaal = $request->story;
+            $story->naam = $request->naam;
+            $story->verhaal = $request->verhaal;
             $story->save();
+            return redirect('/admin/stories');
         }
-        return redirect('/admin/stories');
+        return back()->
+        withErrors($validator->errors())->
+        withInput();
     }
 
     public function editStory($id = null) {
@@ -529,23 +541,64 @@ class AdminController extends Controller {
     }
 
     public function saveStory($id = null, Request $request) {
-        $story = App\Story::where('id', $id)->firstOrFail();
-        $story->naam = $request->naam;
-        $story->verhaal = $request->verhaal;
-        $story->save();
-        return redirect('/admin/stories');
+        $rules = [
+            'naam' => 'required|string',
+            'verhaal' => 'required|string',
+        ];
+        $messages = array(
+            'required' => 'Het veld :attribute is verplicht!'
+        );
+        $validator = Validator::make($request->all(), $rules, $messages);
+
+        if(!$validator->fails()){
+            $story = App\Story::where('id', $id)->firstOrFail();
+            $story->naam = $request->naam;
+            $story->verhaal = $request->verhaal;
+            $story->save();
+            return redirect('/admin/stories');
+        }
+        return back()->
+        withErrors($validator->errors())->
+        withInput();
     }
 
     public function deleteStory($id = null) {
         $story = App\Story::where('id', $id)->firstOrFail();
-        if (empty($id)) {
-            return redirect('/admin/stories');
-        } else {
+        if (!empty($id)) {
             $story->delete();
-            return redirect('/admin/stories');
         }
+        $stories = App\Story::all();
+        $view = View::make('subviews.stories-table', ['items' => $stories]);
+        echo $view->render();
     }
 
+    /**
+     * Delete comment from database
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function deleteComment($id = null){
+        $comment = App\Comment::where('id', $id)->firstOrFail();
+        $publication = App\Publication::where('id', $comment->publication_id)->firstOrFail();
+        $comment->delete();
+        $view = View::make('subviews.publication-comments', ['publication' => $publication]);
+        echo $view->render();
+    }
+
+    /**
+     * Accepts comment
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function acceptComment($id = null){
+        $comment = App\Comment::where('id', $id)->firstOrFail();
+        $comment->geaccepteerd = 1;
+        $comment->save();
+        $publication = App\Publication::where('id', $comment->publication_id)->firstOrFail();
+        $view = View::make('subviews.publication-comments', ['publication' => $publication]);
+        echo $view->render();
+    }
+    
     /**
      * Shows the mailinglist.
      *

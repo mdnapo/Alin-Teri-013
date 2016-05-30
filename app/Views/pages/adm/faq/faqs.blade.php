@@ -7,7 +7,7 @@
                 {!! csrf_field() !!}
                 {!! method_field('DELETE') !!}
                 <h2 style="display:inline;">{{ $cat->name }}</h2>
-                <a href="{{ url('/admin/cat/'.$cat->id) }}" class="glyphicon glyphicon-pencil"></a>
+                    <a href="{{ url('/admin/cat/'.$cat->id) }}" class="glyphicon glyphicon-pencil plain_link"></a>
 
                 @if($cat->faqs->isEmpty())
                     <button type="submit" id="delete-faq-{{ $cat->id }}"
@@ -34,7 +34,7 @@
                     <td>{{ $faq->question }}</td>
                     <td>{{ $faq->answer }}</td>
                     <td>
-                        <a href="{{ url('/admin/faq/'.$faq->id) }}" class="glyphicon glyphicon-pencil"></a>
+                        <a href="{{ url('/admin/faq/'.$faq->id) }}" class="glyphicon glyphicon-pencil plain_link"></a>
                     </td>
                     <td>
                         <form action="{{ url('/admin/faq/' . $faq->id) }}" method="POST">
@@ -42,7 +42,7 @@
                             {!! method_field('DELETE') !!}
 
                             <button type="submit" id="delete-faq-{{ $faq->id }}"
-                                    style="outline: 0; border: 0; background:0;" class="glyphicon glyphicon-remove">
+                                    style="outline: 0; border: 0; background:0;" class="glyphicon glyphicon-remove text-primary">
                             </button>
                         </form>
                     </td>

@@ -11,13 +11,17 @@ class Publication extends Model
     protected $guarded = 'id';
 
     public static function publications(){
-        $publications = Publication::paginate(10);
+        $publications = Publication::orderBy('created_at', 'desc')->paginate(10);
         return $publications;
     }
 
     public static function search($needle){
         $publications = Publication::where('source', 'LIKE', "%$needle%")->
-            orWhere('article', 'LIKE', "%$needle%")->paginate(10);
+            orWhere('article', 'LIKE', "%$needle%")->orderBy('created_at', 'desc')->paginate(10);
         return $publications;
+    }
+
+    public function comments(){
+        return $this->hasMany('App\Comment');
     }
 }

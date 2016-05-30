@@ -1,0 +1,34 @@
+<?php
+
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class RenameMediaIdColumnOnCommentsTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::drop('comments');
+        Schema::create('comments', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer("publication_id");
+            $table->string("naam");
+            $table->longText("reactie");
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+
+    }
+}

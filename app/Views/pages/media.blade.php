@@ -5,14 +5,7 @@
             <h1>In de media</h1>
         </div>
         <div class="col-xs-12">
-            <form action="media-search">
-                <div class="input-group">
-                    <input name="needle" type="text" class="form-control" placeholder="Zoeken naar..." value="{{ isset($needle) ? $needle : '' }}">
-                    <span class="input-group-btn">
-                        <button type="submit" id="search" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button>
-                    </span>
-                </div>
-            </form>
+            <input id="needle" name="needle" type="text" class="form-control" placeholder="Zoeken naar..." value="{{ isset($needle) ? $needle : '' }}">
         </div>
         <div class="col-xs-12">
             <button id="collapse_button" class="btn btn-primary">Alles openklappen</button>
@@ -22,18 +15,26 @@
                 @if(count($publications) > 0)
                     @foreach($publications as $publication)
                         <div class="panel panel-primary">
-                            <div class="panel-heading">
+                            <div class="panel-heading collapse_publication" id="{{ $publication->id }}">
+                                <a href="#"  class="pop circle"></a>
                                 {{ $publication->source }}
-                                <span id="{{ $publication->id }}" class="glyphicon glyphicon-chevron-down pull-right collapse_publication"
+                                <span id="glyph{{ $publication->id }}" class="glyphicon glyphicon-chevron-down pull-right glyph"
                                       data-toggle="collapse" href="#publication{{ $publication->id }}">
-                            </span>
+                                </span>
                             </div>
                             <div id="publication{{ $publication->id }}" class="panel-collapse collapse in publication">
                                 <div class="panel-body">
                                     <div class="col-xs-12">{!! $publication->article !!}</div>
                                     @if($publication->video != '')
-                                        <div class="col-xs-12 text-center top_buffer"> {!! $publication->video !!} </div>
+                                        <div class="col-xs-12 text-center top_buffer" style="padding-bottom: 10px;"> {!! $publication->video !!} </div>
                                     @endif
+                                    <div class="col-xs-12">
+                                        <div class="text-center">
+                                            <a class="btn btn-primary" href="./reactiepagina/{{ $publication->id }}">
+                                                Reacties
+                                            </a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -57,46 +58,58 @@
 
 @section('footer')
     <script src="{{ asset('js/fluidvids.js') }}"></script>
+    <script src="{{ asset('js/jquery.highlight.js') }}"></script>
     <script>
         $(document).ready(function(){
-            $('.collapse_publication').click(function(){
+            $(document).delegate('.collapse_publication', 'click', function(){
                 var id = $(this).attr('id');
                 var publication = $('div#publication' + id);
-                var collapse_span = $('span#' + id);
-                if(!publication.hasClass('collapsed')){
-                    publication.addClass('collapsed');
-                    collapse_span.removeClass('glyphicon-chevron-up').
-                            addClass('glyphicon-chevron-down');
-                }
-                else{
-                    publication.removeClass('collapsed');
-                    collapse_span.removeClass('glyphicon-chevron-down').
-                            addClass('glyphicon-chevron-up');
-                }
+                var collapse_span = $(this).find('#glyph' + id);
+                if(collapse_span.hasClass('glyphicon-chevron-up'))
+                    collapse_span.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
+                else
+                    collapse_span.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
                 publication.collapse('toggle');
             });
             $('#collapse_button').click(function(){
                 if($(this).hasClass('collapse_all')){
                     $(this).removeClass('collapse_all');
                     $(this).html('Alles openklappen');
-                    $('.collapse.publication').collapse('hide').addClass('collapsed');
-                    $('.collapse_publication').removeClass('glyphicon-chevron-up').
+                    $('.collapse.publication').collapse('hide');
+                    $('.collapse_publication').find('.glyph').
+                            removeClass('glyphicon-chevron-up').
                             addClass('glyphicon-chevron-down');
                 }
                 else{
                     $(this).addClass('collapse_all');
                     $(this).html('Alles dichtklappen');
-                    $('.collapse.publication').collapse('show').removeClass('collapsed');
-                    $('.collapse_publication').removeClass('glyphicon-chevron-down').
+                    $('.collapse.publication').collapse('show');
+                    $('.collapse_publication').find('.glyph').
+                            removeClass('glyphicon-chevron-down').
                             addClass('glyphicon-chevron-up');
                 }
             });
+            $('#needle').on('input', function(){
+                var needle = $(this).val();
+                $.ajax({
+                    type: 'GET',
+                    url: '{{ url('zoeken-in-media') }}',
+                    data: { needle: needle },
+                    success: function(data){
+                        $('#publications_holder').replaceWith(data);
+                        $('.collapse.publication').collapse();
+                        $('#publications_holder').highlight(needle);
+                    }
+                });
+            });
+            if($('#needle').val() != '')
+                $('#publications_holder').highlight($('#needle').val());
             $('.collapse.publication').collapse();
             $('img').addClass('img-responsive');
             fluidvids.init({
                 selector: ['iframe'],
                 players: ['www.youtube.com', 'player.vimeo.com'] // players to support
-            });
+            })
         });
     </script>
 @stop

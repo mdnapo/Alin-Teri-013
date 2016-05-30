@@ -3,6 +3,7 @@
 
 	use App\Donation;
 	use App\Mailinglist;
+	use App\SettingCategory;
 	use DB;
 	use Illuminate\Http\Request;
 	use Illuminate\Support\Facades\Validator;
@@ -15,7 +16,8 @@
 
 		public function gallery(){
 			$donations = Donation::paginatedDonations();
-			return view('pages.donaties-gallery', ['donations' => $donations]);
+			$settings = SettingCategory::find('2')->settings;
+			return view('pages.donaties-gallery', ['donations' => $donations, 'settings' => $settings]);
 		}
 
 		public function optin(Request $request){
