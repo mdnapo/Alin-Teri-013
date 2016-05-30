@@ -5,18 +5,17 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\User;
 
-class DefaultActionsTest extends TestCase
-{
+class DefaultActionsTest extends TestCase {
     /**
      * Test successful login.
      *
      * @return void
      */
-    public function testSuccessfulLogin(){
+    public function testSuccessfulLogin() {
         $this->visit('/login')
-            ->type('admin@alinteri.nl', 'username')
+            ->type('admin@alinteri.nl', 'email')
             ->type('admin', 'password')
-            ->press('login')
+            ->press('Login')
             ->seePageIs('/');
     }
 
@@ -25,11 +24,11 @@ class DefaultActionsTest extends TestCase
      *
      * @return void
      */
-    public function testFailingLogin(){
+    public function testFailingLogin() {
         $this->visit('/login')
-            ->type('admin@alinteri.nl', 'username')
+            ->type('admin@alinteri.nl', 'email')
             ->type('@dmin', 'password')
-            ->press('login')
+            ->press('Login')
             ->seePageIs('/login');
     }
 
@@ -38,7 +37,7 @@ class DefaultActionsTest extends TestCase
      *
      * @return void
      */
-    public function testDefaultPages(){
+    public function testDefaultPages() {
         $this->visit('/')
             ->see('Alin Teri')
             ->visit('steun-ons-gallerij')
@@ -58,18 +57,18 @@ class DefaultActionsTest extends TestCase
      *
      * @return void
      */
-    public function testAdminPanel(){
+    public function testAdminPanel() {
         $user = User::find(1);
         $this->actingAs($user)
             ->visit('/')
             ->see('Welkom Administrator')
             ->visit('/admin/dashboard/')
             ->see('Welkom Administrator, op het AlinTeri administratiepaneel.')
-            ->click('pagina\'s')
+            ->click('Pagina\'s')
             ->see('Home')->see('Steun Ons')
-            ->click('verhalen')
-            ->see('Verhaal 1')
-            ->click('nieuwsbrief')
+            ->click('Verhalen')
+            ->see('Verhalen')
+            ->click('Nieuwsbrief')
             ->see('Upload een bestand en deze wordt automatisch verstuurd naar iedereen die zich heeft ingeschreven voor de nieuwsbrief!')
             ->click('steun ons')
             ->see('Steun ons')

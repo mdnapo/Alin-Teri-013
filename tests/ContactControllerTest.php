@@ -13,7 +13,7 @@ class ContactController extends TestCase
      */
     public function testClass()
     {
-        $this->testLogin();
+        //$this->testLogin();
     }
 
 }
