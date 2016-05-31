@@ -26,7 +26,8 @@ class MediaController extends Controller
      * @return string | \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * Returns a View for a normal get request and a string for an Ajax get request.
      */
-    public function search(Request $request){
+    public function search(Request $request)
+    {
         $needle = $request->needle;
         $publications = $needle == '' ?
             Publication::publications() :
@@ -35,8 +36,8 @@ class MediaController extends Controller
         if ($request->ajax()) {
             $view = View::make('subviews.media-search', ['publications' => $publications, 'needle' => $needle]);
             echo $view->render();
-        }
-        else
+        } else {
             return view('pages.media', ['publications' => $publications, 'needle' => $needle]);
+        }
     }
 }

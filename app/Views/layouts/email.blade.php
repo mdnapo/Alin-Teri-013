@@ -14,7 +14,7 @@
                 <tr>
                     <td>
                         <a href="{{ url('/') }}">
-                            <img src="{{ asset('img/images/logo.png') }}" />
+                            <img src="{{ asset('img/images/logo.png') }}"/>
                         </a>
                     </td>
                 </tr>

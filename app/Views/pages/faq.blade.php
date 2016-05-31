@@ -39,7 +39,7 @@
     <script type="text/javascript" src="{{ asset('js/bootbox.min.js') }}"></script>
     <script type="text/javascript">
         $(function () {
-            $('.faq').on('click', function(e) {
+            $('.faq').on('click', function (e) {
                 bootbox.alert(e.currentTarget.children[1].textContent);
                 e.stopPropagation();
             });

@@ -18,7 +18,8 @@ class PageController extends Controller
      * @param string $slug
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function getPage($slug = null){
+    public function getPage($slug = null)
+    {
         $page = App\Page::where('route', $slug)->where('active', 1)->where('archived', 0)->firstOrFail();
         if (empty($page->html)) {
             abort(404);

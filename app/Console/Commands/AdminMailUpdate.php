@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\Mail;
 use App\Donation;
 use App\Contact;
 
-class AdminMailUpdate extends Command {
+class AdminMailUpdate extends Command
+{
     /**
      * The name and signature of the console command.
      *
@@ -27,7 +28,8 @@ class AdminMailUpdate extends Command {
      *
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -36,17 +38,19 @@ class AdminMailUpdate extends Command {
      *
      * @return mixed
      */
-    public function handle() {
+    public function handle()
+    {
         $file = "/srv/http/alinteri/app/Console/Storage/mailupdate.json";
 
         if (file_exists($file)) {
             $status = json_decode(file_get_contents($file), true);
             if (isset($status['contacts'])) {
                 $contacts = Contact::where('id', '>', $status['contacts'])->get();
-                if (Contact::orderBy('id', 'desc')->first() != null)
+                if (Contact::orderBy('id', 'desc')->first() != null) {
                     $status['contacts'] = Contact::orderBy('id', 'desc')->first()->id;
-                else
+                } else {
                     $status['contacts'] = 0;
+                }
                 file_put_contents($file, json_encode($status));
             } else {
                 $this->error("Could not parse file correctly.");

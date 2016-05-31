@@ -26,14 +26,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $(document).delegate('*[data-toggle="lightbox"]', 'click', function(event) {
+        $(document).ready(function () {
+            $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
                 event.preventDefault();
                 $(this).ekkoLightbox();
             });
-            $('#delete_message').click(function delete_publication(){
-                bootbox.confirm('Weet u zeker dat u dit bericht wilt verwijderen?', function(answer){
-                    if(answer === true) $('#delete').submit();
+            $('#delete_message').click(function delete_publication() {
+                bootbox.confirm('Weet u zeker dat u dit bericht wilt verwijderen?', function (answer) {
+                    if (answer === true) $('#delete').submit();
                 });
             });
         });

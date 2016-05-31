@@ -1,6 +1,6 @@
 <?php
 $text = App\Page::where('name', 'Steun ons')->first();
-if($text == null){
+if ($text == null) {
     $text = new App\Page();
     $text->name = "Steun ons";
     $text->protected = 1;
@@ -18,18 +18,20 @@ if($text == null){
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h2><strong>Steun ons!</strong></h2>
+                <h1>Steun ons!</h1>
             </div>
             <div class="col-xs-12">
                 <?php echo $text->html ?>
             </div>
             <div class="col-xs-12">
-                <strong><em>Onze ambassadeurs, bondgenoten en vrijwilligers</em></strong>
+                <h3>Onze ambassadeurs, bondgenoten en vrijwilligers</h3>
             </div>
 
             <div class="col-xs-12">
                 <div class="btn-group pull-right">
-                    <a href="{{ url('steun-ons-gallerij') }}"> <div class="btn btn-primary">Gallerij</div></a>
+                    <a href="{{ url('steun-ons-gallerij') }}">
+                        <div class="btn btn-primary">Gallerij</div>
+                    </a>
                 </div>
             </div>
 
@@ -66,7 +68,8 @@ if($text == null){
                         <div class="carousel-inner">
                             @for($i = 0; $i < count($donations); $i++)
                                 <div class="item @if($i == 0){{ 'active' }}@endif">
-                                    <a data-toggle="lightbox" href="{{ $donations[$i]->pic_loc }}" data-gallery="donations_gallery"  data-footer="{{ $donations[$i]->message }}">
+                                    <a data-toggle="lightbox" href="{{ $donations[$i]->pic_loc }}"
+                                       data-gallery="donations_gallery" data-footer="{{ $donations[$i]->message }}">
                                         <img class="center-block img-responsive" src="{{ $donations[$i]->pic_loc }}">
                                     </a>
                                 </div>

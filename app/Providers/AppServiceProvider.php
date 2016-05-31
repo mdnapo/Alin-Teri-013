@@ -15,8 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //Extend the validator with custom rule for names
-        Validator::extend('alpha_spaces', function($attribute, $value)
-        {
+        Validator::extend('alpha_spaces', function ($attribute, $value) {
             return preg_match('/^[\pL\s]+$/u', $value);
         });
     }

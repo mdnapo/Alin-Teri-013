@@ -12,7 +12,8 @@ class Role extends Model
      * Get user role.
      * @return string
      */
-    public static function getRole($roleId){
+    public static function getRole($roleId)
+    {
         $roles = Role::find($roleId);
         $roles->name;
         return $roles;
@@ -23,13 +24,14 @@ class Role extends Model
      * @param $role
      * @return void
      */
-    public static function setRole($role){
+    public static function setRole($role)
+    {
         $role = Role::where('name', $role)->first();
-        if($role < 1){
+        if ($role < 1) {
             $newRole = new Role;
             $newRole->name = $role;
             $newRole->save();
-        }else{
+        } else {
             return "this role already exists.";
         }
     }
@@ -38,7 +40,8 @@ class Role extends Model
      * Get all current Roles
      * @return Array
      */
-    public static function getAllRoles(){
+    public static function getAllRoles()
+    {
         $roles = Role::all();
         return $roles;
     }
@@ -47,7 +50,8 @@ class Role extends Model
      * Get all users with this role.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function users() {
+    public function users()
+    {
         return $this->hasMany('App\User');
     }
 }

@@ -12,7 +12,8 @@ class Category extends Model
      * Defines a one-to-many relationship between Category and Faq.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function faqs() {
+    public function faqs()
+    {
         return $this->hasMany('App\Faq');
     }
 }

@@ -9,7 +9,7 @@
             <input type="name" class="form-control" name="name">
             <label class="control-label" for="bericht">Reactie</label>
             <textarea type="comment" class="form-control" name="comment"></textarea>
-            <input type="submit" class="btn btn-primary" value="Versturen" />
+            <input type="submit" class="btn btn-primary" value="Versturen"/>
         </form>
     </div>
 
