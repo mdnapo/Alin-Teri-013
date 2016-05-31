@@ -10,8 +10,7 @@ class FaqController extends Controller
 
     /**
      * Show the main faq overview
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     function index()
     {

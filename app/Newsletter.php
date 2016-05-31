@@ -11,7 +11,7 @@ class Newsletter extends Model
 
     /**
      * Get all users that want an E-Mail
-     *
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public static function wantNewsletter(){
         $newsletter = Newsletter::all();

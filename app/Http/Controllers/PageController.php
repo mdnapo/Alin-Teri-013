@@ -13,8 +13,12 @@ class PageController extends Controller
 {
     private $template = 'pages.page';
 
-    public function getPage($slug = null)
-    {
+    /**
+     * Deletes a faq entry.
+     * @param string $slug
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function getPage($slug = null){
         $page = App\Page::where('route', $slug)->where('active', 1)->where('archived', 0)->firstOrFail();
         if (empty($page->html)) {
             abort(404);

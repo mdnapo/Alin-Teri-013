@@ -12,8 +12,7 @@ class ContactController extends Controller
 
     /**
      * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function index()
     {
@@ -22,6 +21,8 @@ class ContactController extends Controller
 
     /**
      * Inserts question into DB and sends e-mail.
+     * @param $request \Illuminate\Http\Request
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function insertIntoDb(Request $request)
     {

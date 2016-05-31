@@ -45,7 +45,6 @@ class Role extends Model
 
     /**
      * Get all users with this role.
-     * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function users() {

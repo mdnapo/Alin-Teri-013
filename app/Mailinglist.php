@@ -12,6 +12,10 @@ class Mailinglist extends Model
 
     protected $guarded = 'id';
 
+    /**
+     * Searches for all email addresses containing the needle passed.
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
     public static function search($needle){
         $list = Mailinglist::where('email', 'LIKE', "%$needle%");
         return $list;

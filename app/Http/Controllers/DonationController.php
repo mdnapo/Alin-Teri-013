@@ -8,31 +8,44 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use necrox87\NudityDetector\NudityDetector;
 
-class DonationController extends Controller
-{
-    public function index()
-    {
+class DonationController extends Controller {
+    /**
+     * Takes the user to the Steun ons page.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function index() {
         $donations = Donation::approvedDonations();
         return view('pages.donaties-slider', ['donations' => $donations]);
     }
 
-    public function gallery()
-    {
+    /**
+     * Show the Steun ons page in gallery mode.
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function gallery() {
         $donations = Donation::paginatedDonations();
         $settings = SettingCategory::find('2')->settings;
         return view('pages.donaties-gallery', ['donations' => $donations, 'settings' => $settings]);
     }
 
-    public function optin(Request $request)
-    {
+    /**
+     * Shows an edit page for a single faq.
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function optin(Request $request) {
         $mailinglist = new Mailinglist();
         $mailinglist->email = strtolower($request->email);
         $mailinglist->save();
         return back();
     }
 
-    public function upload(Request $request)
-    {
+    /**
+     * Shows an edit page for a single faq.
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function upload(Request $request) {
         if ($request->file('image')->isValid()) {
             $rules = array(
                 'image' => 'required|image',

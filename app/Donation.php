@@ -10,7 +10,7 @@ class Donation extends Model
 
     /**
      * Returns non-checked photo's.
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public static function didNotCheckYet(){
         $donation = Donation::where('approved', 0)->get();
@@ -20,7 +20,7 @@ class Donation extends Model
 
     /**
      * Returns checked photo's.
-     * @return array
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public static function approvedDonations(){
         $donation = Donation::where('approved', 1)->get();
@@ -29,7 +29,7 @@ class Donation extends Model
 
     /**
      * Sets approved
-     * @param $id
+     * @param int $id
      * @param $approved
      */
     public static function setApproved($id, $approved){
@@ -42,7 +42,7 @@ class Donation extends Model
 
     /**
      * Returns checked foto's with paginations
-     * @returns $donations
+     * @returns \Illuminate\Database\Eloquent\Collection
      */
     public static function paginatedDonations(){
         $donations = Donation::where('approved', 1)->paginate(24);
