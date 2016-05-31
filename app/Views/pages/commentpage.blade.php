@@ -4,7 +4,7 @@
         <h1 class="entry-title">Een reactie plaatsen</h1>
         <form method="POST" action="./comment" class="well well-lg" >
             <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" >
-            <input type="hidden" name="media_id" value="{{ $id }}" />
+            <input type="hidden" name="publication_id" value="{{ $id }}" />
             <label class="control-label" for="email">Naam</label>
             <input type="name" class="form-control" name="name">
             <label class="control-label" for="bericht">Reactie</label>

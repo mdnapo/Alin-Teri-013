@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller {
     /**
-     * Show the homepage.
+     * Show commentspage.
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function comments($publication_id = null) {
@@ -33,7 +33,7 @@ class CommentController extends Controller {
             withInput();
         } else {
             $comment = new App\Comment();
-            $comment->media_id = $request->media_id;
+            $comment->publication_id = $request->publication_id;
             $comment->naam = $request->name;
             $comment->reactie = $request->comment;
             $comment->save();
