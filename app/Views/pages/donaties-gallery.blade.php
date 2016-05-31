@@ -8,23 +8,25 @@
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h2><strong>Steun ons!</strong></h2>
+                <h1>Steun ons!</h1>
             </div>
             <div class="col-xs-12">
                 <p>
-                    <strong>AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
-                        vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
-                        doelen is het krijgen van 5000 profielfoto’s als steunbetuiging. Onze vrijwilligers en
-                        ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!</strong>
+                    AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
+                    vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
+                    doelen is het krijgen van 5000 profielfoto’s als steunbetuiging. Onze vrijwilligers en
+                    ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!
                 </p>
             </div>
             <div class="col-xs-12">
-                <p><strong><em>Onze ambassadeurs, bondgenoten en vrijwilligers</em></strong></p>
+                <h3>Onze ambassadeurs, bondgenoten en vrijwilligers</h3>
             </div>
 
             <div class="col-xs-12">
                 <div class="btn-group pull-right">
-                    <a href="{{ url('steun-ons-carousel') }}"><div class="btn btn-primary">Carousel</div></a>
+                    <a href="{{ url('steun-ons-carousel') }}">
+                        <div class="btn btn-primary">Carousel</div>
+                    </a>
                 </div>
             </div>
 
@@ -35,9 +37,10 @@
                     {{ ($settings->where('name', 'Rijen - PC')->first()->value == 4) ? 'col-md-3':'col-md-4' }}
                     {{ ($settings->where('name', 'Rijen - Tablet')->first()->value == 3) ? 'col-sm-4':'col-sm-6' }}
                     {{ ($settings->where('name', 'Rijen - Telefoon')->first()->value == 2) ? 'col-xs-6':'col-xs-12' }}
-                    ">
+                            ">
                         <div class="img-thumbnail">
-                            <a data-toggle="lightbox" href="{{ asset($donation->pic_loc) }}" data-title="{{ $donation->message }}">
+                            <a data-toggle="lightbox" href="{{ asset($donation->pic_loc) }}"
+                               data-title="{{ $donation->message }}">
                                 <img src="{{ asset($donation->pic_loc) }}" class="img-responsive">
                             </a>
                         </div>
@@ -180,7 +183,7 @@
             }
         }
 
-        $(document).ready(function() {
+        $(document).ready(function () {
             $.material.init();
             $("#rotate_left").hide();
             $("#rotate_right").hide();

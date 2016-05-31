@@ -18,13 +18,13 @@ if($text == null){
     <div class="container">
         <div class="row">
             <div class="col-xs-12">
-                <h2><strong>Steun ons!</strong></h2>
+                <h1>Steun ons!</h1>
             </div>
             <div class="col-xs-12">
                 <?php echo $text->html ?>
             </div>
             <div class="col-xs-12">
-                <strong><em>Onze ambassadeurs, bondgenoten en vrijwilligers</em></strong>
+                <h3>Onze ambassadeurs, bondgenoten en vrijwilligers</h3>
             </div>
 
             <div class="col-xs-12">

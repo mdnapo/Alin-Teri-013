@@ -30,10 +30,10 @@ class PagesTableSeeder extends Seeder {
             'name' => 'Steun ons',
             'route' => 'steun-ons-gallerij',
             'html' => '<p>
-                    <strong>AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
+                        AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
                         vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
                         doelen is het krijgen van 5000 profielfoto’s als steunbetuiging. Onze vrijwilligers en
-                        ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!</strong>
+                        ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!
                 </p>',
             'protected' => 1,
             'sort' => 1,
