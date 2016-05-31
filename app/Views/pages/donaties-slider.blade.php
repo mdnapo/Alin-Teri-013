@@ -1,6 +1,6 @@
 <?php
 $text = App\Page::where('name', 'Steun ons')->first();
-if($text == null){
+if ($text == null) {
     $text = new App\Page();
     $text->name = "Steun ons";
     $text->protected = 1;
@@ -29,7 +29,9 @@ if($text == null){
 
             <div class="col-xs-12">
                 <div class="btn-group pull-right">
-                    <a href="{{ url('steun-ons-gallerij') }}"> <div class="btn btn-primary">Gallerij</div></a>
+                    <a href="{{ url('steun-ons-gallerij') }}">
+                        <div class="btn btn-primary">Gallerij</div>
+                    </a>
                 </div>
             </div>
 
@@ -66,7 +68,8 @@ if($text == null){
                         <div class="carousel-inner">
                             @for($i = 0; $i < count($donations); $i++)
                                 <div class="item @if($i == 0){{ 'active' }}@endif">
-                                    <a data-toggle="lightbox" href="{{ $donations[$i]->pic_loc }}" data-gallery="donations_gallery"  data-footer="{{ $donations[$i]->message }}">
+                                    <a data-toggle="lightbox" href="{{ $donations[$i]->pic_loc }}"
+                                       data-gallery="donations_gallery" data-footer="{{ $donations[$i]->message }}">
                                         <img class="center-block img-responsive" src="{{ $donations[$i]->pic_loc }}">
                                     </a>
                                 </div>

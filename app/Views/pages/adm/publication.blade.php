@@ -2,7 +2,8 @@
 @section('adminPanel')
     @if(count($errors) > 0)
         <div class="alert alert-warning alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
             <ul>
                 @foreach($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -13,7 +14,7 @@
 
     <div class="col-xs-12">
         <form class="well well-lg form-horizontal" method="POST" target=".">
-            <input type="hidden" name="_token" value="<?= csrf_token(); ?>" >
+            <input type="hidden" name="_token" value="<?= csrf_token(); ?>">
             <fieldset>
                 <legend>MEDIA PUBLICATIE {{ $publication->id > 0 ? 'BEWERKEN' : 'AANMAKEN' }}</legend>
                 <div class="form-group">
@@ -27,11 +28,13 @@
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="artikel">Artikel</label>
-                    <textarea id="c" name="artikel">{{ old('artikel') != null ? old('artikel') : $publication->article }}</textarea>
+                    <textarea id="c"
+                              name="artikel">{{ old('artikel') != null ? old('artikel') : $publication->article }}</textarea>
                 </div>
                 <div class="form-group">
                     <label class="control-label" for="iframe">Video</label>
-                    <input type="text" class="form-control" name="video" value="{{ old('video') != null ? old('video') : $publication->video }}">
+                    <input type="text" class="form-control" name="video"
+                           value="{{ old('video') != null ? old('video') : $publication->video }}">
                     <span class="material-input"></span>
                 <span class="help-block">
                     Geef hier het iframe van de video op.
@@ -43,7 +46,8 @@
                         @if($publication->id > 0)
                             <a id="delete_publication" class="btn btn-primary delete">Verwijderen</a>
                         @endif
-                        <input type="submit" class="btn btn-primary" value="{{ $publication->id > 0 ? 'Opslaan' : 'Aanmaken' }}" />
+                        <input type="submit" class="btn btn-primary"
+                               value="{{ $publication->id > 0 ? 'Opslaan' : 'Aanmaken' }}"/>
                     </div>
                 </div>
             </fieldset>
@@ -59,7 +63,7 @@
             <h1>Reacties</h1>
 
             @if(count($publication->comments) > 0)
-                <table class="table table-bordered" >
+                <table class="table table-bordered">
                     <thead>
                     <th>#</th>
                     <th>Naam</th>
@@ -111,47 +115,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
     <script src="https://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
     <script>
-        $(document).ready(function(){
-            $('.glyphicon-zoom-in').click(function(){
+        $(document).ready(function () {
+            $('.glyphicon-zoom-in').click(function () {
                 var id = $(this).attr('id');
                 var message = $('#comment' + id).val();
                 bootbox.dialog({
                     message: message,
                     buttons: {
-                       success: {
-                           label: 'Sluiten',
-                           className: 'btn-primary'
-                       }
-                   }
+                        success: {
+                            label: 'Sluiten',
+                            className: 'btn-primary'
+                        }
+                    }
                 });
             });
-            $(document).delegate('.glyphicon-remove', 'click', function(){
+            $(document).delegate('.glyphicon-remove', 'click', function () {
                 var id = $(this).attr('id');
-                bootbox.confirm('Weet u zeker dat u deze reactie wilt verwijderen?', function(answer){
-                    if(answer === true){
+                bootbox.confirm('Weet u zeker dat u deze reactie wilt verwijderen?', function (answer) {
+                    if (answer === true) {
                         $.ajax({
                             type: 'GET',
                             url: '{{ url('/admin/delete_comment') }}/' + id,
-                            success: function(data){
+                            success: function (data) {
                                 $('#comments_holder').replaceWith(data);
                             }
                         })
                     }
                 });
             });
-            $(document).delegate('.glyphicon-ok-sign', 'click', function(){
+            $(document).delegate('.glyphicon-ok-sign', 'click', function () {
                 var id = $(this).attr('id');
                 $.ajax({
                     type: 'GET',
                     url: '{{ url('/admin/accept_comment') }}/' + id,
-                    success: function(data){
+                    success: function (data) {
                         $('#comments_holder').replaceWith(data);
                     }
                 });
             });
-            $('#delete_publication').click(function(){
-                bootbox.confirm('Weet u zeker dat u deze publicatie wilt verwijderen?', function(answer){
-                    if(answer === true) $('#delete').submit();
+            $('#delete_publication').click(function () {
+                bootbox.confirm('Weet u zeker dat u deze publicatie wilt verwijderen?', function (answer) {
+                    if (answer === true) $('#delete').submit();
                 });
             });
             CKEDITOR.replace('c');

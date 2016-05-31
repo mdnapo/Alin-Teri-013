@@ -5,7 +5,8 @@
             <h1>Verhalen</h1>
         </div>
         <div class="col-xs-12">
-            <input id="needle" name="needle" type="text" class="form-control" placeholder="Zoeken naar..." value="{{ isset($needle) ? $needle : '' }}">
+            <input id="needle" name="needle" type="text" class="form-control" placeholder="Zoeken naar..."
+                   value="{{ isset($needle) ? $needle : '' }}">
         </div>
         <div class="col-xs-12">
             <button id="collapse_button" class="btn btn-primary">Alles openklappen</button>
@@ -17,7 +18,8 @@
                         <div class="panel panel-primary">
                             <div class="panel-heading collapse_publication" id="{{ $story->id }}">
                                 {{ $story->naam }}
-                                <span id="glyph{{ $story->id }}" class="glyphicon glyphicon-chevron-down pull-right glyph"
+                                <span id="glyph{{ $story->id }}"
+                                      class="glyphicon glyphicon-chevron-down pull-right glyph"
                                       data-toggle="collapse" href="#story{{ $story->id }}">
                                 </span>
                             </div>
@@ -48,49 +50,45 @@
 @section('footer')
     <script src="{{ asset('js/jquery.highlight.js') }}"></script>
     <script>
-        $(document).ready(function(){
-            $(document).delegate('.collapse_publication', 'click', function(){
+        $(document).ready(function () {
+            $(document).delegate('.collapse_publication', 'click', function () {
                 var id = $(this).attr('id');
                 var story = $('div#story' + id);
                 var collapse_span = $(this).find('#glyph' + id);
-                if(collapse_span.hasClass('glyphicon-chevron-up'))
+                if (collapse_span.hasClass('glyphicon-chevron-up'))
                     collapse_span.removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
                 else
                     collapse_span.removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
                 story.collapse('toggle');
             });
-            $('#collapse_button').click(function(){
-                if($(this).hasClass('collapse_all')){
+            $('#collapse_button').click(function () {
+                if ($(this).hasClass('collapse_all')) {
                     $(this).removeClass('collapse_all');
                     $(this).html('Alles openklappen');
                     $('.collapse.story').collapse('hide');
-                    $('.collapse_publication').find('.glyph').
-                            removeClass('glyphicon-chevron-up').
-                            addClass('glyphicon-chevron-down');
+                    $('.collapse_publication').find('.glyph').removeClass('glyphicon-chevron-up').addClass('glyphicon-chevron-down');
                 }
-                else{
+                else {
                     $(this).addClass('collapse_all');
                     $(this).html('Alles dichtklappen');
                     $('.collapse.story').collapse('show');
-                    $('.collapse_publication').find('.glyph').
-                            removeClass('glyphicon-chevron-down').
-                            addClass('glyphicon-chevron-up');
+                    $('.collapse_publication').find('.glyph').removeClass('glyphicon-chevron-down').addClass('glyphicon-chevron-up');
                 }
             });
-            $('#needle').on('input', function(){
+            $('#needle').on('input', function () {
                 var needle = $(this).val();
                 $.ajax({
                     type: 'GET',
                     url: '{{ url('zoeken-in-verhalen') }}',
-                    data: { needle: needle },
-                    success: function(data){
+                    data: {needle: needle},
+                    success: function (data) {
                         $('#stories_holder').replaceWith(data);
                         $('.collapse.story').collapse();
                         $('#stories_holder').highlight(needle);
                     }
                 });
             });
-            if($('#needle').val() != '')
+            if ($('#needle').val() != '')
                 $('#stories_holder').highlight($('#needle').val());
             $('.collapse.story').collapse();
             $('img').addClass('img-responsive');

@@ -1,5 +1,5 @@
 <html>
-    <body>
-        {!! $content !!}
-    </body>
+<body>
+{!! $content !!}
+</body>
 </html>

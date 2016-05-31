@@ -43,7 +43,7 @@ Route::group(['middleware' => ['web']], function () {
 
     Route::get('verhalen', 'StoryController@index');
     Route::get('zoeken-in-verhalen', 'StoryController@search');
-    
+
     Route::get('optout', 'OptoutController@index');
     Route::post('optout', 'OptoutController@optout');
 
@@ -64,7 +64,8 @@ Route::group(['middleware' => ['web']], function () {
             Route::get('edit/{id}', ['uses' => 'AdminController@editPage'])->where('id', '([0-9]+)');
             Route::post('edit/{id}', ['uses' => 'AdminController@savePage'])->where('id', '([0-9]+)');
             Route::get('delete/{id}', ['uses' => 'AdminController@deletePage'])->where('id', '([0-9]+)');
-            Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id', '([0-9]+)')->where('visibility', '([0-1])');
+            Route::get('visibility/{id}/{visibility}', ['uses' => 'AdminController@setVisibility'])->where('id',
+                '([0-9]+)')->where('visibility', '([0-1])');
             Route::get('move-up/{id}', ['uses' => 'AdminController@movePageUp'])->where('id', '([0-9]+)');
             Route::get('move-down/{id}', ['uses' => 'AdminController@movePageDown'])->where('id', '([0-9]+)');
             Route::get('restore/{id}', ['uses' => 'AdminController@restorePage'])->where('id', '([0-9]+)');
@@ -120,11 +121,11 @@ Route::group(['middleware' => ['web']], function () {
         Route::post('newsletter', 'AdminController@sendNewsletter');
         Route::get('/delete_comment/{id}', ['uses' => 'AdminController@deleteComment'])->where('id', '([0-9]+)');
         Route::get('/accept_comment/{id}', ['uses' => 'AdminController@acceptComment'])->where('id', '([0-9]+)');
-        
+
         Route::group(['prefix' => 'mailinglist'], function () {
             Route::get('/', 'AdminController@mailinglist');
             Route::post('/', 'AdminController@saveMailing');
             Route::delete('/{id}', ['uses' => 'AdminController@deleteMailing'])->where('id', '[0-9]+');
-        });    
+        });
     });
 });

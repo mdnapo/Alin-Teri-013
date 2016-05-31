@@ -2,14 +2,14 @@
 @section('content')
     <div class="col-xs-12">
         <h1 class="entry-title">Een reactie plaatsen</h1>
-        <form method="POST" action="./comment" class="well well-lg" >
-            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>" >
-            <input type="hidden" name="media_id" value="{{ $id }}" />
+        <form method="POST" action="./comment" class="well well-lg">
+            <input type="hidden" name="_token" value="<?php echo csrf_token(); ?>">
+            <input type="hidden" name="media_id" value="{{ $id }}"/>
             <label class="control-label" for="email">Naam</label>
             <input type="name" class="form-control" name="name">
             <label class="control-label" for="bericht">Reactie</label>
             <textarea type="comment" class="form-control" name="comment"></textarea>
-            <input type="submit" class="btn btn-primary" value="Versturen" />
+            <input type="submit" class="btn btn-primary" value="Versturen"/>
         </form>
     </div>
 

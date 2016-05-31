@@ -2,7 +2,7 @@
     <h1>Reacties</h1>
 
     @if(count($publication->comments) > 0)
-        <table class="table table-bordered" >
+        <table class="table table-bordered">
             <thead>
             <th>#</th>
             <th>Naam</th>

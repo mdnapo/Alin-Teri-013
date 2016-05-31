@@ -8,7 +8,8 @@ use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 use App\Donation;
 
-class Kernel extends ConsoleKernel {
+class Kernel extends ConsoleKernel
+{
     /**
      * The Artisan commands provided by your application.
      *
@@ -25,7 +26,8 @@ class Kernel extends ConsoleKernel {
      * @param  \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
-    protected function schedule(Schedule $schedule) {
+    protected function schedule(Schedule $schedule)
+    {
         // $schedule->command('inspire')
         //          ->hourly();
 
@@ -33,7 +35,9 @@ class Kernel extends ConsoleKernel {
             $file = "/srv/http/alinteri/app/Console/Storage/mailupdate.json";
             if (file_exists($file)) {
                 $status = json_decode(file_get_contents($file), true);
-                if (isset($status['contacts']) && ($status['contacts'] (Contact::orderBy('id', 'desc')->first() != null) && (Contact::orderBy('id', 'desc')->first()->id))) {
+                if (isset($status['contacts']) && ($status['contacts'] (Contact::orderBy('id',
+                                'desc')->first() != null) && (Contact::orderBy('id', 'desc')->first()->id))
+                ) {
                     return true;
                 }
             }
