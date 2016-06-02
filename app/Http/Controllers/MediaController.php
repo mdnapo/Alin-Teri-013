@@ -18,6 +18,25 @@ class MediaController extends Controller
     public function index()
     {
         $publications = Publication::publications();
+        foreach($publications as $publication) {
+            $teaser = $publication->article;
+            $teaser = strip_tags($teaser);
+//            if(strlen($teaser) > 10)
+//                $teaser = substr($teaser, 0, strpos($teaser, ' ', 500));
+            $teaser = implode(' ', array_slice(explode(' ', $teaser), 0, 130));
+            $teasers["$publication->id"] = $teaser;
+        }
+        return view('pages.media_v2', ['publications' => $publications, 'teasers' => $teasers]);
+    }
+
+    /**
+     * Takes the user to the full publication.
+     * @param int $id
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function view($id)
+    {
+        $publications = Publication::where('id', $id);
         return view('pages.media', ['publications' => $publications]);
     }
 
