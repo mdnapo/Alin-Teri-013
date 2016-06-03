@@ -12,6 +12,22 @@
                 {!! $publication->article !!}
             </div>
         </div>
+        <div class="col-xs-12 top_buffer">
+            @if(count($publication->comments) > 0)
+                <h1>Reacties</h1>
+                <div class="scroller bottom_buffer">
+                    @foreach($publication->comments as $comment)
+                        <div>{{ $comment->reactie }}</div>
+                        <div>{{ $comment->reactie }}</div>
+                        <div>{{ $comment->reactie }}</div>
+                        <div>{{ $comment->reactie }}</div>
+                    @endforeach
+                </div>
+            @else
+                <h2>Nog geen reacties</h2>
+
+            @endif
+        </div>
     </div>
 @stop
 
