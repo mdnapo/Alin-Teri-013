@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Illuminate\Support\Facades\View;
+use App\Helpers\TextHelper;
 
 class MediaController extends Controller
 {
@@ -19,11 +20,7 @@ class MediaController extends Controller
     {
         $publications = Publication::publications();
         foreach($publications as $publication) {
-            $teaser = $publication->article;
-            $teaser = strip_tags($teaser);
-//            if(strlen($teaser) > 10)
-//                $teaser = substr($teaser, 0, strpos($teaser, ' ', 500));
-            $teaser = implode(' ', array_slice(explode(' ', $teaser), 0, 130));
+            $teaser = TextHelper::create_teaser($publication->article);
             $teasers["$publication->id"] = $teaser;
         }
         return view('pages.media_v2', ['publications' => $publications, 'teasers' => $teasers]);
@@ -52,8 +49,13 @@ class MediaController extends Controller
             Publication::publications() :
             Publication::search($needle);
 
+        foreach($publications as $publication) {
+            $teaser = TextHelper::create_teaser($publication->article);
+            $teasers["$publication->id"] = $teaser;
+        }
+
         if ($request->ajax()) {
-            $view = View::make('subviews.media-search', ['publications' => $publications, 'needle' => $needle]);
+            $view = View::make('subviews.media-search', ['publications' => $publications, 'needle' => $needle, 'teasers' => $teasers]);
             echo $view->render();
         } else {
             return view('pages.media', ['publications' => $publications, 'needle' => $needle]);

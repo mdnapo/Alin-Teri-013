@@ -9,7 +9,7 @@
                    value="{{ isset($needle) ? $needle : '' }}">
         </div>
         <div class="col-xs-12">
-            <button id="collapse_button" class="btn btn-primary">Alles openklappen</button>
+            <button id="collapse_button" class="btn btn-primary collapse_all">Alles dichtklappen</button>
         </div>
         <div id="publications_holder">
             <div class="col-xs-12">
@@ -20,15 +20,15 @@
                                 <a href="#" class="pop circle"></a>
                                 {{ $publication->source }}
                                 <span id="glyph{{ $publication->id }}"
-                                      class="glyphicon glyphicon-chevron-down pull-right glyph"
+                                      class="glyphicon glyphicon-chevron-up pull-right glyph"
                                       data-toggle="collapse" href="#publication{{ $publication->id }}">
                                 </span>
                             </div>
                             <div id="publication{{ $publication->id }}" class="panel-collapse collapse in publication">
                                 <div class="panel-body">
                                     <div class="col-xs-12">
-                                        <a class="article_link" title="Lees meer...">
-                                            {{ $teasers["$publication->id"].'.....' }}
+                                        <a class="article_link" title="Lees verder...">
+                                            {{ $teasers["$publication->id"].'...' }}
                                         </a>
                                     </div>
                                 </div>
@@ -89,19 +89,18 @@
                     data: {needle: needle},
                     success: function (data) {
                         $('#publications_holder').replaceWith(data);
-                        $('.collapse.publication').collapse();
+                        $('.collapse.publication').collapse('show');
                         $('#publications_holder').highlight(needle);
                     }
                 });
             });
-            if ($('#needle').val() != '')
-                $('#publications_holder').highlight($('#needle').val());
-            $('.collapse.publication').collapse();
-            $('img').addClass('img-responsive');
-            fluidvids.init({
-                selector: ['iframe'],
-                players: ['www.youtube.com', 'player.vimeo.com'] // players to support
-            })
+            if ($('#needle').val() != '') $('#publications_holder').highlight($('#needle').val());
+//            $('.collapse.publication').show();
+//            $('img').addClass('img-responsive');
+//            fluidvids.init({
+//                selector: ['iframe'],
+//                players: ['www.youtube.com', 'player.vimeo.com'] // players to support
+//            })
         });
     </script>
 @stop
