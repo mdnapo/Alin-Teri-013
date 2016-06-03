@@ -165,17 +165,19 @@ class AdminController extends Controller
             if ($request->file('newsletter')->isValid()) {
                 $rules = array(
                     'newsletter' => 'required',
-                    'subject' => 'string|required'
+                    'subject' => 'string|required',
+                    'html' => 'string'
                 );
                 $validator = Validator::make($request->all(), $rules);
                 if (!$validator->fails()) {
                     $request->file('newsletter')->move("newsletter/",
                         $request->file('newsletter')->getClientOriginalName());
-                    Mail::raw('Klik hier om je uit te schrijven voor de nieuwsbrief: ' . url('/optout'),
+                    Mail::raw('',
                         function ($message) use ($request) {
                             $message->subject($request->subject);
                             $message->attach("newsletter/" . $request->file('newsletter')->getClientOriginalName());
                             $message->from('testmail34125@gmail.com');
+                            $message->setBody($request->html . '<p>Klik hier om je uit te schrijven voor de nieuwsbrief: ' . url('/optout') . '</p>', 'text/html');
                             foreach (App\Mailinglist::all() as $mail) {
                                 $message->bcc($mail->email);
                             }

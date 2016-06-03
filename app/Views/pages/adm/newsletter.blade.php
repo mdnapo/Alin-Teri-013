@@ -15,6 +15,10 @@
                 <input type="text" readonly="" class="form-control" placeholder="Bestand selecteren">
                 <span class="material-input"></span>
             </div>
+            <h2>Inhoud mail</h2>
+            <div class="form-group">
+                <textarea id="c" name="html"></textarea>
+            </div>
             <div class="form-group">
                 <input type="submit" class="btn btn-block btn-primary" value="Versturen"/>
             </div>
@@ -57,4 +61,13 @@
         </div>
     </form>
     <script src="{{url("js/newsletter.js")}}"></script>
+@stop
+
+@section('footer')
+    <script src="https://cdn.ckeditor.com/4.5.8/full/ckeditor.js"></script>
+    <script>
+        $(document).ready(function () {
+            CKEDITOR.replace('c');
+        });
+    </script>
 @stop
