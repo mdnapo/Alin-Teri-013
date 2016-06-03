@@ -33,12 +33,13 @@ class MediaController extends Controller
      */
     public function view($id)
     {
-        $publications = Publication::where('id', $id);
-        return view('pages.media', ['publications' => $publications]);
+        $publication = Publication::where('id', $id)->firstOrFail();
+        return view('pages.media-view', ['publication' => $publication]);
     }
 
     /**
      * Searches for all publications containing the needle passed to the request.
+     * @param \Illuminate\Http\Request $request
      * @return string | \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * Returns a View for a normal get request and a string for an Ajax get request.
      */
@@ -49,6 +50,7 @@ class MediaController extends Controller
             Publication::publications() :
             Publication::search($needle);
 
+        $teasers = [];
         foreach($publications as $publication) {
             $teaser = TextHelper::create_teaser($publication->article);
             $teasers["$publication->id"] = $teaser;
@@ -58,7 +60,7 @@ class MediaController extends Controller
             $view = View::make('subviews.media-search', ['publications' => $publications, 'needle' => $needle, 'teasers' => $teasers]);
             echo $view->render();
         } else {
-            return view('pages.media', ['publications' => $publications, 'needle' => $needle]);
+            return view('pages.media_v2', ['publications' => $publications, 'needle' => $needle, 'teasers' => $teasers]);
         }
     }
 }

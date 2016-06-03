@@ -31,6 +31,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('newsletter/optin', 'DonationController@optin');
 
     Route::get('in-de-media', 'MediaController@index');
+    Route::get('in-de-media/{id}', 'MediaController@view')->where('id', '([0-9]+)');
     Route::get('zoeken-in-media', 'MediaController@search');
 
     Route::get('/reactiepagina/{id}', ['uses' => 'CommentController@comments'])->where('id', '([0-9]+)');

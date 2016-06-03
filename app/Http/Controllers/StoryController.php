@@ -20,6 +20,7 @@ class StoryController extends Controller
 
     /**
      * Searches for all stories containing the needle passed to the request.
+     * @param \Illuminate\Http\Request $request
      * @return string | \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * Returns a View for a normal get request and a string for an Ajax get request.
      */

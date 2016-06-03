@@ -12,8 +12,8 @@
                     <div id="publication{{ $publication->id }}" class="panel-collapse collapse in publication">
                         <div class="panel-body">
                             <div class="col-xs-12">
-                                <a class="article_link" title="Lees verder...">
-                                    {{ $teasers["$publication->id"].'.....' }}
+                                <a href="./in-de-media/{{ $publication->id }}" class="article_link" title="Lees verder...">
+                                    {{ $teasers["$publication->id"].'...' }}
                                 </a>
                             </div>
                         </div>

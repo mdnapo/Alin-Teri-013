@@ -27,7 +27,7 @@
                             <div id="publication{{ $publication->id }}" class="panel-collapse collapse in publication">
                                 <div class="panel-body">
                                     <div class="col-xs-12">
-                                        <a class="article_link" title="Lees verder...">
+                                        <a href="./in-de-media/{{ $publication->id }}" class="article_link" title="Lees verder...">
                                             {{ $teasers["$publication->id"].'...' }}
                                         </a>
                                     </div>
@@ -89,18 +89,11 @@
                     data: {needle: needle},
                     success: function (data) {
                         $('#publications_holder').replaceWith(data);
-                        $('.collapse.publication').collapse('show');
                         $('#publications_holder').highlight(needle);
                     }
                 });
             });
             if ($('#needle').val() != '') $('#publications_holder').highlight($('#needle').val());
-//            $('.collapse.publication').show();
-//            $('img').addClass('img-responsive');
-//            fluidvids.init({
-//                selector: ['iframe'],
-//                players: ['www.youtube.com', 'player.vimeo.com'] // players to support
-//            })
         });
     </script>
 @stop
