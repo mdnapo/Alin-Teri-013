@@ -11,11 +11,6 @@ $items = App\Page::where('active', 1)->where('archived', 0)->orderBy('sort')->ge
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-
-            <!-- Branding Image -->
-            <a class="navbar-brand collapsed" href="{{ url('/') }}">
-                <span>AlinTeri</span>
-            </a>
         </div>
 
         <div class="navbar-collapse collapse navbar-responsive-collapse" id="app-navbar-collapse">
