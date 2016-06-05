@@ -31,16 +31,17 @@
             @endif
         </div>
         <div class="col-xs-12">
+            <div id="notification"></div>
             <h1 class="entry-title">Een reactie plaatsen</h1>
-            <form method="POST" action="{{ url('comment') }}" class="well well-lg" >
+            <div class="well well-lg" >
                 <input type="hidden" name="_token" value="{{ csrf_token() }}" >
                 <input type="hidden" name="publication_id" value="{{ $publication->id }}" />
                 <label class="control-label" for="email">Naam</label>
-                <input type="name" class="form-control" name="name">
+                <input type="name" class="form-control" name="naam">
                 <label class="control-label" for="bericht">Reactie</label>
-                <textarea type="comment" class="form-control" name="comment"></textarea>
-                <input type="submit" class="btn btn-primary" value="Versturen"/>
-            </form>
+                <textarea id="comment" class="form-control" name="bericht"></textarea>
+                <input id="submit_comment" class="btn btn-primary" value="Versturen"/>
+            </div>
         </div>
     </div>
 @stop
@@ -50,13 +51,31 @@
     <script src="{{ asset('js/jquery.highlight.js') }}"></script>
     <script>
         $(document).ready(function () {
-            $('iframe').addClass('embed-responsive-item');
             $('img').addClass('img-responsive');
             fluidvids.init({
                 selector: ['iframe'],
                 players: ['www.youtube.com', 'player.vimeo.com'] // players to support
             })
-
+            $('#submit_comment').click(function () {
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ url('comment') }}',
+                    dataType: 'json',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        naam: $('input[name="naam"]').val(),
+                        bericht: $('#comment').val(),
+                        publication_id: $('input[name="publication_id"]').val()
+                    },
+                    success: function(data){
+                        $('#notification').html(data.html);
+                        if(data.success == 'true'){
+                            $('input[name="naam"]').val('');
+                            $('#comment').val('');
+                        }
+                    }
+                });
+            });
         });
     </script>
 @stop
