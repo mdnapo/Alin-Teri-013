@@ -165,6 +165,6 @@ a.plain_link:hover {
 }
 
 .scroller{
-    height: 200px;
+    height: 300px;
     overflow-y: scroll;
 }
