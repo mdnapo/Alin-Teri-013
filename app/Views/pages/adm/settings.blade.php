@@ -20,19 +20,21 @@
             <form action="{{ url('/admin/settings/' . $cat->id) }}" method="POST">
                 {!! csrf_field() !!}
                 @foreach ($cat->settings as $setting)
-                    <div class="form-group">
-                        <label class="col-md-2 control-label">{{ $setting->name }}</label>
-                        <div class="col-md-10">
-                            @foreach ($setting->values as $option)
-                                <div class="radio radio-primary">
-                                    <label>
-                                        <input type="radio" name="{{ "set" . $setting->id }}"
-                                               id="{{ "set" . $setting->id }}"
-                                               value="{{ $option->value }}" {{ ($setting->value == $option->value) ? 'checked=""':'' }}>{{ $option->value }}
-                                        </input>
-                                    </label>
-                                </div>
-                            @endforeach
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label">{{ $setting->name }}</label>
+                            <div class="col-md-10">
+                                @foreach ($setting->values as $option)
+                                    <div class="radio radio-primary">
+                                        <label>
+                                            <input type="radio" name="{{ "set" . $setting->id }}"
+                                                   id="{{ "set" . $setting->id }}"
+                                                   value="{{ $option->value }}" {{ ($setting->value == $option->value) ? 'checked=""':'' }}>{{ $option->value }}
+                                            </input>
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 @endforeach
