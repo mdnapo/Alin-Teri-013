@@ -15,7 +15,8 @@
                     AlinTeri013 is een burgerinitiatief voor eerlijk verdiend brood tegen (soft)drugsgeld. Onze
                     vrijwilligerswerk groep is open voor iedereen die zich herkent in onze boodschap. Één van onze
                     doelen is het krijgen van 5000 profielfoto’s als steunbetuiging. Onze vrijwilligers en
-                    ambassadeurs zijn het gezicht van onze publiekscampagne. Steun ons en upload je foto!
+                    ambassadeurs zijn het gezicht van onze publiekscampagne.
+                    <a href="" data-toggle="modal" data-target="#upload_modal">Steun ons en upload je foto!</a>
                 </p>
             </div>
             <div class="col-xs-12">
