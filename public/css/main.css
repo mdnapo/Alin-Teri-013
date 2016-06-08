@@ -118,6 +118,10 @@ a.plain_link:hover {
     margin-top: 20px;
 }
 
+.bottom_buffer {
+    margin-bottom: 20px;
+}
+
 .faq {
     height: 175px;
 }
@@ -149,4 +153,18 @@ a.plain_link:hover {
 
 .collapse_publication:hover{
     cursor: pointer;
+}
+
+.article_link{
+    color: black;
+}
+
+.article_link:hover{
+    cursor: pointer;
+    color: black;
+}
+
+.scroller{
+    height: 300px;
+    overflow-y: scroll;
 }

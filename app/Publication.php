@@ -40,4 +40,13 @@ class Publication extends Model
     {
         return $this->hasMany('App\Comment');
     }
+
+    /**
+     * Defines a one-to-many relationship between Publication and Comment.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function approvedComments()
+    {
+        return $this->hasMany('App\Comment')->where('geaccepteerd', 1);
+    }
 }

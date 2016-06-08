@@ -5,16 +5,17 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading collapse_publication" id="{{ $publication->id }}">
                         {{ $publication->source }}
-                        <span id="glyph{{ $publication->id }}" class="glyphicon glyphicon-chevron-down pull-right glyph"
+                        <span id="glyph{{ $publication->id }}" class="glyphicon glyphicon-chevron-up pull-right glyph"
                               data-toggle="collapse" href="#publication{{ $publication->id }}">
                                 </span>
                     </div>
                     <div id="publication{{ $publication->id }}" class="panel-collapse collapse in publication">
                         <div class="panel-body">
-                            <div class="col-xs-12">{!! $publication->article !!}</div>
-                            @if($publication->video != '')
-                                <div class="col-xs-12 text-center top_buffer"> {!! $publication->video !!} </div>
-                            @endif
+                            <div class="col-xs-12">
+                                <a href="./in-de-media/{{ $publication->id }}" class="article_link" title="Lees verder...">
+                                    {{ $teasers["$publication->id"].'...' }}
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

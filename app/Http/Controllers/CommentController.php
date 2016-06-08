@@ -6,6 +6,7 @@ use App;
 use App\Http\Requests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\View;
 
 class CommentController extends Controller
 {
@@ -27,22 +28,29 @@ class CommentController extends Controller
      */
     public function comment(Request $request)
     {
+        $messages = array(
+            'required' => 'Het veld :attribute is verplicht!'
+        );
         $validator = Validator::make($request->all(), [
-            'name' => 'string|required',
-            'comment' => 'string|required'
-        ]);
+            'naam' => 'string|required',
+            'bericht' => 'string|required'
+        ], $messages);
 
         if ($validator->fails()) {
-            return back()->
-            withErrors($validator->errors())->
-            withInput();
+            $view = View::make('subviews.comment-failure', ['errors' => $validator->errors()]);
+            $data['html'] = $view->render();
+            $data['success'] = 'false';
+            echo json_encode($data);
         } else {
             $comment = new App\Comment();
             $comment->publication_id = $request->publication_id;
-            $comment->naam = $request->name;
-            $comment->reactie = $request->comment;
+            $comment->naam = $request->naam;
+            $comment->reactie = $request->bericht;
             $comment->save();
-            return back();
+            $view = View::make('subviews.comment-succes');
+            $data['html'] = $view->render();
+            $data['success'] = 'true';
+            echo json_encode($data);
         }
     }
 }
